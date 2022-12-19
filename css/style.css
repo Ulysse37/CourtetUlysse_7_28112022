@@ -1,4 +1,13 @@
-.gris {
-    background-color: grey;
-    height: 250px;
+body {
+  margin: auto;
+  max-width: 1920px;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+figure {
+  margin: 0;
 }
