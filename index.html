@@ -12,7 +12,7 @@
 <body>
     <header class="container text-center mt-5">
         <a href="index.html">
-            <h1><img class="logo" src="images/logo_les-petits-plats.svg" alt="Les petits plats Home page"></h1>
+            <h1><img class="logo" src="images/logo_les-petits-plats.svg" alt="Les petits plats"></h1>
         </a>
     </header>
 
@@ -20,7 +20,7 @@
         <header class="container-fluid">
             <form>
                 <input class="container-fluid bg-light p-2" type="search" placeholder="Rechercher une recette">
-                <i class="fa-solid fa-magnifying-glass position-absolute"></i>
+                <i class="fa-solid fa-magnifying-glass position-absolute top-0 end-0"></i>
             </form>
             <!--TODO Peut-être remplacer la div par une liste ?-->
             <div class="selected-tag mt-3">
@@ -47,8 +47,10 @@
             </ul>
         </header>
         <!-- Injection des recettes dans la liste -->
-        <ul>
+        <ul class="recipes-list">
         </ul>
     </main>
 </body>
+<script src="js/recipes.js"></script>
+<script src="js/index.js"></script>
 </html>
