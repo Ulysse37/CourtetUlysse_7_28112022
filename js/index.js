@@ -1,41 +1,62 @@
 "use strict";
 //console.log(recipes);
 
-function createRecipesStyle(data) {
+function createRecipesStructure(data) {
 
   let recipesSection  = document.querySelector(".recipes-list");
+  
   let recipesElt      = document.createElement("li");
+  recipesSection.appendChild(recipesElt);
+
   let figureElt       = document.createElement("figure");
+  recipesElt.appendChild(figureElt);
+
   let figcaptionElt   = document.createElement("figcaption");
-  let nameElt         = document.createElement("h2");
+  figureElt.appendChild(figcaptionElt);
+  // NAME
+  let nameElt       = document.createElement("h2");
+  nameElt.innerText = data.name;
+  figcaptionElt.appendChild(nameElt);
+  // TIME
   let timeElt         = document.createElement("p");
-  let ingredientsList = document.createElement("li");
+  timeElt.innerText = data.time + " min";
+  figcaptionElt.appendChild(timeElt);
+
+  let ingredientsList = document.createElement("ul");
+  figcaptionElt.appendChild(ingredientsList);
+
+  let ingredients     = []; 
+  for (let i = 0; i < data.ingredients.length; i++) {
+      ingredients[i]  = document.createElement("li");
+      if(data.ingredients[i].unit === "cuillères à soupe") {
+        ingredients[i].innerText = data.ingredients[i].ingredient + ": " + data.ingredients[i].quantity + " " + data.ingredients[i].unit;
+      } else if(data.ingredients[i].unit) {
+        ingredients[i].innerText = data.ingredients[i].ingredient + ": " + data.ingredients[i].quantity + data.ingredients[i].unit;
+      } else if(data.ingredients[i].quantity){
+        ingredients[i].innerText = data.ingredients[i].ingredient + ": " + data.ingredients[i].quantity;
+      } else {
+        ingredients[i].innerText = data.ingredients[i].ingredient;
+      }
+      
+      ingredientsList.appendChild(ingredients[i]);
+  }
+  // DESCRIPTION
   let descriptionElt  = document.createElement("p");
+  descriptionElt.innerText = data.description;
+  figcaptionElt.appendChild(descriptionElt);
+
+  console.log(data);
 
   //Todo Ajouter le style des éléments ici
 
-  recipesSection.appendChild(recipesElt);
-  recipesElt.appendChild(figureElt);
-  figureElt.appendChild(figcaptionElt);
-  figcaptionElt.appendChild(nameElt);
-  figcaptionElt.appendChild(timeElt);
-  figcaptionElt.appendChild(ingredientsList);
-  figcaptionElt.appendChild(descriptionElt);
-}
-
-
-
-function getRecipes(data) {
-
-  const { id, name, serving, appliance, description, time } = data;
-  console.log(data);
 }
 
 function displayRecipes(recipes) {
 
   for (let i = 0; i < recipes.length; i++) {
-    //console.log(recipes);
-    getRecipes(recipes[i]);
+    
+    createRecipesStructure(recipes[i]);
+    
   }
 }
 
