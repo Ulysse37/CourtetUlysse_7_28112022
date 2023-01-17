@@ -21,7 +21,12 @@ a:focus {
   text-decoration: none;
   color: hsl(0, 0%, 25%);
 }
-
+/* style pour afficher l'ellipsis sur la description de la recette */
 .text-overflow {
   text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  white-space: normal;
 }
