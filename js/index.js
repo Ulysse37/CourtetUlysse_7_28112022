@@ -25,12 +25,12 @@ function createRecipesStructure(data) {
   let figureElt                       = document.createElement("figure");
   figureElt.style.borderRadius        = "8px";
   figureElt.style.backgroundColor     = "#BFBDBB";
-  figureElt.style.marginTop = "50px";
+  figureElt.style.marginTop           = "50px";
   recipesLink.appendChild(figureElt);
 
   // Div pour stylisé le background de la figure
   let figureBackground                = document.createElement("div");
-  figureBackground.style.height       = "15rem";
+  figureBackground.style.height       = "16.5rem";
   figureElt.appendChild(figureBackground);
 
   let figcaptionElt                   = document.createElement("figcaption");
@@ -39,35 +39,36 @@ function createRecipesStructure(data) {
   figcaptionElt.style.flexDirection   = "row";
   figcaptionElt.style.justifyContent  = "space-between";
   figcaptionElt.style.borderRadius    ="0 0 8px 8px";
-  figcaptionElt.style.height          = "15rem";
+  figcaptionElt.style.height          = "16.5rem";
   figcaptionElt.style.backgroundColor = "#E6E6E6";
   figureElt.appendChild(figcaptionElt);
 
   // HEADER contenant le nom et le container du temps de la recette
-  let figcaptionHeader = document.createElement("header");
-  figcaptionHeader.style.display               = "flex";
-  figcaptionHeader.style.width = "100%";
-  figcaptionHeader.style.margin                = "1rem";  
+  let figcaptionHeader                = document.createElement("header");
+  figcaptionHeader.style.display      = "flex";
+  figcaptionHeader.style.width        = "100%";
+  figcaptionHeader.style.margin       = "1rem";  
   figcaptionElt.appendChild(figcaptionHeader);
 
   // NAME
   let nameElt                         = document.createElement("h2");
   nameElt.innerText                   = data.name;
-  nameElt.style.width                 = "75%";             
+  nameElt.style.width                 = "72%";  
+  nameElt.style.marginRight           = "0.4rem";           
   nameElt.style.fontSize              = "26px";
   figcaptionHeader.appendChild(nameElt);
 
   // Container avec l'icône et le temps de la recette
-  let timeContainer  = document.createElement("p");
-  timeContainer.style.width = "25%";
-  timeContainer.style.fontSize = "25px";
+  let timeContainer                   = document.createElement("p");
+  timeContainer.style.width           = "28%";
+  timeContainer.style.fontSize        = "25px";
   figcaptionHeader.appendChild(timeContainer);
 
   // TIME 
   let timeIcon                         = document.createElement("i");
+  timeIcon.style.marginRight           = "0.5rem"; 
   timeIcon.classList.add("fa-regular");
   timeIcon.classList.add("fa-clock");
-  timeIcon.style.marginRight = "0.5rem"; 
   timeContainer.appendChild(timeIcon);
 
   // TIME
@@ -77,17 +78,17 @@ function createRecipesStructure(data) {
   timeContainer.appendChild(timeElt);
 
   //Div contenant la liste et la description de la recette
-  let mainContainer = document.createElement("div");
-  mainContainer.style.display = "flex";
-  mainContainer.style.height = "200px";
-  mainContainer.style.margin = "0 1rem 0 1rem";
-  mainContainer.style.lineHeight = "1";
+  let mainContainer                   = document.createElement("div");
+  mainContainer.style.display         = "flex";
+  mainContainer.style.height          = "200px";
+  mainContainer.style.margin          = "0 1rem 0 1rem";
+  mainContainer.style.lineHeight      = "1";
   figcaptionElt.appendChild(mainContainer);
 
 // INGREDIENTS, QUANTITES ET UNITES 
   let ingredientsList                 = document.createElement("ul");
-  ingredientsList.style.marginRight = "0.5rem";
-  ingredientsList.style.width = "50%";
+  ingredientsList.style.marginRight   = "0.5rem";
+  ingredientsList.style.width         = "50%";
   mainContainer.appendChild(ingredientsList);
 
   let ingredients     = []; 
@@ -105,12 +106,12 @@ function createRecipesStructure(data) {
       ingredientsList.appendChild(ingredients[i]);
   }
   // DESCRIPTION
-  let descriptionElt  = document.createElement("p");
+  let descriptionElt                  = document.createElement("p");
   descriptionElt.classList.add("text-overflow");
-  descriptionElt.innerText = data.description;
-  descriptionElt.style.width = "50%";
-  descriptionElt.style.maxHeight = "5.7rem";
-  descriptionElt.style.marginLeft = "0.5rem";
+  descriptionElt.innerText            = data.description;
+  descriptionElt.style.width          = "50%";
+  descriptionElt.style.maxHeight      = "5.7rem";
+  descriptionElt.style.marginLeft     = "0.5rem";
   mainContainer.appendChild(descriptionElt);
 
   //console.log(data);
