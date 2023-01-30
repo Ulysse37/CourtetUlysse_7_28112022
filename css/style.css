@@ -30,3 +30,32 @@ a:focus {
   -webkit-line-clamp: 6;
   white-space: normal;
 }
+
+@media (min-width: 768px) {
+  .recipes-list {
+    flex-flow: row wrap;
+    gap : 40px;
+    width: 100%;
+  }
+
+  .recipe-element {
+    width : 45% !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .recipes-list {
+    gap: 70px;
+  }
+
+  .recipe-element {
+    width: 45% !important;
+  }
+}
+
+@media (min-width: 1500px) {
+  .recipe-element {
+    width: 29% !important;
+  }
+}
+

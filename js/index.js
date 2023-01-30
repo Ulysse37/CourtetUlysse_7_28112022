@@ -6,15 +6,17 @@ function createRecipesStructure(data) {
   let recipesSection                  = document.querySelector(".recipes-list");
   recipesSection.style.display        = "flex";
   recipesSection.style.flexWrap       = "wrap";
-  recipesSection.style.flexDirection  = "row";
+  //recipesSection.style.flexDirection  = "column";
+  //recipesSection.style.flexDirection  = "row";
   recipesSection.style.justifyContent = "center";
 
   // Création de la li qui contient une recette
   let recipesElt                      = document.createElement("li");
-  recipesElt.style.width              = "25%";
+  recipesElt.classList.add("recipe-element");
+  recipesElt.style.width              = "100%";
   recipesElt.style.display            = "flex";
-  recipesElt.style.flexDirection      = "column";
-  recipesElt.style.margin             = "0rem 3rem 0rem 3rem";
+  //recipesElt.style.flexDirection      = "column";
+  recipesElt.style.margin             = "0";
   recipesSection.appendChild(recipesElt);
 
   // Lien contenant la figure
@@ -30,7 +32,7 @@ function createRecipesStructure(data) {
 
   // Div pour stylisé le background de la figure
   let figureBackground                = document.createElement("div");
-  figureBackground.style.height       = "16.5rem";
+  figureBackground.style.height       = "17rem";
   figureElt.appendChild(figureBackground);
 
   let figcaptionElt                   = document.createElement("figcaption");
@@ -39,7 +41,7 @@ function createRecipesStructure(data) {
   figcaptionElt.style.flexDirection   = "row";
   figcaptionElt.style.justifyContent  = "space-between";
   figcaptionElt.style.borderRadius    ="0 0 8px 8px";
-  figcaptionElt.style.height          = "16.5rem";
+  figcaptionElt.style.height          = "17rem";
   figcaptionElt.style.backgroundColor = "#E6E6E6";
   figureElt.appendChild(figcaptionElt);
 
