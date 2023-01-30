@@ -32,16 +32,18 @@ function createRecipesStructure(data) {
 
   // Div pour stylisé le background de la figure
   let figureBackground                = document.createElement("div");
-  figureBackground.style.height       = "17rem";
+  figureBackground.classList.add("figure-height");
+  figureBackground.style.height       = "20rem";
   figureElt.appendChild(figureBackground);
 
   let figcaptionElt                   = document.createElement("figcaption");
+  figcaptionElt.classList.add("figcaption-height");
   figcaptionElt.style.display         = "flex";
   figcaptionElt.style.flexWrap        = "wrap";
   figcaptionElt.style.flexDirection   = "row";
   figcaptionElt.style.justifyContent  = "space-between";
   figcaptionElt.style.borderRadius    ="0 0 8px 8px";
-  figcaptionElt.style.height          = "17rem";
+  figcaptionElt.style.height          = "25rem";
   figcaptionElt.style.backgroundColor = "#E6E6E6";
   figureElt.appendChild(figcaptionElt);
 

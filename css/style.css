@@ -31,6 +31,16 @@ a:focus {
   white-space: normal;
 }
 
+@media (min-width: 576px) {
+  .figure-height {
+    height: 17rem !important;
+  }
+
+  .figcaption-height {
+    height: 17rem !important;
+  }
+}
+
 @media (min-width: 768px) {
   .recipes-list {
     flex-flow: row wrap;
@@ -40,6 +50,16 @@ a:focus {
 
   .recipe-element {
     width : 45% !important;
+  }
+
+  .figcaption-height {
+    height: 22rem !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .figcaption-height {
+    height: 17rem !important;
   }
 }
 
