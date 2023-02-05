@@ -118,7 +118,7 @@ function createRecipesStructure(data) {
   descriptionElt.style.marginLeft     = "0.5rem";
   mainContainer.appendChild(descriptionElt);
 
-  //console.log(data);
+  console.log(data);
 }
 
 function displayRecipes(recipes) {
@@ -130,9 +130,31 @@ function displayRecipes(recipes) {
   }
 }
 
+function createApplianceList(recipes) {
+
+  let applianceList = [];
+  for (let i = 0; i < recipes.length; i++) {
+    let appliance = recipes[i].appliance;
+    applianceList.push(appliance);
+    //console.log(appliance);
+  }
+  //console.log(applianceList); // Renvoit une liste de 50 appareils 
+  /*function uniq(applianceList) {
+    var seen = {};
+    return applianceList.filter(function(item)  {
+      return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+      
+    })
+  }
+  console.log(applianceList) renvoit un undifined*/ 
+}
+
+
+
 function init() {
 
   displayRecipes(recipes);
+  createApplianceList(recipes);
 
 }
 
