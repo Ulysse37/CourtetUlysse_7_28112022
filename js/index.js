@@ -118,7 +118,7 @@ function createRecipesStructure(data) {
   descriptionElt.style.marginLeft     = "0.5rem";
   mainContainer.appendChild(descriptionElt);
 
-  console.log(data);
+  //console.log(data);
 }
 
 function displayRecipes(recipes) {
@@ -130,32 +130,54 @@ function displayRecipes(recipes) {
   }
 }
 
-function createApplianceList(recipes) {
+function createApplianceArray(recipes) {
 
-  let applianceList = [];
+  let applianceArray = [];
   for (let i = 0; i < recipes.length; i++) {
-    let appliance = recipes[i].appliance;
-    applianceList.push(appliance);
+    let getAppliance = recipes[i].appliance;
+    applianceArray.push(getAppliance);
     //console.log(appliance);
   }
-  //console.log(applianceList); // Renvoit une liste de 50 appareils 
-  /*function uniq(applianceList) {
+  //console.log(applianceArray); // Renvoit une liste de 50 appareils 
+  /*function uniq(applianceArray) {
     var seen = {};
-    return applianceList.filter(function(item)  {
+    return applianceArray.filter(function(item)  {
       return seen.hasOwnProperty(item) ? false : (seen[item] = true);
       
     })
-  }
-  console.log(applianceList) renvoit un undifined*/ 
+  }*/
+  console.log(applianceArray) // renvoit un undifined avec le code du dessus
 }
 
+function createIngredientArray(recipes) {
 
+  let ingredientArray = [];
+  for (let i = 0; i < recipes.length; i++) {
+    for (let y = 0; y < recipes[i].ingredients.length; y++) {
+      let getIngredient = recipes[i].ingredients[y].ingredient;
+      ingredientArray.push(getIngredient);
+      //console.log(getIngredient);
+    }
+  }
+  console.log(ingredientArray);
+}
+
+function createUstensileArray(recipes) {
+
+  let ustensileArray = [];
+  for (let i = 0; i < recipes.length; i++) {
+    let getUstensile = recipes[i].ustensils
+    ustensileArray.push(getUstensile);
+  }
+  console.log(ustensileArray);
+}
 
 function init() {
 
   displayRecipes(recipes);
-  createApplianceList(recipes);
-
+  createApplianceArray(recipes);
+  createIngredientArray(recipes);
+  createUstensileArray(recipes);
 }
 
 init();
