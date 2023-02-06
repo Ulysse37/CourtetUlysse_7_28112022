@@ -1,23 +1,33 @@
 "use strict";
 //console.log(recipes);
 
-function createRecipesStructure(data) {
-
+function createRecipeSection() {
   let recipesSection                  = document.querySelector(".recipes-list");
   recipesSection.style.display        = "flex";
   recipesSection.style.flexWrap       = "wrap";
-  //recipesSection.style.flexDirection  = "column";
-  //recipesSection.style.flexDirection  = "row";
   recipesSection.style.justifyContent = "center";
+  
+  return recipesSection;
+}
 
-  // Création de la li qui contient une recette
+function createRecipesElt(recipesSection) {
   let recipesElt                      = document.createElement("li");
   recipesElt.classList.add("recipe-element");
   recipesElt.style.width              = "100%";
   recipesElt.style.display            = "flex";
-  //recipesElt.style.flexDirection      = "column";
   recipesElt.style.margin             = "0";
   recipesSection.appendChild(recipesElt);
+
+  return recipesElt;
+}
+
+function createRecipesStructure(data) {
+
+
+  let recipesSection = createRecipeSection();
+
+  // Création de la li qui contient une recette
+  let recipesElt = createRecipesElt(recipesSection);
 
   // Lien contenant la figure
   let recipesLink                     = document.createElement("a");
@@ -138,15 +148,8 @@ function createApplianceArray(recipes) {
     applianceArray.push(getAppliance);
     //console.log(appliance);
   }
-  //console.log(applianceArray); // Renvoit une liste de 50 appareils 
-  /*function uniq(applianceArray) {
-    var seen = {};
-    return applianceArray.filter(function(item)  {
-      return seen.hasOwnProperty(item) ? false : (seen[item] = true);
-      
-    })
-  }*/
-  console.log(applianceArray) // renvoit un undifined avec le code du dessus
+  let uniqueApplianceArray = [...new Set(applianceArray)];
+  console.log(uniqueApplianceArray);
 }
 
 function createIngredientArray(recipes) {
@@ -159,17 +162,26 @@ function createIngredientArray(recipes) {
       //console.log(getIngredient);
     }
   }
-  console.log(ingredientArray);
+  let uniqueIngredientArray = [...new Set(ingredientArray)];
+  console.log(uniqueIngredientArray);
 }
 
 function createUstensileArray(recipes) {
 
   let ustensileArray = [];
+
   for (let i = 0; i < recipes.length; i++) {
-    let getUstensile = recipes[i].ustensils
-    ustensileArray.push(getUstensile);
+
+    for (let y = 0; y < recipes[i].ustensils.length; y++) {
+
+      let getUstensile = recipes[i].ustensils[y];
+      ustensileArray.push(getUstensile);
+
+      
+    }
   }
-  console.log(ustensileArray);
+  let uniqueUstensilArray = [...new Set(ustensileArray)];
+  console.log(uniqueUstensilArray);
 }
 
 function init() {
