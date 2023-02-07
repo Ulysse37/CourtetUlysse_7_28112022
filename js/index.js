@@ -1,50 +1,63 @@
 "use strict";
 //console.log(recipes);
 
+// Récupération de l'ul qui va contenir les recettes
 function createRecipeSection() {
-  let recipesSection                  = document.querySelector(".recipes-list");
-  recipesSection.style.display        = "flex";
-  recipesSection.style.flexWrap       = "wrap";
-  recipesSection.style.justifyContent = "center";
-  
-  return recipesSection;
+
+  let recipeSection                  = document.querySelector(".recipes-list");
+  recipeSection.style.display        = "flex";
+  recipeSection.style.flexWrap       = "wrap";
+  recipeSection.style.justifyContent = "center";
+
+  return recipeSection;
 }
 
-function createRecipesElt(recipesSection) {
-  let recipesElt                      = document.createElement("li");
-  recipesElt.classList.add("recipe-element");
-  recipesElt.style.width              = "100%";
-  recipesElt.style.display            = "flex";
-  recipesElt.style.margin             = "0";
-  recipesSection.appendChild(recipesElt);
+// Création de la li qui contient une recette
+function createRecipeElt(recipeSection) {
 
-  return recipesElt;
+  let recipeElt                      = document.createElement("li");
+  recipeElt.classList.add("recipe-element");
+  recipeElt.style.width              = "100%";
+  recipeElt.style.display            = "flex";
+  recipeElt.style.margin             = "0";
+  recipeSection.appendChild(recipeElt);
+
+  return recipeElt;
 }
 
-function createRecipesStructure(data) {
+// Lien contenant la figure
+function createRecipeLink(recipeElt) {
 
+  let recipeLink                     = document.createElement("a");
+  recipeLink.href                    = "#";
+  recipeElt.appendChild(recipeLink);
 
-  let recipesSection = createRecipeSection();
+  return recipeLink;
+}
 
-  // Création de la li qui contient une recette
-  let recipesElt = createRecipesElt(recipesSection);
-
-  // Lien contenant la figure
-  let recipesLink                     = document.createElement("a");
-  recipesLink.href                    = "#";
-  recipesElt.appendChild(recipesLink);
+function createFigureElt(recipeLink) {
 
   let figureElt                       = document.createElement("figure");
   figureElt.style.borderRadius        = "8px";
   figureElt.style.backgroundColor     = "#BFBDBB";
   figureElt.style.marginTop           = "50px";
-  recipesLink.appendChild(figureElt);
+  recipeLink.appendChild(figureElt);
 
-  // Div pour stylisé le background de la figure
+  return figureElt;
+}
+
+// Div pour stylisé le background de la figure
+function createFigureBackground(figureElt) {
+
   let figureBackground                = document.createElement("div");
   figureBackground.classList.add("figure-height");
   figureBackground.style.height       = "20rem";
   figureElt.appendChild(figureBackground);
+
+  return figureBackground;
+}
+
+function createFigcaptionElt(figureElt) {
 
   let figcaptionElt                   = document.createElement("figcaption");
   figcaptionElt.classList.add("figcaption-height");
@@ -56,15 +69,33 @@ function createRecipesStructure(data) {
   figcaptionElt.style.height          = "25rem";
   figcaptionElt.style.backgroundColor = "#E6E6E6";
   figureElt.appendChild(figcaptionElt);
+  
+  return figcaptionElt;
+}
 
-  // HEADER contenant le nom et le container du temps de la recette
+// HEADER contenant le nom et le container du temps de la recette
+function createFigcaptionheader(figcaptionElt) {
+
   let figcaptionHeader                = document.createElement("header");
   figcaptionHeader.style.display      = "flex";
   figcaptionHeader.style.width        = "100%";
   figcaptionHeader.style.margin       = "1rem";  
   figcaptionElt.appendChild(figcaptionHeader);
 
-  // NAME
+  return figcaptionHeader;
+}
+
+function createRecipesStructure(data) {
+
+  let recipeSection     = createRecipeSection();
+  let recipeElt         = createRecipeElt(recipeSection);
+  let recipeLink        = createRecipeLink(recipeElt);
+  let figureElt         = createFigureElt(recipeLink);
+  let figureBackground  = createFigureBackground(figureElt);
+  let figcaptionElt     = createFigcaptionElt(figureElt);
+  let figcaptionHeader  = createFigcaptionheader(figcaptionElt);
+
+ // Création d'un h2 contenant le nom de la recette
   let nameElt                         = document.createElement("h2");
   nameElt.innerText                   = data.name;
   nameElt.style.width                 = "72%";  
@@ -131,41 +162,61 @@ function createRecipesStructure(data) {
   //console.log(data);
 }
 
+/**
+ * Fonction appelant celle qui crée la stucture d'une recette afin de la boucler sur les 50
+ * @param {object} recipes 
+ */
 function displayRecipes(recipes) {
   
   for (let i = 0; i < recipes.length; i++) {
     
     createRecipesStructure(recipes[i]);
-
   }
 }
 
+/**
+ * Création d'un tableau regroupant tous les appareils
+ * @param {object} recipes 
+ */
 function createApplianceArray(recipes) {
 
   let applianceArray = [];
+
   for (let i = 0; i < recipes.length; i++) {
+
     let getAppliance = recipes[i].appliance;
     applianceArray.push(getAppliance);
-    //console.log(appliance);
   }
+  // Création d'un nouveau tableau qui ne contient aucun doublons d'appareil
   let uniqueApplianceArray = [...new Set(applianceArray)];
   console.log(uniqueApplianceArray);
 }
 
+/**
+ * Création d'un tableau regroupant tous les ingrédients
+ * @param {object} recipes 
+ */
 function createIngredientArray(recipes) {
 
   let ingredientArray = [];
+
   for (let i = 0; i < recipes.length; i++) {
+
     for (let y = 0; y < recipes[i].ingredients.length; y++) {
+
       let getIngredient = recipes[i].ingredients[y].ingredient;
       ingredientArray.push(getIngredient);
-      //console.log(getIngredient);
     }
   }
+  // Création d'un nouveau tableau qui ne contient aucun doublons d'ingrédient
   let uniqueIngredientArray = [...new Set(ingredientArray)];
   console.log(uniqueIngredientArray);
 }
 
+/**
+ * Création d'un tableau regroupant tous les ustensiles
+ * @param {object} recipes 
+ */
 function createUstensileArray(recipes) {
 
   let ustensileArray = [];
@@ -176,14 +227,16 @@ function createUstensileArray(recipes) {
 
       let getUstensile = recipes[i].ustensils[y];
       ustensileArray.push(getUstensile);
-
-      
     }
   }
+  // Création d'un nouveau tableau qui ne contient aucun doublons d'ustensile
   let uniqueUstensilArray = [...new Set(ustensileArray)];
   console.log(uniqueUstensilArray);
 }
 
+/**
+ * Fonction d'initialisation du code
+ */
 function init() {
 
   displayRecipes(recipes);
