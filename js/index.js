@@ -85,17 +85,9 @@ function createFigcaptionheader(figcaptionElt) {
   return figcaptionHeader;
 }
 
-function createRecipesStructure(data) {
+// Création d'un h2 contenant le nom de la recette
+function createNameElt(figcaptionHeader, data) {
 
-  let recipeSection     = createRecipeSection();
-  let recipeElt         = createRecipeElt(recipeSection);
-  let recipeLink        = createRecipeLink(recipeElt);
-  let figureElt         = createFigureElt(recipeLink);
-  let figureBackground  = createFigureBackground(figureElt);
-  let figcaptionElt     = createFigcaptionElt(figureElt);
-  let figcaptionHeader  = createFigcaptionheader(figcaptionElt);
-
- // Création d'un h2 contenant le nom de la recette
   let nameElt                         = document.createElement("h2");
   nameElt.innerText                   = data.name;
   nameElt.style.width                 = "72%";  
@@ -103,26 +95,45 @@ function createRecipesStructure(data) {
   nameElt.style.fontSize              = "26px";
   figcaptionHeader.appendChild(nameElt);
 
-  // Container avec l'icône et le temps de la recette
+  return nameElt;
+}
+// Container avec l'icône et le temps de la recette
+function createTimeContainer(figcaptionHeader) {
+
   let timeContainer                   = document.createElement("p");
   timeContainer.style.width           = "28%";
   timeContainer.style.fontSize        = "25px";
   figcaptionHeader.appendChild(timeContainer);
 
-  // TIME 
+  return timeContainer;
+}
+
+// Time icône 
+function createTimeIcon(timeContainer) {
+
   let timeIcon                         = document.createElement("i");
   timeIcon.style.marginRight           = "0.5rem"; 
   timeIcon.classList.add("fa-regular");
   timeIcon.classList.add("fa-clock");
   timeContainer.appendChild(timeIcon);
 
-  // TIME
+  return timeIcon;
+}
+
+// Temps en  minutes
+function createTimeElt(timeContainer, data) {
+
   let timeElt                         = document.createElement("span");
   timeElt.innerText                   = data.time + " min";
   timeElt.style.fontFamily            = "Latto";
   timeContainer.appendChild(timeElt);
 
-  //Div contenant la liste et la description de la recette
+  return timeElt;
+}
+
+//Div contenant la liste et la description de la recette
+function createFigcaptionMainContainer(figcaptionElt) {
+
   let mainContainer                   = document.createElement("div");
   mainContainer.style.display         = "flex";
   mainContainer.style.height          = "200px";
@@ -130,11 +141,22 @@ function createRecipesStructure(data) {
   mainContainer.style.lineHeight      = "1";
   figcaptionElt.appendChild(mainContainer);
 
-// INGREDIENTS, QUANTITES ET UNITES 
+  return mainContainer;
+}
+
+// Liste (ul) contenant tous les ingrédients de la recette
+function createIngredientsList(mainContainer) {
+
   let ingredientsList                 = document.createElement("ul");
   ingredientsList.style.marginRight   = "0.5rem";
   ingredientsList.style.width         = "50%";
   mainContainer.appendChild(ingredientsList);
+
+  return ingredientsList;
+}
+
+//affiche l'ingrédient, la quantité et l'unité de celui-ci
+function getIngredients(ingredientsList, data) {
 
   let ingredients     = []; 
   for (let i = 0; i < data.ingredients.length; i++) {
@@ -150,7 +172,12 @@ function createRecipesStructure(data) {
       }
       ingredientsList.appendChild(ingredients[i]);
   }
-  // DESCRIPTION
+  return ingredients;
+}
+
+// Description de la recette
+function createDescriptionElt(mainContainer, data) {
+  
   let descriptionElt                  = document.createElement("p");
   descriptionElt.classList.add("text-overflow");
   descriptionElt.innerText            = data.description;
@@ -159,6 +186,26 @@ function createRecipesStructure(data) {
   descriptionElt.style.marginLeft     = "0.5rem";
   mainContainer.appendChild(descriptionElt);
 
+  return descriptionElt;
+}
+
+function createRecipesStructure(data) {
+
+  let recipeSection     = createRecipeSection();
+  let recipeElt         = createRecipeElt(recipeSection);
+  let recipeLink        = createRecipeLink(recipeElt);
+  let figureElt         = createFigureElt(recipeLink);
+  let figureBackground  = createFigureBackground(figureElt);
+  let figcaptionElt     = createFigcaptionElt(figureElt);
+  let figcaptionHeader  = createFigcaptionheader(figcaptionElt);
+  let nameElt           = createNameElt(figcaptionHeader, data);
+  let timeContainer     = createTimeContainer(figcaptionHeader);
+  let timeIcon          = createTimeIcon(timeContainer);
+  let timeElt           = createTimeElt(timeContainer, data);
+  let mainContainer     = createFigcaptionMainContainer(figcaptionElt);
+  let ingredientsList   = createIngredientsList(mainContainer);
+  let ingredients       = getIngredients(ingredientsList, data);
+  let descriptionElt    = createDescriptionElt(mainContainer, data);
   //console.log(data);
 }
 
