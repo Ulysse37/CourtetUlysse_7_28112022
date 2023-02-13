@@ -189,6 +189,10 @@ function createDescriptionElt(mainContainer, data) {
   return descriptionElt;
 }
 
+/**
+ * fonction appelant toutes celles créant la structure de la recette ainsi que leurs styles.
+ * @param {object} data 
+ */
 function createRecipesStructure(data) {
 
   let recipeSection     = createRecipeSection();
@@ -237,7 +241,21 @@ function createApplianceArray(recipes) {
   // Création d'un nouveau tableau qui ne contient aucun doublons d'appareil
   let uniqueApplianceArray = [...new Set(applianceArray)];
   console.log(uniqueApplianceArray);
+
+  //return uniqueApplianceArray;
 }
+
+function createApplianceList(uniqueApplianceArray) {
+
+  let applianceSelect         = document.querySelector(".select-appareils");
+
+  for (let i = 0; i < uniqueApplianceArray.length; i++) {
+    let applianceOption       = document.createElement("option");
+    applianceSelect.appendChild(applianceOption);
+    applianceOption.value     = uniqueApplianceArray[i];
+  }
+}
+
 
 /**
  * Création d'un tableau regroupant tous les ingrédients
@@ -290,6 +308,7 @@ function init() {
   createApplianceArray(recipes);
   createIngredientArray(recipes);
   createUstensileArray(recipes);
+  //createApplianceList(uniqueApplianceArray);
 }
 
 init();
