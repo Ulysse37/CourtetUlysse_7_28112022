@@ -242,17 +242,23 @@ function createApplianceArray(recipes) {
   let uniqueApplianceArray = [...new Set(applianceArray)];
   console.log(uniqueApplianceArray);
 
-  //return uniqueApplianceArray;
+  return uniqueApplianceArray;
 }
 
+/**
+ * Affiche le tableau des appareils en tant que liste via des options dans un select du html
+ * @param {object} uniqueApplianceArray 
+ */
 function createApplianceList(uniqueApplianceArray) {
 
-  let applianceSelect         = document.querySelector(".select-appareils");
+  let applianceSelect           = document.querySelector(".select-appareils");
 
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
-    let applianceOption       = document.createElement("option");
+    
+    let applianceOption         = document.createElement("option");
     applianceSelect.appendChild(applianceOption);
-    applianceOption.value     = uniqueApplianceArray[i];
+    applianceOption.value       = uniqueApplianceArray[i];
+    applianceOption.textContent = uniqueApplianceArray[i];
   }
 }
 
@@ -276,6 +282,25 @@ function createIngredientArray(recipes) {
   // Création d'un nouveau tableau qui ne contient aucun doublons d'ingrédient
   let uniqueIngredientArray = [...new Set(ingredientArray)];
   console.log(uniqueIngredientArray);
+
+  return uniqueIngredientArray;
+}
+
+/**
+ * Affiche le tableau des appareils en tant que liste via des options dans un select du html
+ * @param {object} uniqueIngredientArray 
+ */
+function createIngredientList(uniqueIngredientArray) {
+
+  let ingredientSelect            = document.querySelector(".select-ingredients");
+
+  for (let i = 0; i < uniqueIngredientArray.length; i++) {
+    
+    let ingredientOption          = document.createElement("option");
+    ingredientSelect.appendChild(ingredientOption);
+    ingredientOption.value        = uniqueIngredientArray[i];
+    ingredientOption.textContent  = uniqueIngredientArray[i];
+  }
 }
 
 /**
@@ -297,6 +322,25 @@ function createUstensileArray(recipes) {
   // Création d'un nouveau tableau qui ne contient aucun doublons d'ustensile
   let uniqueUstensilArray = [...new Set(ustensileArray)];
   console.log(uniqueUstensilArray);
+
+  return uniqueUstensilArray;
+}
+
+/**
+ * Affiche le tableau des ustensiles en tant que liste via des options dans un select du html
+ * @param {object} uniqueUstensilArray
+ */
+function createUstensileList(uniqueUstensilArray) {
+
+  let ustensileSelect           = document.querySelector(".select-ustensiles");
+
+  for (let i = 0; i < uniqueUstensilArray.length; i++) {
+    
+    let ustensileOption         = document.createElement("option");
+    ustensileSelect.appendChild(ustensileOption);
+    ustensileOption.value       = uniqueUstensilArray[i];
+    ustensileOption.textContent = uniqueUstensilArray[i];
+  }
 }
 
 /**
@@ -305,37 +349,12 @@ function createUstensileArray(recipes) {
 function init() {
 
   displayRecipes(recipes);
-  createApplianceArray(recipes);
-  createIngredientArray(recipes);
-  createUstensileArray(recipes);
-  //createApplianceList(uniqueApplianceArray);
+  let uniqueApplianceArray  = createApplianceArray(recipes);
+  let uniqueIngredientArray = createIngredientArray(recipes);
+  let uniqueUstensilArray   = createUstensileArray(recipes);
+  createApplianceList(uniqueApplianceArray);
+  createIngredientList(uniqueIngredientArray);
+  createUstensileList(uniqueUstensilArray);
 }
 
 init();
-
-
-
-/*function getRecipes() {
-    
-    const url = 'js/recipes.js';
-    try {
-        fetch(url)
-        .then((res) => {
-            console.log(res);
-            res.json();
-            
-        })
-        .then((data) => {
-            console.log(data);
-            const recipes = data.recipes;
-            console.log(recipes);
-        })
-
-        
-    } catch (error) {
-        console.log(error);
-    } 
-}
-let recipes = getRecipes();
-console.log(recipes);
-*/
