@@ -1,4 +1,90 @@
-.gris {
-    background-color: grey;
-    height: 250px;
+body {
+  margin: auto;
+  max-width: 1920px;
 }
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+figure {
+  margin: 0;
+}
+
+a { 
+  color: black;
+}
+
+a:hover,
+a:focus { 
+  text-decoration: none;
+  color: hsl(0, 0%, 25%);
+}
+
+.ingredients {
+  margin-right: 100px;
+}
+
+.appareils {
+  margin-right: 100px;
+}
+
+/* style pour afficher l'ellipsis sur la description de la recette */
+.text-overflow {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  white-space: normal;
+}
+
+@media (min-width: 576px) {
+  .figure-height {
+    height: 17rem !important;
+  }
+
+  .figcaption-height {
+    height: 17rem !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .recipes-list {
+    flex-flow: row wrap;
+    gap : 40px;
+    width: 100%;
+  }
+
+  .recipe-element {
+    width : 45% !important;
+  }
+
+  .figcaption-height {
+    height: 22rem !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .figcaption-height {
+    height: 17rem !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .recipes-list {
+    gap: 70px;
+  }
+
+  .recipe-element {
+    width: 45% !important;
+  }
+}
+
+@media (min-width: 1500px) {
+  .recipe-element {
+    width: 29% !important;
+  }
+}
+
