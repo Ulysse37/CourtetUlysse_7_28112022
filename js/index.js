@@ -1,5 +1,8 @@
 "use strict";
 //console.log(recipes);
+let uniqueIngredientArray;
+let uniqueApplianceArray;
+let uniqueUstensilArray;
 
 // Récupération de l'ul qui va contenir les recettes
 function createRecipeSection() {
@@ -241,7 +244,7 @@ function createApplianceArray(recipes) {
   }
   // Création d'un nouveau tableau qui ne contient aucun doublons d'appareil
   let uniqueApplianceArray = [...new Set(applianceArray)];
-  console.log(uniqueApplianceArray);
+  //console.log(uniqueApplianceArray);
 
   return uniqueApplianceArray;
 }
@@ -282,10 +285,12 @@ function createIngredientArray(recipes) {
   }
   // Création d'un nouveau tableau qui ne contient aucun doublons d'ingrédient
   let uniqueIngredientArray = [...new Set(ingredientArray)];
-  console.log(uniqueIngredientArray);
+  //console.log(uniqueIngredientArray);
 
   return uniqueIngredientArray;
 }
+
+//export { createIngredientArray };
 
 /**
  * Affiche le tableau des appareils en tant que liste via des options dans un select du html
@@ -322,7 +327,7 @@ function createUstensileArray(recipes) {
   }
   // Création d'un nouveau tableau qui ne contient aucun doublons d'ustensile
   let uniqueUstensilArray = [...new Set(ustensileArray)];
-  console.log(uniqueUstensilArray);
+  //console.log(uniqueUstensilArray);
 
   return uniqueUstensilArray;
 }
@@ -350,12 +355,13 @@ function createUstensileList(uniqueUstensilArray) {
 function init() {
 
   displayRecipes(recipes);
-  let uniqueApplianceArray  = createApplianceArray(recipes);
-  let uniqueIngredientArray = createIngredientArray(recipes);
-  let uniqueUstensilArray   = createUstensileArray(recipes);
+  uniqueApplianceArray  = createApplianceArray(recipes);
+  uniqueIngredientArray = createIngredientArray(recipes);
+  uniqueUstensilArray   = createUstensileArray(recipes);
   createApplianceList(uniqueApplianceArray);
   createIngredientList(uniqueIngredientArray);
   createUstensileList(uniqueUstensilArray);
 }
 
 init();
+
