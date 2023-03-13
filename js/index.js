@@ -223,6 +223,7 @@ function displayRecipes(recipes) {
     
     createRecipesStructure(recipes[i]);
   }
+  //console.log(recipes);
 }
 
 /**
