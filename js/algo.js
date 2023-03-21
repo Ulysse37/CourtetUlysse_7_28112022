@@ -1,21 +1,24 @@
 "use strict";
 
 console.log(recipes);
-console.log(uniqueIngredientArray);
-console.log(uniqueApplianceArray);
-console.log(uniqueUstensilArray);
+//console.log(uniqueIngredientArray);
+//console.log(uniqueApplianceArray);
+//console.log(uniqueUstensilArray);
 
+const mainSearchElt = document.getElementById("search-bar");
+const ingredientsElt = document.getElementById("ingredients");
+const appareilsElt = document.getElementById("appareils");
+const ustensilesElt = document.getElementById("ustensiles");
 
-function searchListener() {
-    let searchBar = document.getElementById("search-bar");
-
-    searchBar.addEventListener("input", (e) => {
-        let searchValue = e.target.value;
-        console.log(searchValue);
-    })
+function searchRecipes() {
+    mainSearchElt.addEventListener("input", (e) => {
+        
+        let value = e.target.value;
+        console.log(value);
     
+    })   
 }
-searchListener();
+
 
 function filterByName() {
     for (let i = 0; i < recipes.length; i++) {
@@ -28,4 +31,4 @@ function filterByName() {
     }
 }
 //filterByName();
-
+searchRecipes();
