@@ -4,10 +4,10 @@ const mainSearchElt = document.getElementById("search-bar");
 const ingredientsElt = document.getElementById("ingredients");
 const appareilsElt = document.getElementById("appareils");
 const ustensilesElt = document.getElementById("ustensiles");
-
 const lowerCaseIngredients = uniqueIngredientArray.map(x => x.toLowerCase());
 
 console.log(recipes);
+console.log(recipesNamesArray);
 //console.log(uniqueIngredientArray);
 //console.log(uniqueApplianceArray);
 //console.log(uniqueUstensilArray);
@@ -24,8 +24,9 @@ function searchRecipes() {
             //console.log(uniqueIngredientArray);
             console.log(value);
             return true;
+        }   else {
+            return false;
         }
-        return false;
     })   
 }
 
