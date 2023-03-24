@@ -15,21 +15,20 @@ console.log(recipesNamesArray);
 
 
 function searchRecipes() {
-    mainSearchElt.addEventListener("input", (e) => {
+  mainSearchElt.addEventListener("input", (e) => {
 
-        let value = e.target.value;
-        //console.log(value);
+    let value = e.target.value;
+    //console.log(value);
 
-        if (lowerCaseIngredients.includes(value)) {
-            //console.log(uniqueIngredientArray);
-            console.log(value);
-            return true;
-        }   else {
-            return false;
-        }
-    })   
+    if (lowerCaseIngredients.includes(value)) {
+      //console.log(uniqueIngredientArray);
+      console.log(value);
+      return true;
+    } else {
+      return false;
+    }
+  })
 }
-
 /*function filterByName() {
     for (let i = 0; i < recipes.length; i++) {
         let recipesName = recipes[i].name
