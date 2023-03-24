@@ -1,13 +1,13 @@
 "use strict";
 
-const mainSearchElt = document.getElementById("search-bar");
-const ingredientsElt = document.getElementById("ingredients");
-const appareilsElt = document.getElementById("appareils");
-const ustensilesElt = document.getElementById("ustensiles");
-const lowerCaseIngredients = uniqueIngredientArray.map(x => x.toLowerCase());
-
+const mainSearchElt         = document.getElementById("search-bar");
+const ingredientsElt        = document.getElementById("ingredients");
+const appareilsElt          = document.getElementById("appareils");
+const ustensilesElt         = document.getElementById("ustensiles");
+const lowerCaseIngredients  = uniqueIngredientArray.map(x => x.toLowerCase());
+const lowerCaseRecipesNames = recipesNamesArray.map (x => x.toLowerCase());
 console.log(recipes);
-console.log(recipesNamesArray);
+//console.log(lowerCaseRecipesNames);
 //console.log(uniqueIngredientArray);
 //console.log(uniqueApplianceArray);
 //console.log(uniqueUstensilArray);
@@ -22,22 +22,12 @@ function searchRecipes() {
 
     if (lowerCaseIngredients.includes(value)) {
       //console.log(uniqueIngredientArray);
-      console.log(value);
+      //console.log(value);
       return true;
     } else {
       return false;
     }
-  })
+  }) 
 }
-/*function filterByName() {
-    for (let i = 0; i < recipes.length; i++) {
-        let recipesName = recipes[i].name
 
-        if (recipesName.match(searchValue)) {
-            return true;
-        }
-        //console.log(recipesName);
-    }
-}
-//filterByName();*/
 searchRecipes();
