@@ -6,12 +6,12 @@ const appareilsElt          = document.getElementById("appareils");
 const ustensilesElt         = document.getElementById("ustensiles");
 const lowerCaseIngredients  = uniqueIngredientArray.map(x => x.toLowerCase());
 const lowerCaseRecipesNames = recipesNamesArray.map (x => x.toLowerCase());
-console.log(recipes);
+const lowerCaseDescriptions = recipesDescriptionsArray.map (x => x.toLowerCase());
+const lowerCaseAppliances   = uniqueApplianceArray.map (x => x.toLowerCase());
+const lowerCaseUstensiles   = uniqueUstensilArray.map (x => x.toLowerCase());
+//console.log(recipes);
 //console.log(lowerCaseRecipesNames);
-//console.log(uniqueIngredientArray);
-//console.log(uniqueApplianceArray);
-//console.log(uniqueUstensilArray);
-//console.log(lowerCaseIngredients);
+
 
 
 function searchRecipes() {
@@ -22,7 +22,7 @@ function searchRecipes() {
 
     if (lowerCaseIngredients.includes(value)) {
       //console.log(uniqueIngredientArray);
-      //console.log(value);
+      console.log(value);
       return true;
     } else {
       return false;

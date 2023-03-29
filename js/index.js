@@ -1,6 +1,7 @@
 "use strict";
 //console.log(recipes);
 let recipesNamesArray;
+let recipesDescriptionsArray;
 let uniqueIngredientArray;
 let uniqueApplianceArray;
 let uniqueUstensilArray;
@@ -246,6 +247,21 @@ function createRecipesNamesArray(recipes) {
 }
 
 /**
+ * Création d'un tableau regroupant toutes les descriptions des recettes
+ * @param {object} recipes 
+ */
+function createDescriptionsArray(recipes) {
+  
+  let recipesDescriptionsArray = [];
+
+  for (let i = 0; i < recipes.length; i++) {
+    let getRecipesDescriptions = recipes[i].description;
+    recipesDescriptionsArray.push(getRecipesDescriptions);
+  }
+  return recipesDescriptionsArray;
+}
+
+/**
  * Création d'un tableau regroupant tous les appareils
  * @param {object} recipes 
  */
@@ -371,10 +387,11 @@ function createUstensileList(uniqueUstensilArray) {
 function init() {
 
   displayRecipes(recipes);
-  recipesNamesArray     = createRecipesNamesArray(recipes);
-  uniqueApplianceArray  = createApplianceArray(recipes);
-  uniqueIngredientArray = createIngredientArray(recipes);
-  uniqueUstensilArray   = createUstensileArray(recipes);
+  recipesNamesArray         = createRecipesNamesArray(recipes);
+  recipesDescriptionsArray  = createDescriptionsArray(recipes);
+  uniqueApplianceArray      = createApplianceArray(recipes);
+  uniqueIngredientArray     = createIngredientArray(recipes);
+  uniqueUstensilArray       = createUstensileArray(recipes);
   createApplianceList(uniqueApplianceArray);
   createIngredientList(uniqueIngredientArray);
   createUstensileList(uniqueUstensilArray);
