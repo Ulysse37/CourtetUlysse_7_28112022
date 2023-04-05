@@ -12,17 +12,20 @@ const lowerCaseUstensiles   = uniqueUstensilArray.map (x => x.toLowerCase());
 //console.log(recipes);
 //console.log(lowerCaseRecipesNames);
 
-
-
 function searchRecipes() {
   mainSearchElt.addEventListener("input", (e) => {
 
     let value = e.target.value;
     //console.log(value);
+    if ( value.length >= 3 ) {
+      
+      for (let ingredient of lowerCaseIngredients) {
 
-    if (lowerCaseIngredients.includes(value)) {
-      //console.log(uniqueIngredientArray);
-      console.log(value);
+        if (ingredient.includes(value)) {
+
+          console.log(ingredient);
+        }
+      }
       return true;
     } else {
       return false;
