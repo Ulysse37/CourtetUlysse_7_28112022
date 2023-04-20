@@ -14,15 +14,11 @@ console.log(recipes);
 //console.log(lowerCaseRecipesNames);
 //console.log(lowerCaseDescriptions);
 
-function displaySearchRecipes() {
-
-}
 
 function searchRecipes() {
   mainSearchElt.addEventListener("input", (e) => {
 
     let value = e.target.value;
-    //console.log(value);
     if ( value.length >= 3 ) {
 
       let items = [];
@@ -30,30 +26,28 @@ function searchRecipes() {
       for (let recipe of recipes) {
 
           if (recipe.name.includes(value) || recipe.name.toLowerCase().includes(value)) {
+
             items.push(recipe);
-            console.log(recipe.name);
-            //console.log(items);
+            //console.log(recipe.name);
           }
           
           if (recipe.description.includes(value) || recipe.description.toLowerCase().includes(value)) {
+
             items.push(recipe);
-            console.log(recipe.description);
-            //console.log(items);
+            //console.log(recipe.description);
           }
   
-        //console.log(recipe.ingredients);
         for (let ingredient of recipe.ingredients) {
-          //console.log(ingredient);
+          
           if (ingredient.ingredient.includes(value) || ingredient.ingredient.toLowerCase().includes(value)) {
+
             items.push(recipe);
             //console.log(ingredient.ingredient);
-            //console.log(items);
-            let uniqueItems = [...new Set(items)];
-            console.log(uniqueItems);
           }
         }
-        
       }
+      let uniqueItems = [...new Set(items)];
+      console.log(uniqueItems);
       //displaySearchRecipes(items);
       return true;
     } else {
@@ -63,4 +57,8 @@ function searchRecipes() {
 }
 
 searchRecipes();
+
+//function displaySearchRecipes() {};
+  
+
 
