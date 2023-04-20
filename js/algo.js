@@ -9,23 +9,49 @@ const lowerCaseRecipesNames = recipesNamesArray.map (x => x.toLowerCase());
 const lowerCaseDescriptions = recipesDescriptionsArray.map (x => x.toLowerCase());
 const lowerCaseAppliances   = uniqueApplianceArray.map (x => x.toLowerCase());
 const lowerCaseUstensiles   = uniqueUstensilArray.map (x => x.toLowerCase());
-//console.log(recipes);
+console.log(recipes);
 //console.log(lowerCaseIngredients);
+//console.log(lowerCaseRecipesNames);
+//console.log(lowerCaseDescriptions);
 
-/*function searchRecipes() {
+function displaySearchRecipes() {
+
+}
+
+function searchRecipes() {
   mainSearchElt.addEventListener("input", (e) => {
 
     let value = e.target.value;
     //console.log(value);
     if ( value.length >= 3 ) {
-      
-      for (let ingredient of lowerCaseIngredients) {
-        
-        if (ingredient.includes(value)) {
 
-          console.log(ingredient);
+      let items = [];
+    
+      for (let recipe of recipes) {
+
+          if (recipe.name.includes(value) || recipe.name.toLowerCase().includes(value)) {
+            console.log(recipe.name);
+            items.push(recipe.name);
+            //console.log(items);
+          }
+          
+          if (recipe.description.includes(value) || recipe.description.toLowerCase().includes(value)) {
+            console.log(recipe.description);
+            items.push(recipe.description);
+            //console.log(items);
+          }
+  
+        //console.log(recipe.ingredients);
+        for (let ingredient of recipe.ingredients) {
+          //console.log(ingredient);
+          if (ingredient.ingredient.includes(value) || ingredient.ingredient.toLowerCase().includes(value)) {
+            console.log(ingredient.ingredient);
+            items.push(ingredient.ingredient);
+            //console.log(items);
+          }
         }
       }
+      //displaySearchRecipes(items);
       return true;
     } else {
       return false;
@@ -34,50 +60,3 @@ const lowerCaseUstensiles   = uniqueUstensilArray.map (x => x.toLowerCase());
 }
 
 searchRecipes();
-*/
-
-function searchRecipesTest() {
-  mainSearchElt.addEventListener("input", (e) => {
-
-    let value = e.target.value;
-    //console.log(value);
-    if ( value.length >= 3 ) {
-      
-      for (let recette of recipes) {
-        //let ingredientRecette = recette.ingredients;
-        console.log(recette.ingredients);
-        if (recette.ingredients.includes(value)) {
-
-          //console.log(recette);
-        }
-      }
-      return true;
-    } else {
-      return false;
-    }
-  }) 
-}
-
-searchRecipesTest();
-
-
-function filterByIngredients() {
-  mainSearchElt.addEventListener("input", (e) => {
-
-    let value = e.target.value;
-
-    for (let i = 0; i < recipes.length; i++) {
-
-      let element = recipes[i];
-      let ingredientLowerCase = element.ingredients.map(x => x.toLowerCase());
-      //let realLowerCase = ingredientLowerCase.map(x => x.toLowerCase());
-      console.log(ingredientLowerCase)
-      if (ingredientLowerCase.includes(value)) {
-        //console.log(ingredientLowerCase)
-        
-      }
-    }
-  })
-}
-
-//filterByIngredients();
