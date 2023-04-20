@@ -30,14 +30,14 @@ function searchRecipes() {
       for (let recipe of recipes) {
 
           if (recipe.name.includes(value) || recipe.name.toLowerCase().includes(value)) {
+            items.push(recipe);
             console.log(recipe.name);
-            items.push(recipe.name);
             //console.log(items);
           }
           
           if (recipe.description.includes(value) || recipe.description.toLowerCase().includes(value)) {
+            items.push(recipe);
             console.log(recipe.description);
-            items.push(recipe.description);
             //console.log(items);
           }
   
@@ -45,11 +45,14 @@ function searchRecipes() {
         for (let ingredient of recipe.ingredients) {
           //console.log(ingredient);
           if (ingredient.ingredient.includes(value) || ingredient.ingredient.toLowerCase().includes(value)) {
-            console.log(ingredient.ingredient);
-            items.push(ingredient.ingredient);
+            items.push(recipe);
+            //console.log(ingredient.ingredient);
             //console.log(items);
+            let uniqueItems = [...new Set(items)];
+            console.log(uniqueItems);
           }
         }
+        
       }
       //displaySearchRecipes(items);
       return true;
@@ -60,3 +63,4 @@ function searchRecipes() {
 }
 
 searchRecipes();
+
