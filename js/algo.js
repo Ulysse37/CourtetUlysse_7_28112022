@@ -14,7 +14,11 @@ console.log(recipes);
 //console.log(lowerCaseRecipesNames);
 //console.log(lowerCaseDescriptions);
 
-
+/**
+ * Ajoute dans un tableau toute recette correspondant à l'input dans la recherche au dessus de 3 caractères,
+  cette recette 
+ * 
+ */
 function searchRecipes() {
   mainSearchElt.addEventListener("input", (e) => {
 
@@ -24,7 +28,7 @@ function searchRecipes() {
       let items = [];
     
       for (let recipe of recipes) {
-
+          
           if (recipe.name.includes(value) || recipe.name.toLowerCase().includes(value)) {
 
             items.push(recipe);
@@ -35,6 +39,7 @@ function searchRecipes() {
 
             items.push(recipe);
             //console.log(recipe.description);
+            //console.log(recipe.description.toLowerCase());
           }
   
         for (let ingredient of recipe.ingredients) {
@@ -43,12 +48,13 @@ function searchRecipes() {
 
             items.push(recipe);
             //console.log(ingredient.ingredient);
+            //console.log(ingredient.ingredient.toLowerCase());
           }
         }
       }
       let uniqueItems = [...new Set(items)];
       console.log(uniqueItems);
-      //displaySearchRecipes(items);
+      //displaySearchRecipes();
       return true;
     } else {
       return false;
@@ -58,7 +64,20 @@ function searchRecipes() {
 
 searchRecipes();
 
-//function displaySearchRecipes() {};
+function displaySearchRecipes() {
+
+};
+
+function displayErrorMessage()  {
+  let recipeSection = document.querySelector(".recipes-list");
+  let recipeSearchSection = document.querySelector(".recipes-search-list");
+  let errorMessage = document.createElement("p");
+
+  recipeSection.style.display = "none";
+  errorMessage.innerText = "Aucune recette ne correspond à votre critère... Vous pouvez chercher <<tarte aux pommes>>, <<poisson>>, etc.";
+
+  recipeSearchSection.appendChild(errorMessage);
+}
   
 
 
