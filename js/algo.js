@@ -44,14 +44,9 @@ function getRecipesIngredients (value, items, recipe) {
   }
 }
 
-/**
- * ajoute dans un tableau les recettes dont le nom, la description ou les ingrédients correspondent à l'input
- * 
- */
-function searchRecipes() {
-  mainSearchElt.addEventListener("input", (e) => {
-
-    let value = e.target.value;
+function getSearchRecipes(event) {
+  let value = event.target.value;
+  value = value.toLowerCase();
     if ( value.length >= 3 ) {
 
       let items = [];
@@ -63,22 +58,27 @@ function searchRecipes() {
         getRecipesIngredients (value, items, recipe);
       }
       let uniqueItems = [...new Set(items)];
-      console.log(uniqueItems);
-      //displaySearchRecipes();
-      return true;
-    } else {
-      return false;
+      console.log(value);
+      displaySearchRecipes(uniqueItems);
     }
-  }) 
 }
 
-searchRecipes();
+mainSearchElt.addEventListener("input", getSearchRecipes);
+ 
+//console.log(searchedRecipes);
 
-function displaySearchRecipes() {
-
+function displaySearchRecipes(recipes) {
+  
+  if (recipes.length > 0) {
+    console.log(recipes);
+  } else  {
+    console.log("Error");
+    displayErrorMessage();
+  }
 };
 
 function displayErrorMessage()  {
+  
   let recipeSection = document.querySelector(".recipes-list");
   let recipeSearchSection = document.querySelector(".recipes-search-list");
   let errorMessage = document.createElement("p");
