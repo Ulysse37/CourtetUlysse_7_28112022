@@ -51,7 +51,7 @@ a:focus {
 }
 
 @media (min-width: 768px) {
-  .recipes-list {
+  .recipes-list, .recipes-search-list {
     flex-flow: row wrap;
     gap : 40px;
     width: 100%;
@@ -73,7 +73,7 @@ a:focus {
 }
 
 @media (min-width: 1200px) {
-  .recipes-list {
+  .recipes-list, .recipes-search-list {
     gap: 70px;
   }
 

@@ -10,9 +10,40 @@ const lowerCaseDescriptions = recipesDescriptionsArray.map (x => x.toLowerCase()
 const lowerCaseAppliances   = uniqueApplianceArray.map (x => x.toLowerCase());
 const lowerCaseUstensiles   = uniqueUstensilArray.map (x => x.toLowerCase());*/
 //console.log(lowerCaseIngredients);
-console.log(recipes);
+//console.log(recipes);
 
-// ajoute dans un tableau les recettes dont le nom correspond à l'input
+// Récupération de l'ul qui va contenir seulement les recettes recherchées 
+function createSearchRecipeSection() {
+
+  let recipeSection                  = document.querySelector(".recipes-search-list");
+  recipeSection.style.display        = "flex";
+  recipeSection.style.flexWrap       = "wrap";
+  recipeSection.style.justifyContent = "center";
+
+  return recipeSection;
+}
+
+function createSearchRecipesStructure(data) {
+
+  let recipeSection     = createSearchRecipeSection();
+  let recipeElt         = createRecipeElt(recipeSection);
+  let recipeLink        = createRecipeLink(recipeElt);
+  let figureElt         = createFigureElt(recipeLink);
+  let figureBackground  = createFigureBackground(figureElt);
+  let figcaptionElt     = createFigcaptionElt(figureElt);
+  let figcaptionHeader  = createFigcaptionheader(figcaptionElt);
+  let nameElt           = createNameElt(figcaptionHeader, data);
+  let timeContainer     = createTimeContainer(figcaptionHeader);
+  let timeIcon          = createTimeIcon(timeContainer);
+  let timeElt           = createTimeElt(timeContainer, data);
+  let mainContainer     = createFigcaptionMainContainer(figcaptionElt);
+  let ingredientsList   = createIngredientsList(mainContainer);
+  let ingredients       = getIngredients(ingredientsList, data);
+  let descriptionElt    = createDescriptionElt(mainContainer, data);
+  //console.log(data);
+}
+
+// ajoute dans un tableau les recettes dont le nom correspond à l'input (en majuscule ou non)
 function getRecipesNames(value, items, recipe) {
   if (recipe.name.includes(value) || recipe.name.toLowerCase().includes(value)) {
 
@@ -21,7 +52,7 @@ function getRecipesNames(value, items, recipe) {
   }
 }
 
-// ajoute dans un tableau les recettes dont la description correspond à l'input
+// ajoute dans un tableau les recettes dont la description correspond à l'input (en majuscule ou non)
 function getRecipesDescriptions (value, items, recipe) {
   if (recipe.description.includes(value) || recipe.description.toLowerCase().includes(value)) {
 
@@ -31,7 +62,7 @@ function getRecipesDescriptions (value, items, recipe) {
   }
 }
 
-// ajoute dans un tableau les recettes dont les ingrédients correspondent à l'input
+// ajoute dans un tableau les recettes dont les ingrédients correspondent à l'input (en majuscule ou non)
 function getRecipesIngredients (value, items, recipe) {
   for (let ingredient of recipe.ingredients) {
           
@@ -45,11 +76,13 @@ function getRecipesIngredients (value, items, recipe) {
 }
 
 function getSearchRecipes(event) {
+  let recipeSection = document.querySelector(".recipes-list");
   let value = event.target.value;
   value = value.toLowerCase();
+  
     if ( value.length >= 3 ) {
-
       let items = [];
+      recipeSection.style.display = "none";
     
       for (let recipe of recipes) {
           
@@ -61,16 +94,23 @@ function getSearchRecipes(event) {
       console.log(value);
       displaySearchRecipes(uniqueItems);
     }
+    else {
+      recipeSection.style.display = "flex";
+    }
 }
 
 mainSearchElt.addEventListener("input", getSearchRecipes);
  
-//console.log(searchedRecipes);
 
-function displaySearchRecipes(recipes) {
+
+function displaySearchRecipes(searchRecipes) {
   
-  if (recipes.length > 0) {
-    console.log(recipes);
+  if (searchRecipes.length > 0) {
+    console.log(searchRecipes);
+    for (let i = 0; i < searchRecipes.length; i++) {
+    
+      createSearchRecipesStructure(searchRecipes[i]);
+    }
   } else  {
     console.log("Error");
     displayErrorMessage();
