@@ -44,37 +44,31 @@ function createSearchRecipesStructure(data) {
   let ingredientsList   = createIngredientsList(mainContainer);
   let ingredients       = getIngredients(ingredientsList, data);
   let descriptionElt    = createDescriptionElt(mainContainer, data);
-  //console.log(data);
 }
 
 // ajoute dans un tableau les recettes dont le nom correspond à l'input (en majuscule ou non)
-function getRecipesNames(value, items, recipe) {
+function fillRecipesArrayForNames(value, items, recipe) {
   if (recipe.name.includes(value) || recipe.name.toLowerCase().includes(value)) {
 
     items.push(recipe);
-    //console.log(recipe.name);
   }
 }
 
 // ajoute dans un tableau les recettes dont la description correspond à l'input (en majuscule ou non)
-function getRecipesDescriptions (value, items, recipe) {
+function fillRecipesArrayForDescriptions (value, items, recipe) {
   if (recipe.description.includes(value) || recipe.description.toLowerCase().includes(value)) {
 
     items.push(recipe);
-    //console.log(recipe.description);
-    //console.log(recipe.description.toLowerCase());
   }
 }
 
 // ajoute dans un tableau les recettes dont les ingrédients correspondent à l'input (en majuscule ou non)
-function getRecipesIngredients (value, items, recipe) {
+function fillRecipesArrayForIngredients (value, items, recipe) {
   for (let ingredient of recipe.ingredients) {
           
     if (ingredient.ingredient.includes(value) || ingredient.ingredient.toLowerCase().includes(value)) {
 
       items.push(recipe);
-      //console.log(ingredient.ingredient);
-      //console.log(ingredient.ingredient.toLowerCase());
     }
   }
 }
@@ -103,7 +97,7 @@ function displayErrorMessage()  {
  * Si ce tableau de contient aucune recette, appelle la fonction qui affiche le message d'erreur.
  * @param {object} searchRecipes 
  */
-function displaySearchRecipes(searchRecipes) {
+function loopSearchRecipes(searchRecipes) {
   
   if (searchRecipes.length > 0) {
     console.log(searchRecipes);
@@ -122,7 +116,7 @@ function displaySearchRecipes(searchRecipes) {
  * afin d'ajouter les recettes concernées dans un tableau. Puis appelle la fonction qui va les afficher.
  * @param {object} event 
  */
-function getSearchRecipes(event) {
+function searchRecipes(event) {
   let recipeSection = document.querySelector(".recipes-list");
   let value = event.target.value;
   value = value.toLowerCase();
@@ -133,18 +127,18 @@ function getSearchRecipes(event) {
     
       for (let recipe of recipes) {
           
-        getRecipesNames(value, items, recipe);
-        getRecipesDescriptions (value, items, recipe);
-        getRecipesIngredients (value, items, recipe);
+        fillRecipesArrayForNames(value, items, recipe);
+        fillRecipesArrayForDescriptions (value, items, recipe);
+        fillRecipesArrayForIngredients (value, items, recipe);
       }
       let uniqueItems = [...new Set(items)]; // supression des doublons dans le tableau des recettes recherchées
       console.log(value);
       removeDomData();
-      displaySearchRecipes(uniqueItems);
+      loopSearchRecipes(uniqueItems);
     } else  {
       removeDomData();
       recipeSection.style.display = "flex";
     }
 }
 
-mainSearchElt.addEventListener("input", getSearchRecipes);
+mainSearchElt.addEventListener("input", searchRecipes);
