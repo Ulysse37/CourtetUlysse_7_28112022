@@ -23,6 +23,10 @@ function createSearchRecipeSection() {
   return recipeSection;
 }
 
+/**
+ * fonction appelant toutes celles créant la structure de la recette recherchée ainsi que leurs styles.
+ * @param {object} data 
+ */
 function createSearchRecipesStructure(data) {
 
   let recipeSection     = createSearchRecipeSection();
@@ -75,6 +79,49 @@ function getRecipesIngredients (value, items, recipe) {
   }
 }
 
+// Fonction qui reset la recherche à chaque nouvel input de l'utilisateur en supprimant l'affichage des recherches précédentes
+function removeDomData() {
+  let recipeSection         = document.querySelector(".recipes-search-list");
+  recipeSection.innerText   = "";
+}
+
+// Fonction qui dans le cas d'une recherche non aboutie va afficher un message d'erreur
+function displayErrorMessage()  {
+  
+  let recipeSection = document.querySelector(".recipes-list");
+  let recipeSearchSection = document.querySelector(".recipes-search-list");
+  let errorMessage = document.createElement("p");
+
+  recipeSection.style.display = "none";
+  errorMessage.innerText = "Aucune recette ne correspond à votre critère... Vous pouvez chercher <<tarte aux pommes>>, <<poisson>>, etc.";
+
+  recipeSearchSection.appendChild(errorMessage);
+}
+
+/**
+ * Fonction appelant celle qui crée la stucture d'une recette recherchée afin de la boucler sur le tableau de toutes celles recherchées.
+ * Si ce tableau de contient aucune recette, appelle la fonction qui affiche le message d'erreur.
+ * @param {object} searchRecipes 
+ */
+function displaySearchRecipes(searchRecipes) {
+  
+  if (searchRecipes.length > 0) {
+    console.log(searchRecipes);
+    for (let i = 0; i < searchRecipes.length; i++) {
+    
+      createSearchRecipesStructure(searchRecipes[i]);
+    }
+  } else  {
+    console.log("Error");
+    displayErrorMessage();
+  }
+};
+
+/**
+ * fonction qui, si la recherche contient 3 caractère va chercher les noms de recettes, les descriptions et les ingrédients correspondants
+ * afin d'ajouter les recettes concernées dans un tableau. Puis appelle la fonction qui va les afficher.
+ * @param {object} event 
+ */
 function getSearchRecipes(event) {
   let recipeSection = document.querySelector(".recipes-list");
   let value = event.target.value;
@@ -90,44 +137,14 @@ function getSearchRecipes(event) {
         getRecipesDescriptions (value, items, recipe);
         getRecipesIngredients (value, items, recipe);
       }
-      let uniqueItems = [...new Set(items)];
+      let uniqueItems = [...new Set(items)]; // supression des doublons dans le tableau des recettes recherchées
       console.log(value);
+      removeDomData();
       displaySearchRecipes(uniqueItems);
-    }
-    else {
+    } else  {
+      removeDomData();
       recipeSection.style.display = "flex";
     }
 }
 
 mainSearchElt.addEventListener("input", getSearchRecipes);
- 
-
-
-function displaySearchRecipes(searchRecipes) {
-  
-  if (searchRecipes.length > 0) {
-    console.log(searchRecipes);
-    for (let i = 0; i < searchRecipes.length; i++) {
-    
-      createSearchRecipesStructure(searchRecipes[i]);
-    }
-  } else  {
-    console.log("Error");
-    displayErrorMessage();
-  }
-};
-
-function displayErrorMessage()  {
-  
-  let recipeSection = document.querySelector(".recipes-list");
-  let recipeSearchSection = document.querySelector(".recipes-search-list");
-  let errorMessage = document.createElement("p");
-
-  recipeSection.style.display = "none";
-  errorMessage.innerText = "Aucune recette ne correspond à votre critère... Vous pouvez chercher <<tarte aux pommes>>, <<poisson>>, etc.";
-
-  recipeSearchSection.appendChild(errorMessage);
-}
-  
-
-
