@@ -33,17 +33,17 @@ function createSearchRecipesStructure(data) {
   let recipeElt         = createRecipeElt(recipeSection);
   let recipeLink        = createRecipeLink(recipeElt);
   let figureElt         = createFigureElt(recipeLink);
-  let figureBackground  = createFigureBackground(figureElt);
+  createFigureBackground(figureElt);
   let figcaptionElt     = createFigcaptionElt(figureElt);
   let figcaptionHeader  = createFigcaptionheader(figcaptionElt);
-  let nameElt           = createNameElt(figcaptionHeader, data);
+  createNameElt(figcaptionHeader, data);
   let timeContainer     = createTimeContainer(figcaptionHeader);
-  let timeIcon          = createTimeIcon(timeContainer);
-  let timeElt           = createTimeElt(timeContainer, data);
+  createTimeIcon(timeContainer);
+  createTimeElt(timeContainer, data);
   let mainContainer     = createFigcaptionMainContainer(figcaptionElt);
   let ingredientsList   = createIngredientsList(mainContainer);
-  let ingredients       = getIngredients(ingredientsList, data);
-  let descriptionElt    = createDescriptionElt(mainContainer, data);
+  getIngredients(ingredientsList, data);
+  createDescriptionElt(mainContainer, data);
 }
 
 // ajoute dans un tableau les recettes dont le nom correspond à l'input (en majuscule ou non)
