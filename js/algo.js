@@ -9,8 +9,9 @@ const lowerCaseRecipesNames = recipesNamesArray.map (x => x.toLowerCase());
 const lowerCaseDescriptions = recipesDescriptionsArray.map (x => x.toLowerCase());
 const lowerCaseAppliances   = uniqueApplianceArray.map (x => x.toLowerCase());
 const lowerCaseUstensiles   = uniqueUstensilArray.map (x => x.toLowerCase());*/
-//console.log(lowerCaseIngredients);
-//console.log(recipes);
+//const lowerCaseRecipes      = recipes.map (x => x.toLowerCase());
+//console.log(lowerCaseRecipesNames);
+console.log(recipes); 
 
 // Récupération de l'ul qui va contenir seulement les recettes recherchées 
 function createSearchRecipeSection() {

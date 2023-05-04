@@ -27,29 +27,32 @@
                 <!--là où les tag selectionnés s'afficheront-->
             </div>
 
-            <ul class="tags row mt-3">
-                <li class="ingredients col col-lg-1">
+            <form class="tags row mt-3">
+                <fieldset class="ingredients col col-lg-1">
+                    <legend>Ingrédients</legend>
+                    <input type="search" id="ingredients">
                     <button type="button" class="btn btn-info m-1 pt-3 px-4">Ingrédients
                         <select class="select-ingredients">
                         </select>
-                        <input type="search" id="ingredients">
                     </button>
-                </li>
-                <li class="appareils col col-lg-1">
+                </fieldset>
+                <fieldset class="appareils col col-lg-1">
+                    <legend>Appareils</legend>
+                    <input type="search" id="appareils">
                     <button type="button" class="btn btn-success m-1 pt-3 px-4">Appareils
                         <select class="select-appareils">
                         </select>
-                        <input type="search" id="appareils">
                     </button>
-                </li>
-                <li class="ustensiles col col-lg-1">
+                </fieldset>
+                <fieldset class="ustensiles col col-lg-1">
+                    <legend>Ustensiles</legend>
+                    <input type="search" id="ustensiles">
                     <button type="button" class="btn btn-danger m-1 pt-3 px-4">Ustensiles
                         <select class="select-ustensiles">
                         </select>
-                        <input type="search" id="ustensiles">
                     </button>           
-                </li>
-            </ul>
+                </fieldset>
+            </form>
         </header>
         <!-- Injection des recettes dans la liste -->
         <ul class="recipes-list"></ul>
