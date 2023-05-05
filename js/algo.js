@@ -13,6 +13,8 @@ const lowerCaseUstensiles   = uniqueUstensilArray.map (x => x.toLowerCase());*/
 //console.log(lowerCaseRecipesNames);
 console.log(recipes); 
 
+//                                             Barre de recherche
+
 // Récupération de l'ul qui va contenir seulement les recettes recherchées 
 function createSearchRecipeSection() {
 
@@ -143,3 +145,59 @@ function searchRecipes(event) {
 }
 
 mainSearchElt.addEventListener("input", searchRecipes);
+
+//                                           TAGS
+
+/**
+ * Affiche le tableau des appareils dans une liste
+ * @param {object} uniqueIngredientArray 
+ */
+function createIngredientList(uniqueIngredientArray) {
+
+  let ingredientList           = document.querySelector(".ingredients-list");
+
+  for (let i = 0; i < uniqueIngredientArray.length; i++) {
+    
+    let ingredientElt          = document.createElement("li");
+    ingredientList.appendChild(ingredientElt);
+    ingredientElt.textContent  = uniqueIngredientArray[i];
+  }
+}
+
+//createIngredientList(uniqueIngredientArray);
+
+/**
+ * Affiche le tableau des appareils dans une liste
+ * @param {object} uniqueApplianceArray 
+ */
+function createApplianceList(uniqueApplianceArray) {
+
+  let applianceList          = document.querySelector(".appareils-list");
+  
+  for (let i = 0; i < uniqueApplianceArray.length; i++) {
+    
+    let applianceElt         = document.createElement("li");
+    applianceList.appendChild(applianceElt);
+    applianceElt.textContent = uniqueApplianceArray[i];
+  }
+}
+
+//createApplianceList(uniqueApplianceArray);
+
+/**
+ * Affiche le tableau des ustensiles dans une liste 
+ * @param {object} uniqueUstensilArray
+ */
+function createUstensileList(uniqueUstensilArray) {
+
+  let ustensileList          = document.querySelector(".ustensiles-list");
+
+  for (let i = 0; i < uniqueUstensilArray.length; i++) {
+    
+    let ustensileElt         = document.createElement("li");
+    ustensileList.appendChild(ustensileElt);
+    ustensileElt.textContent = uniqueUstensilArray[i];
+  }
+}
+
+//createUstensileList(uniqueUstensilArray);

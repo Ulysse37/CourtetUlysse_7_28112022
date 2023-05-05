@@ -282,24 +282,6 @@ function createApplianceArray(recipes) {
 }
 
 /**
- * Affiche le tableau des appareils en tant que liste via des options dans un select du html
- * @param {object} uniqueApplianceArray 
- */
-function createApplianceList(uniqueApplianceArray) {
-
-  let applianceSelect           = document.querySelector(".select-appareils");
-
-  for (let i = 0; i < uniqueApplianceArray.length; i++) {
-    
-    let applianceOption         = document.createElement("option");
-    applianceSelect.appendChild(applianceOption);
-    applianceOption.value       = uniqueApplianceArray[i];
-    applianceOption.textContent = uniqueApplianceArray[i];
-  }
-}
-
-
-/**
  * Création d'un tableau regroupant tous les ingrédients
  * @param {object} recipes 
  */
@@ -320,25 +302,6 @@ function createIngredientArray(recipes) {
   //console.log(uniqueIngredientArray);
 
   return uniqueIngredientArray;
-}
-
-
-
-/**
- * Affiche le tableau des appareils en tant que liste via des options dans un select du html
- * @param {object} uniqueIngredientArray 
- */
-function createIngredientList(uniqueIngredientArray) {
-
-  let ingredientSelect            = document.querySelector(".select-ingredients");
-
-  for (let i = 0; i < uniqueIngredientArray.length; i++) {
-    
-    let ingredientOption          = document.createElement("option");
-    ingredientSelect.appendChild(ingredientOption);
-    ingredientOption.value        = uniqueIngredientArray[i];
-    ingredientOption.textContent  = uniqueIngredientArray[i];
-  }
 }
 
 /**
@@ -365,23 +328,6 @@ function createUstensileArray(recipes) {
 }
 
 /**
- * Affiche le tableau des ustensiles en tant que liste via des options dans un select du html
- * @param {object} uniqueUstensilArray
- */
-function createUstensileList(uniqueUstensilArray) {
-
-  let ustensileSelect           = document.querySelector(".select-ustensiles");
-
-  for (let i = 0; i < uniqueUstensilArray.length; i++) {
-    
-    let ustensileOption         = document.createElement("option");
-    ustensileSelect.appendChild(ustensileOption);
-    ustensileOption.value       = uniqueUstensilArray[i];
-    ustensileOption.textContent = uniqueUstensilArray[i];
-  }
-}
-
-/**
  * Fonction d'initialisation du code
  */
 function init() {
@@ -392,9 +338,6 @@ function init() {
   uniqueApplianceArray      = createApplianceArray(recipes);
   uniqueIngredientArray     = createIngredientArray(recipes);
   uniqueUstensilArray       = createUstensileArray(recipes);
-  createApplianceList(uniqueApplianceArray);
-  createIngredientList(uniqueIngredientArray);
-  createUstensileList(uniqueUstensilArray);
 }
 
 init();
