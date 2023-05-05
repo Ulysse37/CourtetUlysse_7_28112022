@@ -1,9 +1,10 @@
 "use strict";
 
 const mainSearchElt         = document.getElementById("search-bar");
-const ingredientsElt        = document.getElementById("ingredients");
-const appareilsElt          = document.getElementById("appareils");
-const ustensilesElt         = document.getElementById("ustensiles");
+const ingredientsInput        = document.getElementById("ingredients");
+const appareilsInput        = document.getElementById("appareils");
+const ustensilesInput        = document.getElementById("ustensiles");
+
 /*const lowerCaseIngredients  = uniqueIngredientArray.map(x => x.toLowerCase());
 const lowerCaseRecipesNames = recipesNamesArray.map (x => x.toLowerCase());
 const lowerCaseDescriptions = recipesDescriptionsArray.map (x => x.toLowerCase());
@@ -155,13 +156,15 @@ mainSearchElt.addEventListener("input", searchRecipes);
 function createIngredientList(uniqueIngredientArray) {
 
   let ingredientList           = document.querySelector(".ingredients-list");
-
+  console.log(uniqueIngredientArray);
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
     let ingredientElt          = document.createElement("li");
     ingredientList.appendChild(ingredientElt);
     ingredientElt.textContent  = uniqueIngredientArray[i];
+    console.log("test");
   }
+  console.log("test1");
 }
 
 //createIngredientList(uniqueIngredientArray);
@@ -201,3 +204,5 @@ function createUstensileList(uniqueUstensilArray) {
 }
 
 //createUstensileList(uniqueUstensilArray);
+
+ingredientsInput.addEventListener("click", createIngredientList);
