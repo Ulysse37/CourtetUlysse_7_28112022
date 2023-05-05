@@ -4,7 +4,7 @@ const mainSearchElt         = document.getElementById("search-bar");
 const ingredientsInput        = document.getElementById("ingredients");
 const appareilsInput        = document.getElementById("appareils");
 const ustensilesInput        = document.getElementById("ustensiles");
-
+let recipesToLowerCase      = recipes;
 /*const lowerCaseIngredients  = uniqueIngredientArray.map(x => x.toLowerCase());
 const lowerCaseRecipesNames = recipesNamesArray.map (x => x.toLowerCase());
 const lowerCaseDescriptions = recipesDescriptionsArray.map (x => x.toLowerCase());
@@ -12,8 +12,22 @@ const lowerCaseAppliances   = uniqueApplianceArray.map (x => x.toLowerCase());
 const lowerCaseUstensiles   = uniqueUstensilArray.map (x => x.toLowerCase());*/
 //const lowerCaseRecipes      = recipes.map (x => x.toLowerCase());
 //console.log(lowerCaseRecipesNames);
-console.log(recipes); 
+console.log(recipes, "RECIPES");
 
+
+for (let i = 0; i < recipes.length; i++) {
+  recipesToLowerCase[i].appliance = recipes[i].appliance.toLowerCase();
+
+  for (let y = 0; y < recipes[i].ingredients.length; y++) {
+    recipesToLowerCase[i].ingredients[y].ingredient = recipes[i].ingredients[y].ingredient.toLowerCase();
+  }
+
+  for (let y = 0; y < recipes[i].ustensils.length; y++) {
+    recipesToLowerCase[i].ustensils[y] = recipes[i].ustensils[y].toLowerCase();
+  }
+}
+
+console.log(recipesToLowerCase);
 //                                             Barre de recherche
 
 // Récupération de l'ul qui va contenir seulement les recettes recherchées 
@@ -156,19 +170,21 @@ mainSearchElt.addEventListener("input", searchRecipes);
 function createIngredientList(uniqueIngredientArray) {
 
   let ingredientList           = document.querySelector(".ingredients-list");
-  console.log(uniqueIngredientArray);
+  console.log("test0");
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
     let ingredientElt          = document.createElement("li");
     ingredientList.appendChild(ingredientElt);
     ingredientElt.textContent  = uniqueIngredientArray[i];
-    console.log("test");
+    console.log("test1");
   }
-  console.log("test1");
+  console.log("test2");
 }
 
 //createIngredientList(uniqueIngredientArray);
-
+ingredientsInput.addEventListener("click", function () {
+  createIngredientList(uniqueIngredientArray);
+});
 /**
  * Affiche le tableau des appareils dans une liste
  * @param {object} uniqueApplianceArray 
@@ -205,4 +221,3 @@ function createUstensileList(uniqueUstensilArray) {
 
 //createUstensileList(uniqueUstensilArray);
 
-ingredientsInput.addEventListener("click", createIngredientList);
