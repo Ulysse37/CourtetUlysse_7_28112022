@@ -14,7 +14,7 @@ const lowerCaseUstensiles   = uniqueUstensilArray.map (x => x.toLowerCase());*/
 //console.log(lowerCaseRecipesNames);
 console.log(recipes, "RECIPES");
 
-
+// 2eme tableau recipes en lowercase mais change aussi recipes
 for (let i = 0; i < recipes.length; i++) {
   recipesToLowerCase[i].appliance = recipes[i].appliance.toLowerCase();
 
@@ -26,8 +26,8 @@ for (let i = 0; i < recipes.length; i++) {
     recipesToLowerCase[i].ustensils[y] = recipes[i].ustensils[y].toLowerCase();
   }
 }
-
 console.log(recipesToLowerCase);
+
 //                                             Barre de recherche
 
 // Récupération de l'ul qui va contenir seulement les recettes recherchées 
