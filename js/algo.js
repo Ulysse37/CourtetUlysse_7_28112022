@@ -4,6 +4,9 @@ const mainSearchElt         = document.getElementById("search-bar");
 const ingredientsInput      = document.getElementById("ingredients");
 const appareilsInput        = document.getElementById("appareils");
 const ustensilesInput       = document.getElementById("ustensiles");
+let ustensileList           = document.querySelector(".ustensiles-list");
+let ingredientList          = document.querySelector(".ingredients-list");
+let applianceList           = document.querySelector(".appareils-list");
 let recipesToLowerCase      = recipes;
 /*const lowerCaseIngredients  = uniqueIngredientArray.map(x => x.toLowerCase());
 const lowerCaseRecipesNames = recipesNamesArray.map (x => x.toLowerCase());
@@ -169,7 +172,7 @@ mainSearchElt.addEventListener("input", searchRecipes);
  */
 function createIngredientList(uniqueIngredientArray) {
 
-  let ingredientList           = document.querySelector(".ingredients-list");
+  ingredientList.style.display  = "block";
   //console.log("test0");
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
@@ -181,16 +184,13 @@ function createIngredientList(uniqueIngredientArray) {
   //console.log("test2");
 }
 
-ingredientsInput.addEventListener("click", function () {
-  createIngredientList(uniqueIngredientArray);
-});
 /**
  * Affiche le tableau des appareils dans une liste
  * @param {object} uniqueApplianceArray 
  */
 function createApplianceList(uniqueApplianceArray) {
 
-  let applianceList          = document.querySelector(".appareils-list");
+  applianceList.style.display = "block";
   
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
     
@@ -200,18 +200,13 @@ function createApplianceList(uniqueApplianceArray) {
   }
 }
 
-appareilsInput.addEventListener("click", function () {
-  createApplianceList(uniqueApplianceArray);
-});
-
-
 /**
  * Affiche le tableau des ustensiles dans une liste 
  * @param {object} uniqueUstensilArray
  */
 function createUstensileList(uniqueUstensilArray) {
 
-  let ustensileList          = document.querySelector(".ustensiles-list");
+  ustensileList.style.display  = "block";
 
   for (let i = 0; i < uniqueUstensilArray.length; i++) {
     
@@ -221,8 +216,41 @@ function createUstensileList(uniqueUstensilArray) {
   }
 }
 
-ustensilesInput.addEventListener("click", function () {
-  createUstensileList(uniqueUstensilArray);
-});
+//addeventlistener pour liste d'ingrédients
+document.addEventListener('click', (event) => {
 
+  let withinBoundaries = event.composedPath().includes(ingredientsInput)
 
+  if (withinBoundaries) {
+    createIngredientList(uniqueIngredientArray)
+    
+  } else {
+    ingredientList.style.display  = "none";
+  }
+})
+
+//addeventlistener pour liste d'appareils
+document.addEventListener('click', (event) => {
+
+  let withinBoundaries = event.composedPath().includes(appareilsInput)
+
+  if (withinBoundaries) {
+    createApplianceList(uniqueApplianceArray)
+    
+  } else {
+    applianceList.style.display  = "none";
+  }
+})
+
+//addeventlistener pour liste d'ustensiles
+document.addEventListener('click', (event) => {
+
+  let withinBoundaries = event.composedPath().includes(ustensilesInput)
+
+  if (withinBoundaries) {
+    createUstensileList(uniqueUstensilArray);
+
+  } else {
+    ustensileList.style.display  = "none";
+  }
+})
