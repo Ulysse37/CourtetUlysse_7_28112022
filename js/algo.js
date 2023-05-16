@@ -1,9 +1,9 @@
 "use strict";
 
 const mainSearchElt         = document.getElementById("search-bar");
-const ingredientsInput        = document.getElementById("ingredients");
+const ingredientsInput      = document.getElementById("ingredients");
 const appareilsInput        = document.getElementById("appareils");
-const ustensilesInput        = document.getElementById("ustensiles");
+const ustensilesInput       = document.getElementById("ustensiles");
 let recipesToLowerCase      = recipes;
 /*const lowerCaseIngredients  = uniqueIngredientArray.map(x => x.toLowerCase());
 const lowerCaseRecipesNames = recipesNamesArray.map (x => x.toLowerCase());
@@ -170,18 +170,17 @@ mainSearchElt.addEventListener("input", searchRecipes);
 function createIngredientList(uniqueIngredientArray) {
 
   let ingredientList           = document.querySelector(".ingredients-list");
-  console.log("test0");
+  //console.log("test0");
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
     let ingredientElt          = document.createElement("li");
     ingredientList.appendChild(ingredientElt);
     ingredientElt.textContent  = uniqueIngredientArray[i];
-    console.log("test1");
+    //console.log("test1");
   }
-  console.log("test2");
+  //console.log("test2");
 }
 
-//createIngredientList(uniqueIngredientArray);
 ingredientsInput.addEventListener("click", function () {
   createIngredientList(uniqueIngredientArray);
 });
@@ -201,7 +200,10 @@ function createApplianceList(uniqueApplianceArray) {
   }
 }
 
-//createApplianceList(uniqueApplianceArray);
+appareilsInput.addEventListener("click", function () {
+  createApplianceList(uniqueApplianceArray);
+});
+
 
 /**
  * Affiche le tableau des ustensiles dans une liste 
@@ -219,5 +221,8 @@ function createUstensileList(uniqueUstensilArray) {
   }
 }
 
-//createUstensileList(uniqueUstensilArray);
+ustensilesInput.addEventListener("click", function () {
+  createUstensileList(uniqueUstensilArray);
+});
+
 
