@@ -173,15 +173,13 @@ mainSearchElt.addEventListener("input", searchRecipes);
 function createIngredientList(uniqueIngredientArray) {
 
   ingredientList.style.display  = "block";
-  //console.log("test0");
+
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
     let ingredientElt          = document.createElement("li");
     ingredientList.appendChild(ingredientElt);
     ingredientElt.textContent  = uniqueIngredientArray[i];
-    //console.log("test1");
   }
-  //console.log("test2");
 }
 
 /**
@@ -216,41 +214,29 @@ function createUstensileList(uniqueUstensilArray) {
   }
 }
 
-//addeventlistener pour liste d'ingrédients
+//addeventlistener appelant les listes de tag, et les efface si perte du focus
 document.addEventListener('click', (event) => {
 
-  let withinBoundaries = event.composedPath().includes(ingredientsInput)
+  let ingredientFocus = event.composedPath().includes(ingredientsInput);
+  let appareilFocus   = event.composedPath().includes(appareilsInput);
+  let ustensilFocus   = event.composedPath().includes(ustensilesInput);
 
-  if (withinBoundaries) {
-    createIngredientList(uniqueIngredientArray)
-    
+  if (ingredientFocus) {
+    createIngredientList(uniqueIngredientArray);
+    applianceList.style.display  = "none";
+    ustensileList.style.display  = "none";
+  } else if (appareilFocus) {
+    createApplianceList(uniqueApplianceArray);
+    ingredientList.style.display  = "none";
+    ustensileList.style.display  = "none";
+  } else if (ustensilFocus) {
+    createUstensileList(uniqueUstensilArray);
+    applianceList.style.display  = "none";
+    ingredientList.style.display  = "none";
   } else {
+    applianceList.style.display  = "none";
+    ustensileList.style.display  = "none";
     ingredientList.style.display  = "none";
   }
 })
 
-//addeventlistener pour liste d'appareils
-document.addEventListener('click', (event) => {
-
-  let withinBoundaries = event.composedPath().includes(appareilsInput)
-
-  if (withinBoundaries) {
-    createApplianceList(uniqueApplianceArray)
-    
-  } else {
-    applianceList.style.display  = "none";
-  }
-})
-
-//addeventlistener pour liste d'ustensiles
-document.addEventListener('click', (event) => {
-
-  let withinBoundaries = event.composedPath().includes(ustensilesInput)
-
-  if (withinBoundaries) {
-    createUstensileList(uniqueUstensilArray);
-
-  } else {
-    ustensileList.style.display  = "none";
-  }
-})
