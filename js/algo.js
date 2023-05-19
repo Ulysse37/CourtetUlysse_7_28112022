@@ -4,9 +4,10 @@ const mainSearchElt         = document.getElementById("search-bar");
 const ingredientsInput      = document.getElementById("ingredients");
 const appareilsInput        = document.getElementById("appareils");
 const ustensilesInput       = document.getElementById("ustensiles");
-let ustensileList           = document.querySelector(".ustensiles-list");
-let ingredientList          = document.querySelector(".ingredients-list");
-let applianceList           = document.querySelector(".appareils-list");
+const ustensileList         = document.querySelector(".ustensiles-list");
+const ingredientList        = document.querySelector(".ingredients-list");
+const applianceList         = document.querySelector(".appareils-list");
+const selectedTag           = document.querySelector(".selected-tag");
 let recipesToLowerCase      = recipes;
 /*const lowerCaseIngredients  = uniqueIngredientArray.map(x => x.toLowerCase());
 const lowerCaseRecipesNames = recipesNamesArray.map (x => x.toLowerCase());
@@ -177,8 +178,9 @@ function createIngredientList(uniqueIngredientArray) {
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
     let ingredientElt          = document.createElement("li");
-    ingredientList.appendChild(ingredientElt);
+    ingredientElt.classList.add("tag");
     ingredientElt.textContent  = uniqueIngredientArray[i];
+    ingredientList.appendChild(ingredientElt);
   }
 }
 
@@ -193,8 +195,9 @@ function createApplianceList(uniqueApplianceArray) {
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
     
     let applianceElt         = document.createElement("li");
-    applianceList.appendChild(applianceElt);
+    applianceElt.classList.add("tag");
     applianceElt.textContent = uniqueApplianceArray[i];
+    applianceList.appendChild(applianceElt);
   }
 }
 
@@ -209,8 +212,9 @@ function createUstensileList(uniqueUstensilArray) {
   for (let i = 0; i < uniqueUstensilArray.length; i++) {
     
     let ustensileElt         = document.createElement("li");
-    ustensileList.appendChild(ustensileElt);
+    ustensileElt.classList.add("tag");
     ustensileElt.textContent = uniqueUstensilArray[i];
+    ustensileList.appendChild(ustensileElt);
   }
 }
 
@@ -239,4 +243,3 @@ document.addEventListener('click', (event) => {
     ingredientList.style.display  = "none";
   }
 })
-
