@@ -8,29 +8,25 @@ const ustensileList         = document.querySelector(".ustensiles-list");
 const ingredientList        = document.querySelector(".ingredients-list");
 const applianceList         = document.querySelector(".appareils-list");
 const selectedTag           = document.querySelector(".selected-tag");
-let recipesToLowerCase      = recipes;
-/*const lowerCaseIngredients  = uniqueIngredientArray.map(x => x.toLowerCase());
-const lowerCaseRecipesNames = recipesNamesArray.map (x => x.toLowerCase());
-const lowerCaseDescriptions = recipesDescriptionsArray.map (x => x.toLowerCase());
-const lowerCaseAppliances   = uniqueApplianceArray.map (x => x.toLowerCase());
-const lowerCaseUstensiles   = uniqueUstensilArray.map (x => x.toLowerCase());*/
-//const lowerCaseRecipes      = recipes.map (x => x.toLowerCase());
-//console.log(lowerCaseRecipesNames);
-console.log(recipes, "RECIPES");
 
+let recipesToLowerCase      = structuredClone(recipes);
+console.log(recipes, "Recipes de base");
 // 2eme tableau recipes en lowercase mais change aussi recipes
 for (let i = 0; i < recipes.length; i++) {
-  recipesToLowerCase[i].appliance = recipes[i].appliance.toLowerCase();
+  
+  recipesToLowerCase[i].appliance = recipesToLowerCase[i].appliance.toLowerCase();
+  //console.log(recipes[i].appliance);
+  //console.log(recipesToLowerCase[i].appliance);
 
   for (let y = 0; y < recipes[i].ingredients.length; y++) {
-    recipesToLowerCase[i].ingredients[y].ingredient = recipes[i].ingredients[y].ingredient.toLowerCase();
+    recipesToLowerCase[i].ingredients[y].ingredient = recipesToLowerCase[i].ingredients[y].ingredient.toLowerCase();
   }
 
   for (let y = 0; y < recipes[i].ustensils.length; y++) {
-    recipesToLowerCase[i].ustensils[y] = recipes[i].ustensils[y].toLowerCase();
+    recipesToLowerCase[i].ustensils[y] = recipesToLowerCase[i].ustensils[y].toLowerCase();
   }
 }
-console.log(recipesToLowerCase);
+console.log(recipesToLowerCase, "Le recipe lower case");
 
 //                                             Barre de recherche
 
@@ -166,7 +162,6 @@ function searchRecipes(event) {
 mainSearchElt.addEventListener("input", searchRecipes);
 
 //                                           TAGS
-
 /**
  * Affiche le tableau des appareils dans une liste
  * @param {object} uniqueIngredientArray 
