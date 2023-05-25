@@ -8,21 +8,21 @@ const ustensileList         = document.querySelector(".ustensiles-list");
 const ingredientList        = document.querySelector(".ingredients-list");
 const applianceList         = document.querySelector(".appareils-list");
 const selectedTag           = document.querySelector(".selected-tag");
-
-let recipesToLowerCase      = structuredClone(recipes);
 console.log(recipes, "Recipes de base");
-// 2eme tableau recipes en lowercase mais change aussi recipes
-for (let i = 0; i < recipes.length; i++) {
+
+//  Création d'un tableau contenant recipes mais en miniscule 
+let recipesToLowerCase      = structuredClone(recipes);
+for (let i = 0; i < recipesToLowerCase.length; i++) {
   
   recipesToLowerCase[i].appliance = recipesToLowerCase[i].appliance.toLowerCase();
-  //console.log(recipes[i].appliance);
-  //console.log(recipesToLowerCase[i].appliance);
+  recipesToLowerCase[i].description = recipesToLowerCase[i].description.toLowerCase();
+  recipesToLowerCase[i].name = recipesToLowerCase[i].name.toLowerCase();
 
-  for (let y = 0; y < recipes[i].ingredients.length; y++) {
+  for (let y = 0; y < recipesToLowerCase[i].ingredients.length; y++) {
     recipesToLowerCase[i].ingredients[y].ingredient = recipesToLowerCase[i].ingredients[y].ingredient.toLowerCase();
   }
 
-  for (let y = 0; y < recipes[i].ustensils.length; y++) {
+  for (let y = 0; y < recipesToLowerCase[i].ustensils.length; y++) {
     recipesToLowerCase[i].ustensils[y] = recipesToLowerCase[i].ustensils[y].toLowerCase();
   }
 }
@@ -64,27 +64,27 @@ function createSearchRecipesStructure(data) {
   createDescriptionElt(mainContainer, data);
 }
 
-// ajoute dans un tableau les recettes dont le nom correspond à l'input (en majuscule ou non)
+// ajoute dans un tableau les recettes dont le nom correspond à l'input
 function fillRecipesArrayForNames(value, items, recipe) {
-  if (recipe.name.includes(value) || recipe.name.toLowerCase().includes(value)) {
+  if (recipe.name.includes(value))  {
 
     items.push(recipe);
   }
 }
 
-// ajoute dans un tableau les recettes dont la description correspond à l'input (en majuscule ou non)
+// ajoute dans un tableau les recettes dont la description correspond à l'input
 function fillRecipesArrayForDescriptions (value, items, recipe) {
-  if (recipe.description.includes(value) || recipe.description.toLowerCase().includes(value)) {
+  if (recipe.description.includes(value)) {
 
     items.push(recipe);
   }
 }
 
-// ajoute dans un tableau les recettes dont les ingrédients correspondent à l'input (en majuscule ou non)
+// ajoute dans un tableau les recettes dont les ingrédients correspondent à l'input
 function fillRecipesArrayForIngredients (value, items, recipe) {
   for (let ingredient of recipe.ingredients) {
           
-    if (ingredient.ingredient.includes(value) || ingredient.ingredient.toLowerCase().includes(value)) {
+    if (ingredient.ingredient.includes(value))  {
 
       items.push(recipe);
     }
@@ -143,7 +143,7 @@ function searchRecipes(event) {
       let items = [];
       recipeSection.style.display = "none";
     
-      for (let recipe of recipes) {
+      for (let recipe of recipesToLowerCase) {
           
         fillRecipesArrayForNames(value, items, recipe);
         fillRecipesArrayForDescriptions (value, items, recipe);
