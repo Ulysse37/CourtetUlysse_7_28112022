@@ -14,9 +14,9 @@ console.log(recipes, "Recipes de base");
 let recipesToLowerCase      = structuredClone(recipes);
 for (let i = 0; i < recipesToLowerCase.length; i++) {
   
-  recipesToLowerCase[i].appliance = recipesToLowerCase[i].appliance.toLowerCase();
+  recipesToLowerCase[i].appliance   = recipesToLowerCase[i].appliance.toLowerCase();
   recipesToLowerCase[i].description = recipesToLowerCase[i].description.toLowerCase();
-  recipesToLowerCase[i].name = recipesToLowerCase[i].name.toLowerCase();
+  recipesToLowerCase[i].name        = recipesToLowerCase[i].name.toLowerCase();
 
   for (let y = 0; y < recipesToLowerCase[i].ingredients.length; y++) {
     recipesToLowerCase[i].ingredients[y].ingredient = recipesToLowerCase[i].ingredients[y].ingredient.toLowerCase();
@@ -100,12 +100,12 @@ function removeDomData() {
 // Fonction qui dans le cas d'une recherche non aboutie va afficher un message d'erreur
 function displayErrorMessage()  {
   
-  let recipeSection = document.querySelector(".recipes-list");
+  let recipeSection       = document.querySelector(".recipes-list");
   let recipeSearchSection = document.querySelector(".recipes-search-list");
-  let errorMessage = document.createElement("p");
+  let errorMessage        = document.createElement("p");
 
   recipeSection.style.display = "none";
-  errorMessage.innerText = "Aucune recette ne correspond à votre critère... Vous pouvez chercher <<tarte aux pommes>>, <<poisson>>, etc.";
+  errorMessage.innerText      = "Aucune recette ne correspond à votre critère... Vous pouvez chercher <<tarte aux pommes>>, <<poisson>>, etc.";
 
   recipeSearchSection.appendChild(errorMessage);
 }
@@ -172,9 +172,9 @@ function createIngredientList(uniqueIngredientArray) {
 
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
-    let ingredientElt          = document.createElement("li");
+    let ingredientElt           = document.createElement("li");
     ingredientElt.classList.add("tag");
-    ingredientElt.textContent  = uniqueIngredientArray[i];
+    ingredientElt.textContent   = uniqueIngredientArray[i];
     ingredientList.appendChild(ingredientElt);
   }
 }
@@ -189,9 +189,9 @@ function createApplianceList(uniqueApplianceArray) {
   
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
     
-    let applianceElt         = document.createElement("li");
+    let applianceElt          = document.createElement("li");
     applianceElt.classList.add("tag");
-    applianceElt.textContent = uniqueApplianceArray[i];
+    applianceElt.textContent  = uniqueApplianceArray[i];
     applianceList.appendChild(applianceElt);
   }
 }
@@ -206,9 +206,9 @@ function createUstensileList(uniqueUstensilArray) {
 
   for (let i = 0; i < uniqueUstensilArray.length; i++) {
     
-    let ustensileElt         = document.createElement("li");
+    let ustensileElt           = document.createElement("li");
     ustensileElt.classList.add("tag");
-    ustensileElt.textContent = uniqueUstensilArray[i];
+    ustensileElt.textContent   = uniqueUstensilArray[i];
     ustensileList.appendChild(ustensileElt);
   }
 }
@@ -226,15 +226,15 @@ document.addEventListener('click', (event) => {
     ustensileList.style.display  = "none";
   } else if (appareilFocus) {
     createApplianceList(uniqueApplianceArray);
-    ingredientList.style.display  = "none";
+    ingredientList.style.display = "none";
     ustensileList.style.display  = "none";
   } else if (ustensilFocus) {
     createUstensileList(uniqueUstensilArray);
     applianceList.style.display  = "none";
-    ingredientList.style.display  = "none";
+    ingredientList.style.display = "none";
   } else {
     applianceList.style.display  = "none";
     ustensileList.style.display  = "none";
-    ingredientList.style.display  = "none";
+    ingredientList.style.display = "none";
   }
 })
