@@ -28,7 +28,7 @@ for (let i = 0; i < recipesToLowerCase.length; i++) {
 }
 console.log(recipesToLowerCase, "Le recipe lower case");
 
-//                                             Barre de recherche
+//                                                  Barre de recherche
 
 // Récupération de l'ul qui va contenir seulement les recettes recherchées 
 function createSearchRecipeSection() {
@@ -134,34 +134,44 @@ function loopSearchRecipes(searchRecipes) {
  * afin d'ajouter les recettes concernées dans un tableau. Puis appelle la fonction qui va les afficher.
  * @param {object} event 
  */
+function mainSearch(value, recipeSection) {
+  
+  if ( value.length >= 3 ) {
+    let items = [];
+    recipeSection.style.display = "none";
+  
+    for (let recipe of recipesToLowerCase) {
+        
+      fillRecipesArrayForNames(value, items, recipe);
+      fillRecipesArrayForDescriptions (value, items, recipe);
+      fillRecipesArrayForIngredients (value, items, recipe);
+    }
+    let uniqueItems = [...new Set(items)]; // supression des doublons dans le tableau des recettes recherchées
+    console.log(value);
+    removeDomData();
+    loopSearchRecipes(uniqueItems);
+  } else  {
+    removeDomData();
+    recipeSection.style.display = "flex";
+  }
+}
+
+/**
+ * Fonction qui appelle la barre de recherche et les filtres
+ * @param {object} event 
+ */
 function searchRecipes(event) {
   let recipeSection = document.querySelector(".recipes-list");
   let value = event.target.value;
   value = value.toLowerCase();
   
-    if ( value.length >= 3 ) {
-      let items = [];
-      recipeSection.style.display = "none";
-    
-      for (let recipe of recipesToLowerCase) {
-          
-        fillRecipesArrayForNames(value, items, recipe);
-        fillRecipesArrayForDescriptions (value, items, recipe);
-        fillRecipesArrayForIngredients (value, items, recipe);
-      }
-      let uniqueItems = [...new Set(items)]; // supression des doublons dans le tableau des recettes recherchées
-      console.log(value);
-      removeDomData();
-      loopSearchRecipes(uniqueItems);
-    } else  {
-      removeDomData();
-      recipeSection.style.display = "flex";
-    }
+  mainSearch(value, recipeSection); 
 }
 
 mainSearchElt.addEventListener("input", searchRecipes);
 
-//                                           TAGS
+//                                                        TAGS
+
 /**
  * Affiche le tableau des appareils dans une liste
  * @param {object} uniqueIngredientArray 
@@ -238,3 +248,9 @@ document.addEventListener('click', (event) => {
     ingredientList.style.display = "none";
   }
 })
+
+const getTag = document.querySelector(".tag");
+function test() {
+  console.log(getTag);
+}
+appareilsInput.addEventListener("click", test);
