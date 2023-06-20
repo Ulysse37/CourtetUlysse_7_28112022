@@ -186,6 +186,11 @@ function createIngredientList(uniqueIngredientArray) {
     ingredientElt.classList.add("tag");
     ingredientElt.textContent   = uniqueIngredientArray[i];
     ingredientList.appendChild(ingredientElt);
+
+    ingredientElt.addEventListener("click", event => {
+      const clickedTag = event.target.textContent;
+      console.log(clickedTag);
+    });
   }
 }
 
@@ -196,13 +201,17 @@ function createIngredientList(uniqueIngredientArray) {
 function createApplianceList(uniqueApplianceArray) {
 
   applianceList.style.display = "block";
-  
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
     
     let applianceElt          = document.createElement("li");
     applianceElt.classList.add("tag");
     applianceElt.textContent  = uniqueApplianceArray[i];
     applianceList.appendChild(applianceElt);
+
+    applianceElt.addEventListener("click", event => {
+      const clickedTag = event.target.textContent;
+      console.log(clickedTag);
+    });
   }
 }
 
@@ -220,6 +229,11 @@ function createUstensileList(uniqueUstensilArray) {
     ustensileElt.classList.add("tag");
     ustensileElt.textContent   = uniqueUstensilArray[i];
     ustensileList.appendChild(ustensileElt);
+
+    ustensileElt.addEventListener("click", event => {
+      const clickedTag = event.target.textContent;
+      console.log(clickedTag);
+    });
   }
 }
 
@@ -249,8 +263,4 @@ document.addEventListener('click', (event) => {
   }
 })
 
-const getTag = document.querySelector(".tag");
-function test() {
-  console.log(getTag);
-}
-appareilsInput.addEventListener("click", test);
+
