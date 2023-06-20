@@ -160,21 +160,38 @@ function createIngredientsList(mainContainer) {
   return ingredientsList;
 }
 
+/**
+ * Applique un formatage aux ingrédients et les renvoie
+ *
+ * @param {Object} data - L'objet de données contenant les ingrédients et leurs propriétés.
+ * @param {number} i - L'index de l'ingrédient à formatter.
+ * @param {Array} ingredients - Le tableau d'ingrédients à formatter.
+ * @return {Array} Le tableau d'ingrédients formaté.
+ */
+function checkIngredientType(data, i, ingredients) {
+  if(data.ingredients[i].unit === "cl" || data.ingredients[i].unit === "ml" ) { // Ajout syntaxe dans le cas des ml/cl, des autres unités ou de leurs absences.
+    ingredients[i].innerText = data.ingredients[i].ingredient + " : " + data.ingredients[i].quantity + data.ingredients[i].unit;
+  
+  } else if(data.ingredients[i].unit) {
+    ingredients[i].innerText = data.ingredients[i].ingredient + " : " + data.ingredients[i].quantity + " " + data.ingredients[i].unit;
+  
+  } else if(data.ingredients[i].quantity) {
+    ingredients[i].innerText = data.ingredients[i].ingredient + " : " + data.ingredients[i].quantity;
+  
+  } else {
+    ingredients[i].innerText = data.ingredients[i].ingredient;
+  }
+
+  return ingredients;
+}
+
 //affiche l'ingrédient, la quantité et l'unité de celui-ci
 function getIngredients(ingredientsList, data) {
 
-  let ingredients     = []; 
+  let ingredients     = [];
   for (let i = 0; i < data.ingredients.length; i++) {
       ingredients[i]  = document.createElement("li");
-      if(data.ingredients[i].unit === "cl" || data.ingredients[i].unit === "ml" ) { // Ajout syntaxe dans le cas des ml/cl, des autres unités ou de leurs absences.
-        ingredients[i].innerText = data.ingredients[i].ingredient + " : " + data.ingredients[i].quantity + data.ingredients[i].unit;
-      } else if(data.ingredients[i].unit) {
-        ingredients[i].innerText = data.ingredients[i].ingredient + " : " + data.ingredients[i].quantity + " " + data.ingredients[i].unit;
-      } else if(data.ingredients[i].quantity) {
-        ingredients[i].innerText = data.ingredients[i].ingredient + " : " + data.ingredients[i].quantity;
-      } else {
-        ingredients[i].innerText = data.ingredients[i].ingredient;
-      }
+      ingredients = checkIngredientType(data, i, ingredients);
       ingredientsList.appendChild(ingredients[i]);
   }
   return ingredients;
