@@ -40,6 +40,12 @@ a:focus {
   white-space: normal;
 }
 
+/* Style pour les tag selectionnés */
+.selected-tag-list {
+  display: flex;
+  flex-direction: row;
+}
+
 @media (min-width: 576px) {
   .figure-height {
     height: 17rem !important;

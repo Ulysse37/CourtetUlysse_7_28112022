@@ -7,8 +7,9 @@ const ustensilesInput       = document.getElementById("ustensiles");
 const ustensileList         = document.querySelector(".ustensiles-list");
 const ingredientList        = document.querySelector(".ingredients-list");
 const applianceList         = document.querySelector(".appareils-list");
-const selectedTag           = document.querySelector(".selected-tag");
+const selectedTagList       = document.querySelector(".selected-tag-list");
 console.log(recipes, "Recipes de base");
+
 
 //  Création d'un tableau contenant recipes mais en miniscule 
 let recipesToLowerCase      = structuredClone(recipes);
@@ -189,7 +190,11 @@ function createIngredientList(uniqueIngredientArray) {
 
     ingredientElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
-      console.log(clickedTag);
+      //console.log(clickedTag);
+
+      let selectedTagElt = document.createElement("li");
+      selectedTagElt.textContent = clickedTag;
+      selectedTagList.appendChild(selectedTagElt);
     });
   }
 }
@@ -210,7 +215,11 @@ function createApplianceList(uniqueApplianceArray) {
 
     applianceElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
-      console.log(clickedTag);
+      //console.log(clickedTag);
+
+      let selectedTagElt = document.createElement("li");
+      selectedTagElt.textContent = clickedTag;
+      selectedTagList.appendChild(selectedTagElt);
     });
   }
 }
@@ -232,7 +241,11 @@ function createUstensileList(uniqueUstensilArray) {
 
     ustensileElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
-      console.log(clickedTag);
+      //console.log(clickedTag);
+
+      let selectedTagElt = document.createElement("li");
+      selectedTagElt.textContent = clickedTag;
+      selectedTagList.appendChild(selectedTagElt);
     });
   }
 }
