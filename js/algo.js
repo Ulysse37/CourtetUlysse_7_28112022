@@ -248,76 +248,51 @@ function createApplianceList(uniqueApplianceArray) {
 function createUstensileList(uniqueUstensilArray) {
 
   ustensileList.style.display  = "block";
-
   for (let i = 0; i < uniqueUstensilArray.length; i++) {
     
     let ustensileElt           = document.createElement("li");
     ustensileElt.classList.add("tag");
     ustensileElt.textContent   = uniqueUstensilArray[i];
     ustensileList.appendChild(ustensileElt);
-
+    
     ustensileElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
       //console.log(clickedTag);
-
       createSelectedTagElt(clickedTag);
     });
   }
 }
 
+const ingredientsBtn      = document.querySelector(".btn-ingredient");
+const appareilsBtn        = document.querySelector(".btn-appareil");
+const ustensilesBtn       = document.querySelector(".btn-usentile");
 
-//addeventlistener appelant les listes de tag, et les efface si perte du focus
-document.addEventListener('click', (event) => {
-
-  let ingredientFocus = event.composedPath().includes(ingredientsInput);
-  let appareilFocus   = event.composedPath().includes(appareilsInput);
-  let ustensilFocus   = event.composedPath().includes(ustensilesInput);
-
-  if (ingredientFocus) {
-    createIngredientList(uniqueIngredientArray);
-    applianceList.style.display  = "none";
-    ustensileList.style.display  = "none";
-  } else if (appareilFocus) {
-    createApplianceList(uniqueApplianceArray);
-    ingredientList.style.display = "none";
-    ustensileList.style.display  = "none";
-  } else if (ustensilFocus) {
-    createUstensileList(uniqueUstensilArray);
-    applianceList.style.display  = "none";
-    ingredientList.style.display = "none";
-  } else {
-    applianceList.style.display  = "none";
-    ustensileList.style.display  = "none";
-    ingredientList.style.display = "none";
-  }
+// EventListener qui appelle la fonction createIngredientList quand on appuie sur le bouton ingredient
+ingredientsBtn.addEventListener("click", () => {
+  createIngredientList(uniqueIngredientArray);
+  applianceList.style.display  = "none";
+  ustensileList.style.display  = "none";
+})
+// EventListener qui appelle la fonction createApplianceList quand on appuie sur le bouton appareil
+appareilsBtn.addEventListener("click", () => {
+  createApplianceList(uniqueApplianceArray);
+  ingredientList.style.display = "none";
+  ustensileList.style.display  = "none";
+})
+// EventListener qui appelle la fonction createUstensileList quand on appuie sur le bouton ustensile
+ustensilesBtn.addEventListener("click", () => {
+  createUstensileList(uniqueUstensilArray);
+  applianceList.style.display  = "none";
+  ingredientList.style.display = "none";
 })
 
-/*
-const ingredientsBtn      = document.querySelector("btn-ingredient");
-const appareilsBtn        = document.querySelector("btn-appareil");
-const ustensilesBtn       = document.querySelector("btn-usentile");
-
+//addeventlistener qui efface les listes si on clique ailleurs que sur les boutons
 document.addEventListener('click', (event) => {
-
-  let ingredientFocus = event.composedPath().includes(ingredientsBtn);
-  let appareilFocus   = event.composedPath().includes(appareilsBtn);
-  let ustensilFocus   = event.composedPath().includes(ustensilesBtn);
-
-  if (ingredientFocus) {
-    createIngredientList(uniqueIngredientArray);
+  if (!event.target.matches('.btn-ingredient') 
+      && !event.target.matches('.btn-appareil') 
+      && !event.target.matches('.btn-usentile')) {
     applianceList.style.display  = "none";
     ustensileList.style.display  = "none";
-  } else if (appareilFocus) {
-    createApplianceList(uniqueApplianceArray);
-    ingredientList.style.display = "none";
-    ustensileList.style.display  = "none";
-  } else if (ustensilFocus) {
-    createUstensileList(uniqueUstensilArray);
-    applianceList.style.display  = "none";
-    ingredientList.style.display = "none";
-  } else {
-    applianceList.style.display  = "none";
-    ustensileList.style.display  = "none";
-    ingredientList.style.display = "none";
+    ingredientList.style.display = "none"; 
   }
-})*/
+});
