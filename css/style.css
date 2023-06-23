@@ -46,6 +46,28 @@ a:focus {
   flex-direction: row;
 }
 
+.selected-tag-elt {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.close-button {
+  width: 20px;
+  height: 25px;
+  margin-left: 10px;
+  border-radius: 35px;
+  border: 2px solid white;
+  background: none;
+  color : white;
+  font-weight: bolder;
+}
+
 @media (min-width: 576px) {
   .figure-height {
     height: 17rem !important;

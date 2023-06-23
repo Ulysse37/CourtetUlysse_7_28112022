@@ -173,11 +173,25 @@ mainSearchElt.addEventListener("input", searchRecipes);
 
 //                                                        TAGS
 
-//Crée un élément de liste contenant le tag cliqué et l'ajoute à la liste des tags sélectionnés.
+/**
+ * Crée un élément de liste contenant le tag cliqué et l'ajoute à la liste des tags sélectionnés.
+ * @param {string} clickedTag - le tag qui a été cliqué
+ */
 function createSelectedTagElt(clickedTag) {
   let selectedTagElt = document.createElement("li");
+  selectedTagElt.classList.add("selected-tag-elt");
   selectedTagElt.textContent = clickedTag;
+// crée un bouton de fermeture
+  const closeButton = document.createElement("button");
+  closeButton.classList.add("close-button");
+  closeButton.innerHTML = "&times;";
+
   selectedTagList.appendChild(selectedTagElt);
+  selectedTagElt.appendChild(closeButton);
+// addeventlistener pour supprimer l'élément de la liste de tag sélectionné lorsqu'il est cliqué
+  closeButton.addEventListener("click", (event) => {
+    selectedTagElt.remove();
+  });
 };
 
 /**
