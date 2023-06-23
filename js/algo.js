@@ -292,4 +292,32 @@ document.addEventListener('click', (event) => {
   }
 })
 
+/*
+const ingredientsBtn      = document.querySelector("btn-ingredient");
+const appareilsBtn        = document.querySelector("btn-appareil");
+const ustensilesBtn       = document.querySelector("btn-usentile");
 
+document.addEventListener('click', (event) => {
+
+  let ingredientFocus = event.composedPath().includes(ingredientsBtn);
+  let appareilFocus   = event.composedPath().includes(appareilsBtn);
+  let ustensilFocus   = event.composedPath().includes(ustensilesBtn);
+
+  if (ingredientFocus) {
+    createIngredientList(uniqueIngredientArray);
+    applianceList.style.display  = "none";
+    ustensileList.style.display  = "none";
+  } else if (appareilFocus) {
+    createApplianceList(uniqueApplianceArray);
+    ingredientList.style.display = "none";
+    ustensileList.style.display  = "none";
+  } else if (ustensilFocus) {
+    createUstensileList(uniqueUstensilArray);
+    applianceList.style.display  = "none";
+    ingredientList.style.display = "none";
+  } else {
+    applianceList.style.display  = "none";
+    ustensileList.style.display  = "none";
+    ingredientList.style.display = "none";
+  }
+})*/

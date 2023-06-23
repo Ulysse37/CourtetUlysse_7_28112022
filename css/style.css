@@ -40,6 +40,25 @@ a:focus {
   white-space: normal;
 }
 
+/* Style des fieldSet  */
+.fieldsets {
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+} 
+
+.ingredients {
+  background-color: #2e81fe;
+}
+
+.appareils {
+  background-color: #53fdbc;
+}
+
+.ustensiles {
+  background-color: #ff5e2e;
+}
 /* Style pour les tag selectionnés */
 .selected-tag-list {
   display: flex;
