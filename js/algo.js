@@ -173,6 +173,13 @@ mainSearchElt.addEventListener("input", searchRecipes);
 
 //                                                        TAGS
 
+//Crée un élément de liste contenant le tag cliqué et l'ajoute à la liste des tags sélectionnés.
+function createSelectedTagElt(clickedTag) {
+  let selectedTagElt = document.createElement("li");
+  selectedTagElt.textContent = clickedTag;
+  selectedTagList.appendChild(selectedTagElt);
+};
+
 /**
  * Affiche le tableau des appareils dans une liste
  * @param {object} uniqueIngredientArray 
@@ -192,9 +199,7 @@ function createIngredientList(uniqueIngredientArray) {
       const clickedTag = event.target.textContent;
       //console.log(clickedTag);
 
-      let selectedTagElt = document.createElement("li");
-      selectedTagElt.textContent = clickedTag;
-      selectedTagList.appendChild(selectedTagElt);
+      createSelectedTagElt(clickedTag);
     });
   }
 }
@@ -217,9 +222,7 @@ function createApplianceList(uniqueApplianceArray) {
       const clickedTag = event.target.textContent;
       //console.log(clickedTag);
 
-      let selectedTagElt = document.createElement("li");
-      selectedTagElt.textContent = clickedTag;
-      selectedTagList.appendChild(selectedTagElt);
+      createSelectedTagElt(clickedTag);
     });
   }
 }
@@ -243,12 +246,11 @@ function createUstensileList(uniqueUstensilArray) {
       const clickedTag = event.target.textContent;
       //console.log(clickedTag);
 
-      let selectedTagElt = document.createElement("li");
-      selectedTagElt.textContent = clickedTag;
-      selectedTagList.appendChild(selectedTagElt);
+      createSelectedTagElt(clickedTag);
     });
   }
 }
+
 
 //addeventlistener appelant les listes de tag, et les efface si perte du focus
 document.addEventListener('click', (event) => {
