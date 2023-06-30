@@ -1,13 +1,17 @@
 "use strict";
 
 const mainSearchElt         = document.getElementById("search-bar");
-const ingredientsInput      = document.getElementById("ingredients");
-const appareilsInput        = document.getElementById("appareils");
-const ustensilesInput       = document.getElementById("ustensiles");
 const ustensileList         = document.querySelector(".ustensiles-list");
 const ingredientList        = document.querySelector(".ingredients-list");
 const applianceList         = document.querySelector(".appareils-list");
 const selectedTagList       = document.querySelector(".selected-tag-list");
+// Const tags
+const ingredientsBtn      = document.querySelector(".btn-ingredient");
+const appareilsBtn        = document.querySelector(".btn-appareil");
+const ustensilesBtn       = document.querySelector(".btn-usentile");
+const ingredientFa        = document.querySelector(".ingredient-fa");
+const appareilFa          = document.querySelector(".appareil-fa");
+const ustensileFa         = document.querySelector(".ustensile-fa");
 console.log(recipes, "Recipes de base");
 
 
@@ -263,30 +267,49 @@ function createUstensileList(uniqueUstensilArray) {
   }
 }
 
-const ingredientsBtn      = document.querySelector(".btn-ingredient");
-const appareilsBtn        = document.querySelector(".btn-appareil");
-const ustensilesBtn       = document.querySelector(".btn-usentile");
-
-// EventListener qui appelle la fonction createIngredientList quand on appuie sur le bouton ingredient
-ingredientsBtn.addEventListener("click", () => {
+// Affiche la liste des ingrédients
+function displayIngredientList() {
   createIngredientList(uniqueIngredientArray);
-  applianceList.style.display  = "none";
-  ustensileList.style.display  = "none";
-})
-// EventListener qui appelle la fonction createApplianceList quand on appuie sur le bouton appareil
-appareilsBtn.addEventListener("click", () => {
+  applianceList.style.display = "none";
+  ustensileList.style.display = "none";
+}
+// appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
+ingredientsBtn.addEventListener("click", displayIngredientList);
+// appelle la fonction displayIngredientList quand on appuie sur le </i> du bouton ingredient
+ingredientFa.addEventListener("click", (event) => {
+  event.stopPropagation(); // Arrête la propagation de l'événement de clic
+  displayIngredientList();
+});
+
+// Affiche la liste des appareils
+function displayApplianceList() {
   createApplianceList(uniqueApplianceArray);
   ingredientList.style.display = "none";
   ustensileList.style.display  = "none";
-})
-// EventListener qui appelle la fonction createUstensileList quand on appuie sur le bouton ustensile
-ustensilesBtn.addEventListener("click", () => {
+}
+// appelle la fonction displayApplianceList quand on appuie sur le bouton appareil
+appareilsBtn.addEventListener("click", displayApplianceList);
+// appelle la fonction displayApplianceList quand on appuie sur le </i> du bouton appareil
+appareilFa.addEventListener("click", (event) => {
+  event.stopPropagation(); // Arrête la propagation de l'événement de clic
+  displayApplianceList();
+});
+
+// Affiche la liste des ustensiles
+function displayUstensileList() {
   createUstensileList(uniqueUstensilArray);
   applianceList.style.display  = "none";
   ingredientList.style.display = "none";
-})
+}
+// appelle la fonction displayUstensileList quand on appuie sur le bouton appareil
+ustensilesBtn.addEventListener("click", displayUstensileList);
+// appelle la fonction displayUstensileList quand on appuie sur le </i> du bouton appareil
+ustensileFa.addEventListener("click", (event) => {
+  event.stopPropagation(); // Arrête la propagation de l'événement de clic
+  displayUstensileList();
+});
 
-//addeventlistener qui efface les listes si on clique ailleurs que sur les boutons
+// Eventlistener qui efface les listes si on clique ailleurs que sur les boutons
 document.addEventListener('click', (event) => {
   if (!event.target.matches('.btn-ingredient') 
       && !event.target.matches('.btn-appareil') 
