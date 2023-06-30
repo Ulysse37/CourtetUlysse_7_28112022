@@ -182,6 +182,7 @@ mainSearchElt.addEventListener("input", searchRecipes);
  * @param {string} clickedTag - le tag qui a été cliqué
  */
 function createSelectedTagElt(clickedTag) {
+
   let selectedTagElt = document.createElement("li");
   selectedTagElt.classList.add("selected-tag-elt");
   selectedTagElt.textContent = clickedTag;
@@ -206,6 +207,11 @@ function createIngredientList(uniqueIngredientArray) {
 
   ingredientList.style.display  = "block";
 
+  const existingTags = ingredientList.querySelectorAll(".tag");
+  if (existingTags.length > 0) {
+    return; // Si les éléments existent déjà la fonction s'arrête.
+  }
+
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
     let ingredientElt           = document.createElement("li");
@@ -229,6 +235,12 @@ function createIngredientList(uniqueIngredientArray) {
 function createApplianceList(uniqueApplianceArray) {
 
   applianceList.style.display = "block";
+
+  const existingTags = applianceList.querySelectorAll(".tag");
+  if (existingTags.length > 0) {
+    return; // Si les éléments existent déjà la fonction s'arrête.
+  }
+
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
     
     let applianceElt          = document.createElement("li");
@@ -252,6 +264,12 @@ function createApplianceList(uniqueApplianceArray) {
 function createUstensileList(uniqueUstensilArray) {
 
   ustensileList.style.display  = "block";
+
+  const existingTags = ustensileList.querySelectorAll(".tag");
+  if (existingTags.length > 0) {
+    return; // Si les éléments existent déjà la fonction s'arrête.
+  }
+
   for (let i = 0; i < uniqueUstensilArray.length; i++) {
     
     let ustensileElt           = document.createElement("li");
