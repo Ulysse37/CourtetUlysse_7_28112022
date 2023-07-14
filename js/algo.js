@@ -15,9 +15,9 @@ const ustensileFa         = document.querySelector(".ustensile-fa");
 const inputIngredients    = document.getElementById("ingredients");
 const inputAppareils      = document.getElementById("appareils");
 const inputUstensiles     = document.getElementById("ustensiles");
-const legendIngredients   = document.querySelector(".legend-ingredients");
-const legendAppareils     = document.querySelector(".legend-appareils");
-const legendUstensiles    = document.querySelector(".legend-ustensiles");
+const legendIngredients   = document.querySelector(".ingredients-legend");
+const legendAppareils     = document.querySelector(".appareils-legend");
+const legendUstensiles    = document.querySelector(".ustensiles-legend");
 console.log(recipes, "Recipes de base");
 
 
@@ -212,7 +212,7 @@ function createSelectedTagElt(clickedTag) {
 function createIngredientList(uniqueIngredientArray) {
 
   ingredientList.style.display  = "block";
-
+  
   const existingTags = ingredientList.querySelectorAll(".tag");
   if (existingTags.length > 0) {
     return; // Si les éléments existent déjà la fonction s'arrête.

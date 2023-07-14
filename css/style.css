@@ -35,21 +35,28 @@ a:focus {
 /* Style des fieldSet  */
 fieldset {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  position: relative;
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  width: 200px;
+  width: auto;
+  max-height: 45vh;
   padding: 20px;
 } 
 
 legend {
   position: absolute;
+  width: auto;
   color: white;
   font-size: 20px;
   pointer-events: none;
 }
 
+fieldset button {
+  position: absolute;
+  right: 5px;
+}
 .input-tag {
   border: none;
   width: 150px;
