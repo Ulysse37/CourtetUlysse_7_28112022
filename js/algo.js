@@ -12,6 +12,12 @@ const ustensilesBtn       = document.querySelector(".btn-usentile");
 const ingredientFa        = document.querySelector(".ingredient-fa");
 const appareilFa          = document.querySelector(".appareil-fa");
 const ustensileFa         = document.querySelector(".ustensile-fa");
+const inputIngredients    = document.getElementById("ingredients");
+const inputAppareils      = document.getElementById("appareils");
+const inputUstensiles     = document.getElementById("ustensiles");
+const legendIngredients   = document.querySelector(".legend-ingredients");
+const legendAppareils     = document.querySelector(".legend-appareils");
+const legendUstensiles    = document.querySelector(".legend-ustensiles");
 console.log(recipes, "Recipes de base");
 
 
@@ -335,5 +341,39 @@ document.addEventListener('click', (event) => {
     applianceList.style.display  = "none";
     ustensileList.style.display  = "none";
     ingredientList.style.display = "none"; 
+  }
+});
+
+// Eventlistener qui efface le legend du fieldset quand on entre dans l'input
+inputIngredients.addEventListener("focus", () => {
+  legendIngredients.style.display = "none";
+});
+
+// Eventlistener qui ré-affiche le legend si on sort de l'input et qu'il est vide
+inputIngredients.addEventListener('blur', () => {
+  if (inputIngredients.value === '') {
+    legendIngredients.style.display = "block";
+  }
+});
+
+// De même pour le fieldset appareil
+inputAppareils.addEventListener("focus", () => {
+  legendAppareils.style.display = "none";
+});
+
+inputAppareils.addEventListener('blur', () => {
+  if (inputAppareils.value === '') {
+    legendAppareils.style.display = "block";
+  }
+});
+
+// De même pour le fieldset ustensile
+inputUstensiles.addEventListener("focus", () => {
+  legendUstensiles.style.display = "none";
+});
+
+inputUstensiles.addEventListener('blur', () => {
+  if (inputUstensiles.value === '') {
+    legendUstensiles.style.display = "block";
   }
 });
