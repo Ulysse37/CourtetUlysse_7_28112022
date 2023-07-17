@@ -218,7 +218,7 @@ function createSelectedTagElt(clickedTag) {
  */
 function createIngredientList(uniqueIngredientArray) {
 
-  ingredientList.style.display  = "block";
+  ingredientList.style.display  = "flex";
   
   const existingTags = ingredientList.querySelectorAll(".tag");
   if (existingTags.length > 0) {
@@ -230,6 +230,8 @@ function createIngredientList(uniqueIngredientArray) {
     let ingredientElt           = document.createElement("li");
     ingredientElt.classList.add("tag");
     ingredientElt.textContent   = uniqueIngredientArray[i];
+    ingredientElt.style.width = "33.33%";
+    ingredientElt.style.color = "white";
     ingredientList.appendChild(ingredientElt);
 
     ingredientElt.addEventListener("click", event => {
@@ -247,7 +249,7 @@ function createIngredientList(uniqueIngredientArray) {
  */
 function createApplianceList(uniqueApplianceArray) {
 
-  applianceList.style.display = "block";
+  applianceList.style.display = "flex";
 
   const existingTags = applianceList.querySelectorAll(".tag");
   if (existingTags.length > 0) {
@@ -258,7 +260,9 @@ function createApplianceList(uniqueApplianceArray) {
     
     let applianceElt          = document.createElement("li");
     applianceElt.classList.add("tag");
-    applianceElt.textContent            = uniqueApplianceArray[i];
+    applianceElt.textContent  = uniqueApplianceArray[i];
+    applianceElt.style.width  = "50%";
+    applianceElt.style.color  = "white"; 
     applianceList.appendChild(applianceElt);
     
     applianceElt.addEventListener("click", event => {
@@ -276,7 +280,7 @@ function createApplianceList(uniqueApplianceArray) {
  */
 function createUstensileList(uniqueUstensilArray) {
 
-  ustensileList.style.display  = "block";
+  ustensileList.style.display  = "flex";
 
   const existingTags = ustensileList.querySelectorAll(".tag");
   if (existingTags.length > 0) {
@@ -287,7 +291,9 @@ function createUstensileList(uniqueUstensilArray) {
     
     let ustensileElt           = document.createElement("li");
     ustensileElt.classList.add("tag");
-    ustensileElt.textContent            = uniqueUstensilArray[i];
+    ustensileElt.textContent   = uniqueUstensilArray[i];
+    ustensileElt.style.width   = "50%";
+    ustensileElt.style.color   = "white"; 
     ustensileList.appendChild(ustensileElt);
     
     ustensileElt.addEventListener("click", event => {
@@ -306,6 +312,8 @@ function displayIngredientList() {
   appareilContainer.style.height      = "80px";
   ustensileContainer.style.height     = "80px";
   ingredientContainer.style.height    = "auto";
+  ingredientContainer.style.maxWidth          = "630px";
+
 }
 // appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
 ingredientsBtn.addEventListener("click", displayIngredientList);
@@ -321,6 +329,7 @@ function displayApplianceList() {
   ingredientList.style.display      = "none";
   ustensileList.style.display       = "none";
   appareilContainer.style.height    = "auto";
+  appareilContainer.style.maxWidth          = "630px";
   ustensileContainer.style.height   = "80px";
   ingredientContainer.style.height  = "80px";
 }
@@ -339,6 +348,7 @@ function displayUstensileList() {
   ingredientList.style.display      = "none";
   appareilContainer.style.height    = "80px";
   ustensileContainer.style.height   = "auto";
+  ustensileContainer.style.maxWidth          = "630px";
   ingredientContainer.style.height  = "80px";
 }
 // appelle la fonction displayUstensileList quand on appuie sur le bouton appareil
