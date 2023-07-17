@@ -41,7 +41,7 @@ fieldset {
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   width: auto;
-  max-height: 45vh;
+  height: 80px; 
   padding: 20px;
 } 
 
@@ -88,6 +88,10 @@ fieldset button {
 
 .input-ustenstiles {
   background-color: #ff5e2e;
+}
+
+.ingredients-list, .appareils-list, .ustensiles-list {
+  padding-top: 10px;
 }
 
 .fa-angle-down {

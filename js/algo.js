@@ -6,18 +6,25 @@ const ingredientList        = document.querySelector(".ingredients-list");
 const applianceList         = document.querySelector(".appareils-list");
 const selectedTagList       = document.querySelector(".selected-tag-list");
 // Const tags
-const ingredientsBtn      = document.querySelector(".btn-ingredient");
-const appareilsBtn        = document.querySelector(".btn-appareil");
-const ustensilesBtn       = document.querySelector(".btn-usentile");
-const ingredientFa        = document.querySelector(".ingredient-fa");
-const appareilFa          = document.querySelector(".appareil-fa");
-const ustensileFa         = document.querySelector(".ustensile-fa");
-const inputIngredients    = document.getElementById("ingredients");
-const inputAppareils      = document.getElementById("appareils");
-const inputUstensiles     = document.getElementById("ustensiles");
-const legendIngredients   = document.querySelector(".ingredients-legend");
-const legendAppareils     = document.querySelector(".appareils-legend");
-const legendUstensiles    = document.querySelector(".ustensiles-legend");
+const ingredientContainer   = document.querySelector(".ingredients-fieldset");
+const appareilContainer     = document.querySelector(".appareils-fieldset");
+const ustensileContainer    = document.querySelector(".ustensiles-fieldset");
+
+const ingredientsBtn        = document.querySelector(".btn-ingredient");
+const appareilsBtn          = document.querySelector(".btn-appareil");
+const ustensilesBtn         = document.querySelector(".btn-usentile");
+
+const ingredientFa          = document.querySelector(".ingredient-fa");
+const appareilFa            = document.querySelector(".appareil-fa");
+const ustensileFa           = document.querySelector(".ustensile-fa");
+
+const inputIngredients      = document.getElementById("ingredients");
+const inputAppareils        = document.getElementById("appareils");
+const inputUstensiles       = document.getElementById("ustensiles");
+
+const legendIngredients     = document.querySelector(".ingredients-legend");
+const legendAppareils       = document.querySelector(".appareils-legend");
+const legendUstensiles      = document.querySelector(".ustensiles-legend");
 console.log(recipes, "Recipes de base");
 
 
@@ -251,9 +258,9 @@ function createApplianceList(uniqueApplianceArray) {
     
     let applianceElt          = document.createElement("li");
     applianceElt.classList.add("tag");
-    applianceElt.textContent  = uniqueApplianceArray[i];
+    applianceElt.textContent            = uniqueApplianceArray[i];
     applianceList.appendChild(applianceElt);
-
+    
     applianceElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
       //console.log(clickedTag);
@@ -264,7 +271,7 @@ function createApplianceList(uniqueApplianceArray) {
 }
 
 /**
- * Affiche le tableau des ustensiles dans une liste 
+ * Affiche le tableau des ustensiles dans une liste
  * @param {object} uniqueUstensilArray
  */
 function createUstensileList(uniqueUstensilArray) {
@@ -280,7 +287,7 @@ function createUstensileList(uniqueUstensilArray) {
     
     let ustensileElt           = document.createElement("li");
     ustensileElt.classList.add("tag");
-    ustensileElt.textContent   = uniqueUstensilArray[i];
+    ustensileElt.textContent            = uniqueUstensilArray[i];
     ustensileList.appendChild(ustensileElt);
     
     ustensileElt.addEventListener("click", event => {
@@ -291,11 +298,14 @@ function createUstensileList(uniqueUstensilArray) {
   }
 }
 
-// Affiche la liste des ingrédients
+// Affiche la liste des ingrédients, et limite la taille des autres fieldset
 function displayIngredientList() {
   createIngredientList(uniqueIngredientArray);
-  applianceList.style.display = "none";
-  ustensileList.style.display = "none";
+  applianceList.style.display         = "none";
+  ustensileList.style.display         = "none";
+  appareilContainer.style.height      = "80px";
+  ustensileContainer.style.height     = "80px";
+  ingredientContainer.style.height    = "auto";
 }
 // appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
 ingredientsBtn.addEventListener("click", displayIngredientList);
@@ -305,11 +315,14 @@ ingredientFa.addEventListener("click", (event) => {
   displayIngredientList();
 });
 
-// Affiche la liste des appareils
+// Affiche la liste des appareils, et limite la taille des autres fieldset
 function displayApplianceList() {
   createApplianceList(uniqueApplianceArray);
-  ingredientList.style.display = "none";
-  ustensileList.style.display  = "none";
+  ingredientList.style.display      = "none";
+  ustensileList.style.display       = "none";
+  appareilContainer.style.height    = "auto";
+  ustensileContainer.style.height   = "80px";
+  ingredientContainer.style.height  = "80px";
 }
 // appelle la fonction displayApplianceList quand on appuie sur le bouton appareil
 appareilsBtn.addEventListener("click", displayApplianceList);
@@ -319,11 +332,14 @@ appareilFa.addEventListener("click", (event) => {
   displayApplianceList();
 });
 
-// Affiche la liste des ustensiles
+// Affiche la liste des ustensiles, et limite la taille des autres fieldset
 function displayUstensileList() {
   createUstensileList(uniqueUstensilArray);
-  applianceList.style.display  = "none";
-  ingredientList.style.display = "none";
+  applianceList.style.display       = "none";
+  ingredientList.style.display      = "none";
+  appareilContainer.style.height    = "80px";
+  ustensileContainer.style.height   = "auto";
+  ingredientContainer.style.height  = "80px";
 }
 // appelle la fonction displayUstensileList quand on appuie sur le bouton appareil
 ustensilesBtn.addEventListener("click", displayUstensileList);
