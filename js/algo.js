@@ -199,6 +199,11 @@ function createSelectedTagElt(clickedTag) {
   let selectedTagElt = document.createElement("li");
   selectedTagElt.classList.add("selected-tag-elt");
   selectedTagElt.textContent = clickedTag;
+
+  // Récupère le dataset de l'élément de liste sélectionné et ajoute celui-ci en classe du tag sélectionné
+  const tagClass = event.target.dataset.tagClass;
+  selectedTagElt.classList.add(tagClass);
+
 // crée un bouton de fermeture
   const closeButton = document.createElement("button");
   closeButton.classList.add("close-button");
@@ -213,7 +218,7 @@ function createSelectedTagElt(clickedTag) {
 };
 
 /**
- * Affiche le tableau des appareils dans une liste
+ * Affiche le tableau des ingrédients dans une liste
  * @param {object} uniqueIngredientArray 
  */
 function createIngredientList(uniqueIngredientArray) {
@@ -229,6 +234,7 @@ function createIngredientList(uniqueIngredientArray) {
     
     let ingredientElt           = document.createElement("li");
     ingredientElt.classList.add("tag");
+    ingredientElt.dataset.tagClass = "ingredients-tag";
     ingredientElt.textContent   = uniqueIngredientArray[i];
     ingredientElt.style.width = "33.33%";
     ingredientElt.style.color = "white";
@@ -236,9 +242,9 @@ function createIngredientList(uniqueIngredientArray) {
 
     ingredientElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
-      //console.log(clickedTag);
+      /* console.log(clickedTag); */
 
-      createSelectedTagElt(clickedTag);
+      createSelectedTagElt(clickedTag, event);
     });
   }
 }
@@ -260,6 +266,7 @@ function createApplianceList(uniqueApplianceArray) {
     
     let applianceElt          = document.createElement("li");
     applianceElt.classList.add("tag");
+    applianceElt.dataset.tagClass = "appareils-tag";
     applianceElt.textContent  = uniqueApplianceArray[i];
     applianceElt.style.width  = "50%";
     applianceElt.style.color  = "white"; 
@@ -269,7 +276,7 @@ function createApplianceList(uniqueApplianceArray) {
       const clickedTag = event.target.textContent;
       //console.log(clickedTag);
 
-      createSelectedTagElt(clickedTag);
+      createSelectedTagElt(clickedTag, event);
     });
   }
 }
@@ -291,6 +298,7 @@ function createUstensileList(uniqueUstensilArray) {
     
     let ustensileElt           = document.createElement("li");
     ustensileElt.classList.add("tag");
+    ustensileElt.dataset.tagClass = "ustensiles-tag";
     ustensileElt.textContent   = uniqueUstensilArray[i];
     ustensileElt.style.width   = "50%";
     ustensileElt.style.color   = "white"; 
@@ -299,7 +307,7 @@ function createUstensileList(uniqueUstensilArray) {
     ustensileElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
       //console.log(clickedTag);
-      createSelectedTagElt(clickedTag);
+      createSelectedTagElt(clickedTag, event);
     });
   }
 }
@@ -312,7 +320,7 @@ function displayIngredientList() {
   appareilContainer.style.height      = "80px";
   ustensileContainer.style.height     = "80px";
   ingredientContainer.style.height    = "auto";
-  ingredientContainer.style.maxWidth          = "630px";
+  ingredientContainer.style.maxWidth  = "630px";
 
 }
 // appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
@@ -329,7 +337,7 @@ function displayApplianceList() {
   ingredientList.style.display      = "none";
   ustensileList.style.display       = "none";
   appareilContainer.style.height    = "auto";
-  appareilContainer.style.maxWidth          = "630px";
+  appareilContainer.style.maxWidth  = "630px";
   ustensileContainer.style.height   = "80px";
   ingredientContainer.style.height  = "80px";
 }
@@ -348,7 +356,7 @@ function displayUstensileList() {
   ingredientList.style.display      = "none";
   appareilContainer.style.height    = "80px";
   ustensileContainer.style.height   = "auto";
-  ustensileContainer.style.maxWidth          = "630px";
+  ustensileContainer.style.maxWidth = "630px";
   ingredientContainer.style.height  = "80px";
 }
 // appelle la fonction displayUstensileList quand on appuie sur le bouton appareil

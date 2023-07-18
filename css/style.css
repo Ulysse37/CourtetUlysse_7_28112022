@@ -108,7 +108,6 @@ fieldset button {
 }
 
 .selected-tag-elt {
-  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -128,6 +127,19 @@ fieldset button {
   color : white;
   font-weight: bolder;
 }
+
+.ingredients-tag {
+  background-color: #2e81fe;
+}
+
+.appareils-tag {
+  background-color: #53fdbc;
+}
+
+.ustensiles-tag {
+  background-color: #ff5e2e;
+}
+
 
 @media (min-width: 576px) {
   .figure-height {
