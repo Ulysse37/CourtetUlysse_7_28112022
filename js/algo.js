@@ -1,6 +1,8 @@
 "use strict";
 
 const mainSearchElt         = document.getElementById("search-bar");
+const recipeSection         = document.querySelector(".recipes-list");
+
 const ustensileList         = document.querySelector(".ustensiles-list");
 const ingredientList        = document.querySelector(".ingredients-list");
 const applianceList         = document.querySelector(".appareils-list");
@@ -118,7 +120,6 @@ function removeDomData() {
 // Fonction qui dans le cas d'une recherche non aboutie va afficher un message d'erreur
 function displayErrorMessage()  {
   
-  let recipeSection       = document.querySelector(".recipes-list");
   let recipeSearchSection = document.querySelector(".recipes-search-list");
   let errorMessage        = document.createElement("p");
 
@@ -179,7 +180,6 @@ function mainSearch(value, recipeSection) {
  * @param {object} event 
  */
 function searchRecipes(event) {
-  let recipeSection = document.querySelector(".recipes-list");
   let value = event.target.value;
   value = value.toLowerCase();
   
@@ -194,7 +194,7 @@ mainSearchElt.addEventListener("input", searchRecipes);
  * Crée un élément de liste contenant le tag cliqué et l'ajoute à la liste des tags sélectionnés.
  * @param {string} clickedTag - le tag qui a été cliqué
  */
-function createSelectedTagElt(clickedTag) {
+function createSelectedTagElt(clickedTag, event) {
 
   let selectedTagElt = document.createElement("li");
   selectedTagElt.classList.add("selected-tag-elt");
@@ -203,6 +203,7 @@ function createSelectedTagElt(clickedTag) {
   // Récupère le dataset de l'élément de liste sélectionné et ajoute celui-ci en classe du tag sélectionné
   const tagClass = event.target.dataset.tagClass;
   selectedTagElt.classList.add(tagClass);
+  console.log(tagClass);
 
 // crée un bouton de fermeture
   const closeButton = document.createElement("button");
@@ -226,10 +227,8 @@ function createIngredientList(uniqueIngredientArray) {
   ingredientList.style.display  = "flex";
   
   const existingTags = ingredientList.querySelectorAll(".tag");
-  if (existingTags.length > 0) {
-    return; // Si les éléments existent déjà la fonction s'arrête.
-  }
-
+  if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
+  
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
     let ingredientElt           = document.createElement("li");
@@ -258,10 +257,8 @@ function createApplianceList(uniqueApplianceArray) {
   applianceList.style.display = "flex";
 
   const existingTags = applianceList.querySelectorAll(".tag");
-  if (existingTags.length > 0) {
-    return; // Si les éléments existent déjà la fonction s'arrête.
-  }
-
+  if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
+  
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
     
     let applianceElt          = document.createElement("li");
@@ -290,10 +287,8 @@ function createUstensileList(uniqueUstensilArray) {
   ustensileList.style.display  = "flex";
 
   const existingTags = ustensileList.querySelectorAll(".tag");
-  if (existingTags.length > 0) {
-    return; // Si les éléments existent déjà la fonction s'arrête.
-  }
-
+  if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
+  
   for (let i = 0; i < uniqueUstensilArray.length; i++) {
     
     let ustensileElt           = document.createElement("li");
@@ -317,11 +312,14 @@ function displayIngredientList() {
   createIngredientList(uniqueIngredientArray);
   applianceList.style.display         = "none";
   ustensileList.style.display         = "none";
+  // ! ingredientContainer.style.position       = "relative";
+  // ! ingredientContainer.style.zIndex       = "2"; 
   appareilContainer.style.height      = "80px";
   ustensileContainer.style.height     = "80px";
   ingredientContainer.style.height    = "auto";
+  // ! recipeSection.style.position  = "relative";
+  // ! recipeSection.style.zIndex       = "1"; */
   ingredientContainer.style.maxWidth  = "630px";
-
 }
 // appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
 ingredientsBtn.addEventListener("click", displayIngredientList);
