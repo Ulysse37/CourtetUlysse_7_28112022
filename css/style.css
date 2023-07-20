@@ -100,6 +100,39 @@ fieldset button {
 .fa-angle-down {
   color: white;
 } 
+/* Classe stylisant listes fieldset pour qu'elles s'affichent au dessus des recettes */
+.overlay-ingredients { 
+  border-radius : 5px;
+  margin-top : 40px;
+  margin-left : -20px;
+  padding-left : 20px;
+  padding-bottom: 20px;
+  background-color : #2e81fe;
+  position: absolute;
+  z-index: 2;
+}
+
+.overlay-appareils { 
+  border-radius : 5px;
+  margin-top : 40px;
+  margin-left : -20px;
+  padding-left : 20px;
+  padding-bottom: 20px;
+  background-color : #53fdbc;
+  position: absolute;
+  z-index: 2;
+}
+
+.overlay-ustensiles { 
+  border-radius : 5px;
+  margin-top : 40px;
+  margin-left : -20px;
+  padding-left : 20px;
+  padding-bottom: 20px;
+  background-color : #ff5e2e;
+  position: absolute;
+  z-index: 2;
+}
 
 /* Style pour les tag selectionnés */
 .selected-tag-list {

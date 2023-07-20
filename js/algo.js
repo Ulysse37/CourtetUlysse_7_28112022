@@ -14,7 +14,7 @@ const ustensileContainer    = document.querySelector(".ustensiles-fieldset");
 
 const ingredientsBtn        = document.querySelector(".btn-ingredient");
 const appareilsBtn          = document.querySelector(".btn-appareil");
-const ustensilesBtn         = document.querySelector(".btn-usentile");
+const ustensilesBtn         = document.querySelector(".btn-ustensile");
 
 const ingredientFa          = document.querySelector(".ingredient-fa");
 const appareilFa            = document.querySelector(".appareil-fa");
@@ -309,17 +309,15 @@ function createUstensileList(uniqueUstensilArray) {
 
 // Affiche la liste des ingrédients, et limite la taille des autres fieldset
 function displayIngredientList() {
+
   createIngredientList(uniqueIngredientArray);
   applianceList.style.display         = "none";
   ustensileList.style.display         = "none";
-  // ! ingredientContainer.style.position       = "relative";
-  // ! ingredientContainer.style.zIndex       = "2"; 
+  ingredientList.classList.add("overlay-ingredients"); // ajoute classe pour stylisée la liste d'ingredient
+  ingredientContainer.style.width     = "700px"; 
+  ingredientContainer.style.height    = "auto";
   appareilContainer.style.height      = "80px";
   ustensileContainer.style.height     = "80px";
-  ingredientContainer.style.height    = "auto";
-  // ! recipeSection.style.position  = "relative";
-  // ! recipeSection.style.zIndex       = "1"; */
-  ingredientContainer.style.maxWidth  = "630px";
 }
 // appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
 ingredientsBtn.addEventListener("click", displayIngredientList);
@@ -331,11 +329,13 @@ ingredientFa.addEventListener("click", (event) => {
 
 // Affiche la liste des appareils, et limite la taille des autres fieldset
 function displayApplianceList() {
+
   createApplianceList(uniqueApplianceArray);
   ingredientList.style.display      = "none";
   ustensileList.style.display       = "none";
+  applianceList.classList.add("overlay-appareils");
   appareilContainer.style.height    = "auto";
-  appareilContainer.style.maxWidth  = "630px";
+  appareilContainer.style.width     = "700px";
   ustensileContainer.style.height   = "80px";
   ingredientContainer.style.height  = "80px";
 }
@@ -349,12 +349,14 @@ appareilFa.addEventListener("click", (event) => {
 
 // Affiche la liste des ustensiles, et limite la taille des autres fieldset
 function displayUstensileList() {
+
   createUstensileList(uniqueUstensilArray);
   applianceList.style.display       = "none";
   ingredientList.style.display      = "none";
+  ustensileList.classList.add("overlay-ustensiles");
   appareilContainer.style.height    = "80px";
   ustensileContainer.style.height   = "auto";
-  ustensileContainer.style.maxWidth = "630px";
+  ustensileContainer.style.width    = "700px";
   ingredientContainer.style.height  = "80px";
 }
 // appelle la fonction displayUstensileList quand on appuie sur le bouton appareil
@@ -369,11 +371,50 @@ ustensileFa.addEventListener("click", (event) => {
 document.addEventListener('click', (event) => {
   if (!event.target.matches('.btn-ingredient') 
       && !event.target.matches('.btn-appareil') 
-      && !event.target.matches('.btn-usentile')) {
+      && !event.target.matches('btn-ustensile')) {
+
     applianceList.style.display  = "none";
     ustensileList.style.display  = "none";
     ingredientList.style.display = "none"; 
   }
+});
+
+// réinitialise la largeur des fieldset si on ne clique sur son btn
+document.addEventListener('click', (event) => {
+  if (!event.target.matches('.btn-ingredient')) {
+
+    ingredientContainer.style.width = "auto";
+  }
+});
+
+document.addEventListener('click', (event) => {
+  if (!event.target.matches('.btn-appareil'))  {
+    
+    appareilContainer.style.width   = "auto";
+  }
+});
+
+document.addEventListener('click', (event) => {
+  if (!event.target.matches('.btn-ustensile'))  {
+
+    ustensileContainer.style.width  = "auto";
+  }
+});
+
+// réinitialise la largeur des fieldset si on ne clique sur son signet
+ingredientFa.addEventListener('click', () => {
+  appareilContainer.style.width     = "auto";
+  ustensileContainer.style.width    = "auto";
+});
+
+appareilFa.addEventListener('click', () => {
+  ingredientContainer.style.width   = "auto";
+  ustensileContainer.style.width    = "auto";
+});
+
+ustensileFa.addEventListener('click', () => {
+  ingredientContainer.style.width   = "auto";
+  appareilContainer.style.width     = "auto";
 });
 
 // Eventlistener qui efface le legend du fieldset quand on entre dans l'input
