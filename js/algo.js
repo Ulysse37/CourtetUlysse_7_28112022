@@ -371,7 +371,7 @@ ustensileFa.addEventListener("click", (event) => {
 document.addEventListener('click', (event) => {
   if (!event.target.matches('.btn-ingredient') 
       && !event.target.matches('.btn-appareil') 
-      && !event.target.matches('btn-ustensile')) {
+      && !event.target.matches('.btn-ustensile')) {
 
     applianceList.style.display  = "none";
     ustensileList.style.display  = "none";
