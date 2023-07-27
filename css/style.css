@@ -39,6 +39,7 @@ fieldset {
   position: relative;
   border: none;
   border-radius: 5px;
+  margin-bottom: 15px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   width: auto;
   height: 80px; 
@@ -173,6 +174,24 @@ fieldset button {
   background-color: #ff5e2e;
 }
 
+@media (max-width: 535px) { 
+  .selected-tag-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .selected-tag-elt {
+    display: flex;
+    justify-content: space-between;
+    max-width: 190px;
+  }
+}
+
+@media (max-width: 500px) {
+  .ingredients-fieldset, .appareils-fieldset {
+    margin-right: 0;
+  }
+}
 
 @media (min-width: 576px) {
   .figure-height {
@@ -221,4 +240,3 @@ fieldset button {
     width: 29% !important;
   }
 }
-
