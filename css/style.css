@@ -21,6 +21,16 @@ a:focus {
   text-decoration: none;
   color: hsl(0, 0%, 25%);
 }
+/* style pour la barre de recherche */
+.search-bar-form {
+  position: relative;
+}
+
+.fa-magnifying-glass {
+  position: absolute;
+  top: 14px;
+  right: 10px;
+}
 
 /* style pour afficher l'ellipsis sur la description de la recette */
 .text-overflow {
@@ -58,6 +68,7 @@ fieldset button {
   position: absolute;
   right: 5px;
 }
+
 .input-tag {
   border: none;
   width: 150px;
@@ -139,6 +150,7 @@ fieldset button {
 .selected-tag-list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .selected-tag-elt {
