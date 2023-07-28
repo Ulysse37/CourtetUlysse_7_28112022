@@ -174,7 +174,21 @@ fieldset button {
   background-color: #ff5e2e;
 }
 
-@media (max-width: 535px) { 
+@media (max-width: 575px) {
+  .tags {
+    justify-content: center;
+  }
+
+  .ingredients-fieldset, .appareils-fieldset, .ustensiles-fieldset {
+    margin-right: 0;
+    padding-right: 100px;
+  }
+
+  .selected-tag-section {
+    display: flex;
+    justify-content: center;
+  }
+
   .selected-tag-list {
     display: flex;
     flex-direction: column;
@@ -184,12 +198,6 @@ fieldset button {
     display: flex;
     justify-content: space-between;
     max-width: 190px;
-  }
-}
-
-@media (max-width: 500px) {
-  .ingredients-fieldset, .appareils-fieldset {
-    margin-right: 0;
   }
 }
 
