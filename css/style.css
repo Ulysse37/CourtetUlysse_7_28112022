@@ -21,6 +21,18 @@ a:focus {
   text-decoration: none;
   color: hsl(0, 0%, 25%);
 }
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+/* header */
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 /* style pour la barre de recherche */
 .search-bar-form {
   position: relative;
@@ -165,10 +177,12 @@ fieldset button {
 
 .close-button {
   width: 20px;
-  height: 25px;
+  height: 20px;
   margin-left: 10px;
   border-radius: 35px;
+  box-sizing: content-box;
   border: 2px solid white;
+  padding: 0 2px 2px;
   background: none;
   color : white;
   font-weight: bolder;
@@ -186,9 +200,15 @@ fieldset button {
   background-color: #ff5e2e;
 }
 
-@media (max-width: 575px) {
+
+
+@media (max-width: 576px) {
   .tags {
     justify-content: center;
+  }
+
+  .tag {
+    width: 50%;
   }
 
   .ingredients-fieldset, .appareils-fieldset, .ustensiles-fieldset {
@@ -221,6 +241,10 @@ fieldset button {
   .figcaption-height {
     height: 17rem !important;
   }
+
+  .tag {
+    width: 33.33%;
+  }
 }
 
 @media (min-width: 768px) {
@@ -231,7 +255,7 @@ fieldset button {
   }
 
   .recipe-element {
-    width : 45% !important;
+    width: calc((100% - 40px) / 2) !important;
   }
 
   .figcaption-height {
@@ -251,12 +275,12 @@ fieldset button {
   }
 
   .recipe-element {
-    width: 45% !important;
+    width: calc((100% - 70px) / 2) !important;
   }
 }
 
 @media (min-width: 1500px) {
   .recipe-element {
-    width: 29% !important;
+    width: calc((100% - 140px) / 3) !important;
   }
 }

@@ -235,7 +235,6 @@ function createIngredientList(uniqueIngredientArray) {
     ingredientElt.classList.add("tag");
     ingredientElt.dataset.tagClass = "ingredients-tag";
     ingredientElt.textContent   = uniqueIngredientArray[i];
-    ingredientElt.style.width = "33.33%";
     ingredientElt.style.color = "white";
     ingredientList.appendChild(ingredientElt);
 
