@@ -315,7 +315,7 @@ function displayIngredientList() {
   ustensileList.style.display         = "none";
   ingredientList.classList.add("overlay-ingredients"); // ajoute classe pour stylisée la liste d'ingredient
   ingredientContainer.style.width     = "700px"; 
-  ingredientContainer.style.height    = "auto";
+  ingredientContainer.style.height    = "80px";
   appareilContainer.style.height      = "80px";
   ustensileContainer.style.height     = "80px";
 }
@@ -334,8 +334,8 @@ function displayApplianceList() {
   ingredientList.style.display      = "none";
   ustensileList.style.display       = "none";
   applianceList.classList.add("overlay-appareils");
-  appareilContainer.style.height    = "auto";
   appareilContainer.style.width     = "700px";
+  appareilContainer.style.height    = "80px";
   ustensileContainer.style.height   = "80px";
   ingredientContainer.style.height  = "80px";
 }
@@ -354,9 +354,9 @@ function displayUstensileList() {
   applianceList.style.display       = "none";
   ingredientList.style.display      = "none";
   ustensileList.classList.add("overlay-ustensiles");
-  appareilContainer.style.height    = "80px";
-  ustensileContainer.style.height   = "auto";
   ustensileContainer.style.width    = "700px";
+  appareilContainer.style.height    = "80px";
+  ustensileContainer.style.height   = "80px";
   ingredientContainer.style.height  = "80px";
 }
 // appelle la fonction displayUstensileList quand on appuie sur le bouton appareil
