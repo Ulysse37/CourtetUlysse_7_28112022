@@ -322,7 +322,6 @@ function displayIngredientList() {
   legendIngredients.textContent       = "Rechercher un ingrédient";
   legendIngredients.style.opacity     = "0.7";
   legendIngredients.classList.add('smaller-legend-font-size');
-
 }
 // appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
 ingredientsBtn.addEventListener("click", displayIngredientList);
@@ -330,6 +329,11 @@ ingredientsBtn.addEventListener("click", displayIngredientList);
 ingredientFa.addEventListener("click", (event) => {
   event.stopPropagation(); // Arrête la propagation de l'événement de clic
   displayIngredientList();
+});
+// appelle la fonction displayIngredientList quand on appuie sur son input
+inputIngredients.addEventListener("click", (event) => {
+  displayIngredientList();
+  event.stopPropagation();
 });
 
 // Affiche la liste des appareils, et limite la taille des autres fieldset
@@ -354,6 +358,11 @@ appareilFa.addEventListener("click", (event) => {
   event.stopPropagation(); // Arrête la propagation de l'événement de clic
   displayApplianceList();
 });
+// appelle la fonction displayApplianceList quand on appuie sur son input
+inputAppareils.addEventListener("click", (event) => {
+  displayApplianceList();
+  event.stopPropagation();
+});
 
 // Affiche la liste des ustensiles, et limite la taille des autres fieldset
 function displayUstensileList() {
@@ -376,6 +385,11 @@ ustensilesBtn.addEventListener("click", displayUstensileList);
 ustensileFa.addEventListener("click", (event) => {
   event.stopPropagation(); // Arrête la propagation de l'événement de clic
   displayUstensileList();
+});
+// appelle la fonction displayUstensileList quand on appuie sur son input
+inputUstensiles.addEventListener("click", (event) => {
+  displayUstensileList();
+  event.stopPropagation();
 });
 
 // Eventlistener qui efface les listes si on clique ailleurs que sur les boutons
@@ -423,16 +437,19 @@ document.addEventListener('click', (event) => {
 
 // réinitialise la largeur des fieldset en fonction de quel signet est cliqué ainsi que le contenu et style de la légende
 ingredientFa.addEventListener('click', () => {
+
   appareilContainer.style.width     = "auto";
   ustensileContainer.style.width    = "auto";
   legendAppareils.textContent       = "Appareils";
   legendAppareils.style.opacity     = "1";
+  legendAppareils.classList.remove('smaller-legend-font-size');
   legendUstensiles.textContent       = "Ustensiles";
   legendUstensiles.style.opacity     = "1";
   legendUstensiles.classList.remove('smaller-legend-font-size');
 });
 
 appareilFa.addEventListener('click', () => {
+
   ingredientContainer.style.width   = "auto";
   ustensileContainer.style.width    = "auto";
   legendIngredients.textContent     = "Ingrédients";
@@ -444,6 +461,7 @@ appareilFa.addEventListener('click', () => {
 });
 
 ustensileFa.addEventListener('click', () => {
+
   ingredientContainer.style.width   = "auto";
   appareilContainer.style.width     = "auto";
   legendIngredients.textContent     = "Ingrédients";
@@ -451,7 +469,44 @@ ustensileFa.addEventListener('click', () => {
   legendIngredients.classList.remove('smaller-legend-font-size');
   legendAppareils.textContent       = "Appareils";
   legendAppareils.style.opacity     = "1";
+  legendAppareils.classList.remove('smaller-legend-font-size');
+});
+
+// réinitialise la largeur des fieldset en fonction de l'input utilisé ainsi que le contenu et style de la légende
+inputIngredients.addEventListener('click', () => {
   
+  appareilContainer.style.width     = "auto";
+  ustensileContainer.style.width    = "auto";
+  legendAppareils.textContent       = "Appareils";
+  legendAppareils.style.opacity     = "1";
+  legendAppareils.classList.remove('smaller-legend-font-size');
+  legendUstensiles.textContent       = "Ustensiles";
+  legendUstensiles.style.opacity     = "1";
+  legendUstensiles.classList.remove('smaller-legend-font-size');
+})
+
+inputAppareils.addEventListener('click', () => {
+
+  ingredientContainer.style.width   = "auto";
+  ustensileContainer.style.width    = "auto";
+  legendIngredients.textContent     = "Ingrédients";
+  legendIngredients.style.opacity   = "1";
+  legendIngredients.classList.remove('smaller-legend-font-size');
+  legendUstensiles.textContent       = "Ustensiles";
+  legendUstensiles.style.opacity     = "1";
+  legendUstensiles.classList.remove('smaller-legend-font-size');
+});
+
+inputUstensiles.addEventListener('click', () => {
+
+  ingredientContainer.style.width   = "auto";
+  appareilContainer.style.width     = "auto";
+  legendIngredients.textContent     = "Ingrédients";
+  legendIngredients.style.opacity   = "1";
+  legendIngredients.classList.remove('smaller-legend-font-size');
+  legendAppareils.textContent       = "Appareils";
+  legendAppareils.style.opacity     = "1";
+  legendAppareils.classList.remove('smaller-legend-font-size');
 });
 
 // Eventlistener qui efface le legend du fieldset quand on entre dans l'input
