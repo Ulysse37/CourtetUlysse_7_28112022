@@ -441,91 +441,56 @@ document.addEventListener('click', (event) => {
   }
 });
 
-// réinitialise la largeur des fieldset en fonction de quel signet est cliqué ainsi que le contenu et style de la légende
-ingredientFa.addEventListener('click', () => {
+// réinitialise les valeurs des éléments des fieldset appareil et ustensile
+function resetAppareilUstensileFieldset() {
 
   appareilContainer.style.width     = "auto";
-  ustensileContainer.style.width    = "auto";
   legendAppareils.textContent       = "Appareils";
   legendAppareils.style.opacity     = "1";
   legendAppareils.classList.remove('smaller-legend-font-size');
-  legendUstensiles.textContent       = "Ustensiles";
-  legendUstensiles.style.opacity     = "1";
-  legendUstensiles.classList.remove('smaller-legend-font-size');
   appareilFa.classList.remove("rotate180");
+  ustensileContainer.style.width    = "auto";
+  legendUstensiles.textContent      = "Ustensiles";
+  legendUstensiles.style.opacity    = "1";
+  legendUstensiles.classList.remove('smaller-legend-font-size');
   ustensileFa.classList.remove("rotate180");
-});
+}
 
-appareilFa.addEventListener('click', () => {
+ingredientFa.addEventListener('click', resetAppareilUstensileFieldset);
+inputIngredients.addEventListener('click', resetAppareilUstensileFieldset);
+
+function resetIngredientUstensileFieldset() {
 
   ingredientContainer.style.width   = "auto";
-  ustensileContainer.style.width    = "auto";
   legendIngredients.textContent     = "Ingrédients";
   legendIngredients.style.opacity   = "1";
   legendIngredients.classList.remove('smaller-legend-font-size');
+  ingredientFa.classList.remove("rotate180");
+  ustensileContainer.style.width    = "auto";
   legendUstensiles.textContent       = "Ustensiles";
   legendUstensiles.style.opacity     = "1";
   legendUstensiles.classList.remove('smaller-legend-font-size');
-  ingredientFa.classList.remove("rotate180");
   ustensileFa.classList.remove("rotate180");
-});
+}
 
-ustensileFa.addEventListener('click', () => {
+appareilFa.addEventListener('click', resetIngredientUstensileFieldset);
+inputAppareils.addEventListener('click', resetIngredientUstensileFieldset);
 
+function resetIngredientAppareilFieldset() {
   ingredientContainer.style.width   = "auto";
-  appareilContainer.style.width     = "auto";
   legendIngredients.textContent     = "Ingrédients";
   legendIngredients.style.opacity   = "1";
   legendIngredients.classList.remove('smaller-legend-font-size');
+  ingredientFa.classList.remove("rotate180");
+  appareilContainer.style.width     = "auto";
   legendAppareils.textContent       = "Appareils";
   legendAppareils.style.opacity     = "1";
   legendAppareils.classList.remove('smaller-legend-font-size');
-  ingredientFa.classList.remove("rotate180");
   appareilFa.classList.remove("rotate180");
-});
+}
 
-// réinitialise la largeur des fieldset en fonction de l'input utilisé ainsi que le contenu et style de la légende
-inputIngredients.addEventListener('click', () => {
-  
-  appareilContainer.style.width     = "auto";
-  ustensileContainer.style.width    = "auto";
-  legendAppareils.textContent       = "Appareils";
-  legendAppareils.style.opacity     = "1";
-  legendAppareils.classList.remove('smaller-legend-font-size');
-  legendUstensiles.textContent       = "Ustensiles";
-  legendUstensiles.style.opacity     = "1";
-  legendUstensiles.classList.remove('smaller-legend-font-size');
-  appareilFa.classList.remove("rotate180");
-  ustensileFa.classList.remove("rotate180");
-})
-
-inputAppareils.addEventListener('click', () => {
-
-  ingredientContainer.style.width   = "auto";
-  ustensileContainer.style.width    = "auto";
-  legendIngredients.textContent     = "Ingrédients";
-  legendIngredients.style.opacity   = "1";
-  legendIngredients.classList.remove('smaller-legend-font-size');
-  legendUstensiles.textContent       = "Ustensiles";
-  legendUstensiles.style.opacity     = "1";
-  legendUstensiles.classList.remove('smaller-legend-font-size');
-  ingredientFa.classList.remove("rotate180");
-  ustensileFa.classList.remove("rotate180");
-});
-
-inputUstensiles.addEventListener('click', () => {
-
-  ingredientContainer.style.width   = "auto";
-  appareilContainer.style.width     = "auto";
-  legendIngredients.textContent     = "Ingrédients";
-  legendIngredients.style.opacity   = "1";
-  legendIngredients.classList.remove('smaller-legend-font-size');
-  legendAppareils.textContent       = "Appareils";
-  legendAppareils.style.opacity     = "1";
-  legendAppareils.classList.remove('smaller-legend-font-size');
-  ingredientFa.classList.remove("rotate180");
-  appareilFa.classList.remove("rotate180");
-});
+ustensileFa.addEventListener('click', resetIngredientAppareilFieldset);
+inputUstensiles.addEventListener('click', resetIngredientAppareilFieldset);
 
 // Eventlistener qui efface le legend du fieldset quand on entre dans l'input
 inputIngredients.addEventListener("focus", () => {
