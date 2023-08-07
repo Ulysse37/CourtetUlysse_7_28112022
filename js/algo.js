@@ -322,6 +322,7 @@ function displayIngredientList() {
   legendIngredients.textContent       = "Rechercher un ingrédient";
   legendIngredients.style.opacity     = "0.7";
   legendIngredients.classList.add('smaller-legend-font-size');
+  ingredientFa.classList.add("rotate180"); //ajoute classe pour rotate l'icône de 180°
 }
 // appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
 ingredientsBtn.addEventListener("click", displayIngredientList);
@@ -350,6 +351,7 @@ function displayApplianceList() {
   legendAppareils.textContent       = "Rechercher un appareil";
   legendAppareils.style.opacity     = "0.7";
   legendAppareils.classList.add('smaller-legend-font-size');
+  appareilFa.classList.add("rotate180"); //ajoute classe pour rotate l'icône de 180°
 }
 // appelle la fonction displayApplianceList quand on appuie sur le bouton appareil
 appareilsBtn.addEventListener("click", displayApplianceList);
@@ -378,6 +380,7 @@ function displayUstensileList() {
   legendUstensiles.textContent       = "Rechercher un ustensile";
   legendUstensiles.style.opacity     = "0.7";
   legendUstensiles.classList.add('smaller-legend-font-size');
+  ustensileFa.classList.add("rotate180"); //ajoute classe pour rotate l'icône de 180°
 }
 // appelle la fonction displayUstensileList quand on appuie sur le bouton appareil
 ustensilesBtn.addEventListener("click", displayUstensileList);
@@ -412,6 +415,7 @@ document.addEventListener('click', (event) => {
     legendIngredients.textContent       = "Ingrédients";
     legendIngredients.style.opacity     = "1";
     legendIngredients.classList.remove('smaller-legend-font-size');
+    ingredientFa.classList.remove("rotate180");
   }
 });
 
@@ -422,6 +426,7 @@ document.addEventListener('click', (event) => {
     legendAppareils.textContent       = "Appareils";
     legendAppareils.style.opacity     = "1";
     legendAppareils.classList.remove('smaller-legend-font-size');
+    appareilFa.classList.remove("rotate180");
   }
 });
 
@@ -432,6 +437,7 @@ document.addEventListener('click', (event) => {
     legendUstensiles.textContent       = "Ustensiles";
     legendUstensiles.style.opacity     = "1";
     legendUstensiles.classList.remove('smaller-legend-font-size');
+    ustensileFa.classList.remove("rotate180");
   }
 });
 
@@ -446,6 +452,8 @@ ingredientFa.addEventListener('click', () => {
   legendUstensiles.textContent       = "Ustensiles";
   legendUstensiles.style.opacity     = "1";
   legendUstensiles.classList.remove('smaller-legend-font-size');
+  appareilFa.classList.remove("rotate180");
+  ustensileFa.classList.remove("rotate180");
 });
 
 appareilFa.addEventListener('click', () => {
@@ -458,6 +466,8 @@ appareilFa.addEventListener('click', () => {
   legendUstensiles.textContent       = "Ustensiles";
   legendUstensiles.style.opacity     = "1";
   legendUstensiles.classList.remove('smaller-legend-font-size');
+  ingredientFa.classList.remove("rotate180");
+  ustensileFa.classList.remove("rotate180");
 });
 
 ustensileFa.addEventListener('click', () => {
@@ -470,6 +480,8 @@ ustensileFa.addEventListener('click', () => {
   legendAppareils.textContent       = "Appareils";
   legendAppareils.style.opacity     = "1";
   legendAppareils.classList.remove('smaller-legend-font-size');
+  ingredientFa.classList.remove("rotate180");
+  appareilFa.classList.remove("rotate180");
 });
 
 // réinitialise la largeur des fieldset en fonction de l'input utilisé ainsi que le contenu et style de la légende
@@ -483,6 +495,8 @@ inputIngredients.addEventListener('click', () => {
   legendUstensiles.textContent       = "Ustensiles";
   legendUstensiles.style.opacity     = "1";
   legendUstensiles.classList.remove('smaller-legend-font-size');
+  appareilFa.classList.remove("rotate180");
+  ustensileFa.classList.remove("rotate180");
 })
 
 inputAppareils.addEventListener('click', () => {
@@ -495,6 +509,8 @@ inputAppareils.addEventListener('click', () => {
   legendUstensiles.textContent       = "Ustensiles";
   legendUstensiles.style.opacity     = "1";
   legendUstensiles.classList.remove('smaller-legend-font-size');
+  ingredientFa.classList.remove("rotate180");
+  ustensileFa.classList.remove("rotate180");
 });
 
 inputUstensiles.addEventListener('click', () => {
@@ -507,6 +523,8 @@ inputUstensiles.addEventListener('click', () => {
   legendAppareils.textContent       = "Appareils";
   legendAppareils.style.opacity     = "1";
   legendAppareils.classList.remove('smaller-legend-font-size');
+  ingredientFa.classList.remove("rotate180");
+  appareilFa.classList.remove("rotate180");
 });
 
 // Eventlistener qui efface le legend du fieldset quand on entre dans l'input

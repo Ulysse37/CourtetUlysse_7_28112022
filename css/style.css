@@ -125,6 +125,10 @@ fieldset button {
   font-size: 17px !important;
 }
 
+.rotate180 {
+  transform: rotate(180deg);
+}
+
 .fa-angle-down {
   color: white;
 } 
