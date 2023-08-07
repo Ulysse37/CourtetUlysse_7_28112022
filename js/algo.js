@@ -6,8 +6,9 @@ const recipeSection         = document.querySelector(".recipes-list");
 const ustensileList         = document.querySelector(".ustensiles-list");
 const ingredientList        = document.querySelector(".ingredients-list");
 const applianceList         = document.querySelector(".appareils-list");
-const selectedTagList       = document.querySelector(".selected-tag-list");
 // Const tags
+const selectedTagList       = document.querySelector(".selected-tag-list");
+
 const ingredientContainer   = document.querySelector(".ingredients-fieldset");
 const appareilContainer     = document.querySelector(".appareils-fieldset");
 const ustensileContainer    = document.querySelector(".ustensiles-fieldset");
@@ -28,7 +29,6 @@ const legendIngredients     = document.querySelector(".ingredients-legend");
 const legendAppareils       = document.querySelector(".appareils-legend");
 const legendUstensiles      = document.querySelector(".ustensiles-legend");
 console.log(recipes, "Recipes de base");
-
 
 //  Création d'un tableau contenant recipes mais en miniscule 
 let recipesToLowerCase      = structuredClone(recipes);
@@ -130,17 +130,17 @@ function displayErrorMessage()  {
 }
 
 /**
- * Fonction appelant celle qui crée la stucture d'une recette recherchée afin de la boucler sur le tableau de toutes celles recherchées.
+ * Fonction appelant celle qui crée la stucture d'une recette recherchée afin de la boucler sur le tableau de toutes celles recherchées. (uniqueItems)
  * Si ce tableau de contient aucune recette, appelle la fonction qui affiche le message d'erreur.
  * @param {object} searchRecipes 
  */
-function loopSearchRecipes(searchRecipes) {
+function loopSearchRecipes(searchArray) {
   
-  if (searchRecipes.length > 0) {
-    console.log(searchRecipes);
-    for (let i = 0; i < searchRecipes.length; i++) {
+  if (searchArray.length > 0) {
+    console.log(searchArray);
+    for (let i = 0; i < searchArray.length; i++) {
     
-      createSearchRecipesStructure(searchRecipes[i]);
+      createSearchRecipesStructure(searchArray[i]);
     }
   } else  {
     console.log("Error");
