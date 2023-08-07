@@ -111,6 +111,8 @@ function fillRecipesArrayForIngredients (value, items, recipe) {
   }
 }
 
+
+
 // Fonction qui reset la recherche à chaque nouvel input de l'utilisateur en supprimant l'affichage des recherches précédentes
 function removeDomData() {
   let recipeSection         = document.querySelector(".recipes-search-list");
@@ -231,11 +233,11 @@ function createIngredientList(uniqueIngredientArray) {
   
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
-    let ingredientElt           = document.createElement("li");
+    let ingredientElt               = document.createElement("li");
     ingredientElt.classList.add("tag");
-    ingredientElt.dataset.tagClass = "ingredients-tag";
-    ingredientElt.textContent   = uniqueIngredientArray[i];
-    ingredientElt.style.color = "white";
+    ingredientElt.dataset.tagClass  = "ingredients-tag";
+    ingredientElt.textContent       = uniqueIngredientArray[i];
+    ingredientElt.style.color       = "white";
     ingredientList.appendChild(ingredientElt);
 
     ingredientElt.addEventListener("click", event => {
@@ -260,12 +262,12 @@ function createApplianceList(uniqueApplianceArray) {
   
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
     
-    let applianceElt          = document.createElement("li");
+    let applianceElt              = document.createElement("li");
     applianceElt.classList.add("tag");
     applianceElt.dataset.tagClass = "appareils-tag";
-    applianceElt.textContent  = uniqueApplianceArray[i];
-    applianceElt.style.width  = "50%";
-    applianceElt.style.color  = "white"; 
+    applianceElt.textContent      = uniqueApplianceArray[i];
+    applianceElt.style.width      = "50%";
+    applianceElt.style.color      = "white"; 
     applianceList.appendChild(applianceElt);
     
     applianceElt.addEventListener("click", event => {
@@ -290,12 +292,12 @@ function createUstensileList(uniqueUstensilArray) {
   
   for (let i = 0; i < uniqueUstensilArray.length; i++) {
     
-    let ustensileElt           = document.createElement("li");
+    let ustensileElt              = document.createElement("li");
     ustensileElt.classList.add("tag");
     ustensileElt.dataset.tagClass = "ustensiles-tag";
-    ustensileElt.textContent   = uniqueUstensilArray[i];
-    ustensileElt.style.width   = "50%";
-    ustensileElt.style.color   = "white"; 
+    ustensileElt.textContent      = uniqueUstensilArray[i];
+    ustensileElt.style.width      = "50%";
+    ustensileElt.style.color      = "white"; 
     ustensileList.appendChild(ustensileElt);
     
     ustensileElt.addEventListener("click", event => {
@@ -317,6 +319,10 @@ function displayIngredientList() {
   ingredientContainer.style.height    = "80px";
   appareilContainer.style.height      = "80px";
   ustensileContainer.style.height     = "80px";
+  legendIngredients.textContent       = "Rechercher un ingrédient";
+  legendIngredients.style.opacity     = "0.7";
+  legendIngredients.classList.add('smaller-legend-font-size');
+
 }
 // appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
 ingredientsBtn.addEventListener("click", displayIngredientList);
@@ -337,6 +343,9 @@ function displayApplianceList() {
   appareilContainer.style.height    = "80px";
   ustensileContainer.style.height   = "80px";
   ingredientContainer.style.height  = "80px";
+  legendAppareils.textContent       = "Rechercher un appareil";
+  legendAppareils.style.opacity     = "0.7";
+  legendAppareils.classList.add('smaller-legend-font-size');
 }
 // appelle la fonction displayApplianceList quand on appuie sur le bouton appareil
 appareilsBtn.addEventListener("click", displayApplianceList);
@@ -357,6 +366,9 @@ function displayUstensileList() {
   appareilContainer.style.height    = "80px";
   ustensileContainer.style.height   = "80px";
   ingredientContainer.style.height  = "80px";
+  legendUstensiles.textContent       = "Rechercher un ustensile";
+  legendUstensiles.style.opacity     = "0.7";
+  legendUstensiles.classList.add('smaller-legend-font-size');
 }
 // appelle la fonction displayUstensileList quand on appuie sur le bouton appareil
 ustensilesBtn.addEventListener("click", displayUstensileList);
@@ -378,18 +390,24 @@ document.addEventListener('click', (event) => {
   }
 });
 
-// réinitialise la largeur des fieldset si on ne clique sur son btn
+// réinitialise la largeur des fieldset si on ne clique pas sur son btn ainsi que le contenu et style de la légende
 document.addEventListener('click', (event) => {
   if (!event.target.matches('.btn-ingredient')) {
 
-    ingredientContainer.style.width = "auto";
+    ingredientContainer.style.width     = "auto";
+    legendIngredients.textContent       = "Ingrédients";
+    legendIngredients.style.opacity     = "1";
+    legendIngredients.classList.remove('smaller-legend-font-size');
   }
 });
 
 document.addEventListener('click', (event) => {
   if (!event.target.matches('.btn-appareil'))  {
     
-    appareilContainer.style.width   = "auto";
+    appareilContainer.style.width     = "auto";
+    legendAppareils.textContent       = "Appareils";
+    legendAppareils.style.opacity     = "1";
+    legendAppareils.classList.remove('smaller-legend-font-size');
   }
 });
 
@@ -397,23 +415,43 @@ document.addEventListener('click', (event) => {
   if (!event.target.matches('.btn-ustensile'))  {
 
     ustensileContainer.style.width  = "auto";
+    legendUstensiles.textContent       = "Ustensiles";
+    legendUstensiles.style.opacity     = "1";
+    legendUstensiles.classList.remove('smaller-legend-font-size');
   }
 });
 
-// réinitialise la largeur des fieldset si on ne clique sur son signet
+// réinitialise la largeur des fieldset en fonction de quel signet est cliqué ainsi que le contenu et style de la légende
 ingredientFa.addEventListener('click', () => {
   appareilContainer.style.width     = "auto";
   ustensileContainer.style.width    = "auto";
+  legendAppareils.textContent       = "Appareils";
+  legendAppareils.style.opacity     = "1";
+  legendUstensiles.textContent       = "Ustensiles";
+  legendUstensiles.style.opacity     = "1";
+  legendUstensiles.classList.remove('smaller-legend-font-size');
 });
 
 appareilFa.addEventListener('click', () => {
   ingredientContainer.style.width   = "auto";
   ustensileContainer.style.width    = "auto";
+  legendIngredients.textContent     = "Ingrédients";
+  legendIngredients.style.opacity   = "1";
+  legendIngredients.classList.remove('smaller-legend-font-size');
+  legendUstensiles.textContent       = "Ustensiles";
+  legendUstensiles.style.opacity     = "1";
+  legendUstensiles.classList.remove('smaller-legend-font-size');
 });
 
 ustensileFa.addEventListener('click', () => {
   ingredientContainer.style.width   = "auto";
   appareilContainer.style.width     = "auto";
+  legendIngredients.textContent     = "Ingrédients";
+  legendIngredients.style.opacity   = "1";
+  legendIngredients.classList.remove('smaller-legend-font-size');
+  legendAppareils.textContent       = "Appareils";
+  legendAppareils.style.opacity     = "1";
+  
 });
 
 // Eventlistener qui efface le legend du fieldset quand on entre dans l'input
