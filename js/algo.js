@@ -150,10 +150,13 @@ function loopSearchRecipes(searchArray) {
   }
 };
 
+
+
 /**
  * fonction qui, si la recherche contient 3 caractère va chercher les noms de recettes, les descriptions et les ingrédients correspondants
  * afin d'ajouter les recettes concernées dans un tableau. Puis appelle la fonction qui va les afficher.
- * @param {object} event 
+ * @param {string} value
+ * @param {HTMLElement} recipeSection
  */
 function mainSearch(value, recipeSection) {
   
@@ -248,6 +251,71 @@ function createIngredientList(uniqueIngredientArray) {
     });
   }
 }
+
+//! Test liste ingredients
+
+//const lowerCaseIngredientArray = uniqueIngredientArray.map(ingredient => ingredient.toLowerCase());
+//console.log(lowerCaseIngredientArray);
+
+/**
+* ajoute dans un tableau les ingrédients correspondant à l'input
+*
+* @param {string} value
+* @param {Array} items
+* @param {string} ingredientElt
+*/
+function updateIngredientsList(value, items, ingredientElt) {
+  //console.log(ingredientElt);
+  if (ingredientElt.includes(value))  {
+    items.push(ingredientElt);
+  }
+}
+
+function ingredientSearch(event) {
+
+  let value = event.target.value;
+  value = value.toLowerCase();
+  //console.log(value);
+  let items = [];
+
+  let ingredientArray = Array.from(ingredientList.querySelectorAll("li")); // créer dans un tableau la liste des ingrédients
+  let lowerCaseIngredientArray = ingredientArray.map(ingredient => ingredient.textContent.toLowerCase()); // les passe en lowerCase
+  //console.log(lowerCaseLiElements); 
+  //console.log(ingredientList.querySelectorAll("li"));
+  
+  for (let ingredientElt of lowerCaseIngredientArray) {
+    updateIngredientsList(value, items, ingredientElt);
+  } 
+  console.log(items);
+  let uniqueItems = items;
+  console.log(uniqueItems);
+  //clearIngredientList();
+  for (let i = 0; i < items.length; i++) {
+    createIngredientListStructure(items[i]);
+  }
+}
+
+inputIngredients.addEventListener("input", ingredientSearch);
+function createIngredientListStructure(items, i) { 
+  
+  let ingredientElt                 = document.createElement("li");
+  ingredientElt.classList.add("tag");
+  ingredientElt.dataset.tagClass  = "ingredients-tag";
+  ingredientElt.textContent       = items[i];
+  ingredientElt.style.color       = "white";
+  ingredientList.appendChild(ingredientElt);
+
+  ingredientElt.addEventListener("click", event => {
+    const clickedTag = event.target.textContent;
+    /* console.log(clickedTag); */
+    createSelectedTagElt(clickedTag, event);
+    });
+ }
+function clearIngredientList() {
+  ingredientList.innerHTML = "";
+}
+/* inputIngredients.addEventListener("input", clearIngredientList); */
+//!
 
 /**
  * Affiche le tableau des appareils dans une liste
