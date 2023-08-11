@@ -252,49 +252,6 @@ function createIngredientList(uniqueIngredientArray) {
   }
 }
 
-//! Test liste ingredients
-
-//const lowerCaseIngredientArray = uniqueIngredientArray.map(ingredient => ingredient.toLowerCase());
-//console.log(lowerCaseIngredientArray);
-
-/**
-* ajoute dans un tableau les ingrédients correspondant à l'input
-*
-* @param {string} value
-* @param {Array} items
-* @param {string} ingredientElt
-*/
-/* function updateIngredientsList(value, items, ingredientElt) {
-  console.log(ingredientElt);
-  if (ingredientElt.includes(value))  {
-    items.push(ingredientElt);
-  }
-} */
-
-/* function createIngredientListStructure(item) { 
-
-  let ingredientElt                 = document.createElement("li");
-  ingredientElt.classList.add("tag");
-  ingredientElt.dataset.tagClass  = "ingredients-tag";
-  ingredientElt.textContent       = item;
-  ingredientElt.style.color       = "white";
-  ingredientList.appendChild(ingredientElt);
-
-  ingredientElt.addEventListener("click", event => {
-    const clickedTag = event.target.textContent;
-    console.log(clickedTag);
-    createSelectedTagElt(clickedTag, event);
-  });
-} */
-/* function clearIngredientList() {
-  ingredientList.innerHTML = "";
-  while (ingredientList.firstChild) {
-    ingredientList.removeChild(ingredientList.firstChild);
-  } 
-} */
-/* inputIngredients.addEventListener("input", clearIngredientList); */
-
-
 /**
  * Affiche les ingrédients recherchés dans l'input et cache les autres
  *
@@ -304,41 +261,23 @@ function ingredientSearch(event) {
 
   let value = event.target.value;
   value = value.toLowerCase();
-  //console.log(value);
-  //let items = [];
-
   let ingredientArray = Array.from(ingredientList.querySelectorAll("li")); // créer dans un tableau la liste des ingrédients
-  //let lowerCaseIngredientArray = ingredientArray.map(ingredient => ingredient.textContent.toLowerCase()); // les passe en lowerCase
-  //console.log(ingredientArray); 
-  //console.log(ingredientList.querySelectorAll("li"));
-  //console.log(lowerCaseIngredientArray);
   
   for (let ingredientElt of ingredientArray) {
-    /* updateIngredientsList(value, items, ingredientElt); */
-    //let ingredientText = ingredientElt.textContent.toLowerCase();
+    
     if (ingredientElt.textContent.toLowerCase().includes(value)) {
+
       ingredientElt.style.display = "block";
       ingredientList.style.width  = "100%";
     } else {
+
       ingredientElt.style.display = "none";
     }
   } 
-  //console.log(items);
- /*  let uniqueItems = [...new Set(items)]; // supprime les doublons dans le tableau 
-  console.log(uniqueItems); */
-  //clearIngredientList();
-
-  //clearIngredientList();
-
-  /* for (let i = 0; i < uniqueItems.length; i++) {
-    
-    createIngredientListStructure(uniqueItems[i]);
-  } */
+  
 }
 
 inputIngredients.addEventListener("input", ingredientSearch);
-
-//!
 
 /**
  * Affiche le tableau des appareils dans une liste
