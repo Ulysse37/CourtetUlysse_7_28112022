@@ -315,8 +315,8 @@ function ingredientSearch(event) {
   
   for (let ingredientElt of ingredientArray) {
     /* updateIngredientsList(value, items, ingredientElt); */
-    let ingredientText = ingredientElt.textContent.toLowerCase();
-    if (ingredientText.includes(value)) {
+    //let ingredientText = ingredientElt.textContent.toLowerCase();
+    if (ingredientElt.textContent.toLowerCase().includes(value)) {
       ingredientElt.style.display = "block";
       ingredientList.style.width  = "100%";
     } else {
@@ -379,8 +379,7 @@ function applianceSearch(event) {
   
   for (let applianceElt of applianceArray) {
 
-    let applianceText = applianceElt.textContent.toLowerCase();
-    if (applianceText.includes(value)) {
+    if (applianceElt.textContent.toLowerCase().includes(value)) {
 
       applianceElt.style.display = "block";
       applianceList.style.width  = "100%";
@@ -430,9 +429,8 @@ function ustensileSearch(event) {
   let ustensileArray = Array.from(ustensileList.querySelectorAll("li")); // créer dans un tableau la liste des appareils
   
   for (let ustensileElt of ustensileArray) {
-
-    let ustensileText = ustensileElt.textContent.toLowerCase();
-    if (ustensileText.includes(value)) {
+    
+    if (ustensileElt.textContent.toLowerCase().includes(value)) {
 
       ustensileElt.style.display = "block";
       ustensileList.style.width  = "100%";
