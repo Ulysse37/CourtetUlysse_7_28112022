@@ -39,10 +39,12 @@ for (let i = 0; i < recipesToLowerCase.length; i++) {
   recipesToLowerCase[i].name        = recipesToLowerCase[i].name.toLowerCase();
 
   for (let y = 0; y < recipesToLowerCase[i].ingredients.length; y++) {
+
     recipesToLowerCase[i].ingredients[y].ingredient = recipesToLowerCase[i].ingredients[y].ingredient.toLowerCase();
   }
 
   for (let y = 0; y < recipesToLowerCase[i].ustensils.length; y++) {
+
     recipesToLowerCase[i].ustensils[y] = recipesToLowerCase[i].ustensils[y].toLowerCase();
   }
 }
@@ -115,6 +117,7 @@ function fillRecipesArrayForIngredients (value, items, recipe) {
 
 // Fonction qui reset la recherche à chaque nouvel input de l'utilisateur en supprimant l'affichage des recherches précédentes
 function removeDomData() {
+
   let recipeSection         = document.querySelector(".recipes-search-list");
   recipeSection.innerText   = "";
 }
@@ -140,6 +143,7 @@ function loopSearchRecipes(searchArray) {
   
   if (searchArray.length > 0) {
     console.log(searchArray);
+
     for (let i = 0; i < searchArray.length; i++) {
     
       createSearchRecipesStructure(searchArray[i]);
@@ -161,6 +165,7 @@ function loopSearchRecipes(searchArray) {
 function mainSearch(value, recipeSection) {
   
   if ( value.length >= 3 ) {
+
     let items = [];
     recipeSection.style.display = "none";
   
@@ -175,6 +180,7 @@ function mainSearch(value, recipeSection) {
     removeDomData();
     loopSearchRecipes(uniqueItems);
   } else  {
+
     removeDomData();
     recipeSection.style.display = "flex";
   }
@@ -185,6 +191,7 @@ function mainSearch(value, recipeSection) {
  * @param {object} event 
  */
 function searchRecipes(event) {
+
   let value = event.target.value;
   value = value.toLowerCase();
   
@@ -230,8 +237,8 @@ function createSelectedTagElt(clickedTag, event) {
 function createIngredientList(uniqueIngredientArray) {
 
   ingredientList.style.display  = "flex";
-  
   const existingTags = ingredientList.querySelectorAll(".tag");
+
   if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
   
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
@@ -245,8 +252,8 @@ function createIngredientList(uniqueIngredientArray) {
 
     ingredientElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
-      /* console.log(clickedTag); */
 
+      /* console.log(clickedTag); */
       createSelectedTagElt(clickedTag, event);
     });
   }
@@ -269,6 +276,7 @@ function ingredientSearch(event) {
 
       ingredientElt.style.display = "block";
       ingredientList.style.width  = "100%";
+
     } else {
 
       ingredientElt.style.display = "none";
@@ -286,8 +294,8 @@ inputIngredients.addEventListener("input", ingredientSearch);
 function createApplianceList(uniqueApplianceArray) {
 
   applianceList.style.display = "flex";
-
   const existingTags = applianceList.querySelectorAll(".tag");
+
   if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
   
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
@@ -302,8 +310,8 @@ function createApplianceList(uniqueApplianceArray) {
     
     applianceElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
+    
       //console.log(clickedTag);
-
       createSelectedTagElt(clickedTag, event);
     });
   }
@@ -322,6 +330,7 @@ function applianceSearch(event) {
 
       applianceElt.style.display = "block";
       applianceList.style.width  = "100%";
+
     } else {
 
       applianceElt.style.display = "none";
@@ -338,8 +347,8 @@ inputAppareils.addEventListener("input", applianceSearch);
 function createUstensileList(uniqueUstensilArray) {
 
   ustensileList.style.display  = "flex";
-
   const existingTags = ustensileList.querySelectorAll(".tag");
+
   if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
   
   for (let i = 0; i < uniqueUstensilArray.length; i++) {
@@ -373,6 +382,7 @@ function ustensileSearch(event) {
 
       ustensileElt.style.display = "block";
       ustensileList.style.width  = "100%";
+
     } else {
 
       ustensileElt.style.display = "none";
@@ -471,6 +481,7 @@ inputUstensiles.addEventListener("click", (event) => {
 
 // Eventlistener qui efface les listes si on clique ailleurs que sur les boutons
 document.addEventListener('click', (event) => {
+
   if (!event.target.matches('.btn-ingredient') 
       && !event.target.matches('.btn-appareil') 
       && !event.target.matches('.btn-ustensile')) {
@@ -483,6 +494,7 @@ document.addEventListener('click', (event) => {
 
 // réinitialise la largeur des fieldset si on ne clique pas sur son btn ainsi que le contenu et style de la légende
 document.addEventListener('click', (event) => {
+
   if (!event.target.matches('.btn-ingredient')) {
 
     ingredientContainer.style.width     = "auto";
@@ -494,6 +506,7 @@ document.addEventListener('click', (event) => {
 });
 
 document.addEventListener('click', (event) => {
+
   if (!event.target.matches('.btn-appareil'))  {
     
     appareilContainer.style.width     = "auto";
@@ -505,6 +518,7 @@ document.addEventListener('click', (event) => {
 });
 
 document.addEventListener('click', (event) => {
+
   if (!event.target.matches('.btn-ustensile'))  {
 
     ustensileContainer.style.width  = "auto";
@@ -551,6 +565,7 @@ appareilFa.addEventListener('click', resetIngredientUstensileFieldset);
 inputAppareils.addEventListener('click', resetIngredientUstensileFieldset);
 
 function resetIngredientAppareilFieldset() {
+  
   ingredientContainer.style.width   = "auto";
   legendIngredients.textContent     = "Ingrédients";
   legendIngredients.style.opacity   = "1";
