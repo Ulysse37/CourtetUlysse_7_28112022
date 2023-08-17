@@ -200,7 +200,7 @@ function searchRecipes(event) {
 
 mainSearchElt.addEventListener("input", searchRecipes);
 
-//                                                        TAGS
+//!                                                   TAGS
 
 /**
  * Crée un élément de liste contenant le tag cliqué et l'ajoute à la liste des tags sélectionnés.
@@ -643,6 +643,7 @@ function filterRecipesByTags(selectedTags) {
     recipesToLowerCase.forEach (recipe => { // si pas de tag selectionné -> affiche l'ensemble des recettes
       createSearchRecipesStructure(recipe);
     });
+    //selectedTagList.innerHTML = '';
     return;
   }
 
@@ -674,7 +675,7 @@ function filterRecipesByTags(selectedTags) {
 
   filteredRecipes.forEach(recipe => {
     createSearchRecipesStructure(recipe);
-    //recipeSection.appendChild(recipeCard);
+    
   });
 }
 
@@ -682,3 +683,20 @@ mainSearchElt.addEventListener('click', function() {
   const selectedTags = getSelectedTags();
   filterRecipesByTags(selectedTags);
 });
+
+
+//const closeTagButton = document.querySelector(".close-button");
+function resetRecipesDisplay(selectedTags) {
+  // Vérifie si aucun tag n'est sélectionné
+  if (selectedTags.length === 0) {
+    recipeSection.innerHTML = ''; // Efface les recettes existantes
+    recipesToLowerCase.forEach(recipe => {
+
+      createSearchRecipesStructure(recipe);
+    });
+  }
+}
+
+/* closeButton.addEventListener("click", (event) => {
+  resetRecipesDisplay(selectedTags);
+}); */
