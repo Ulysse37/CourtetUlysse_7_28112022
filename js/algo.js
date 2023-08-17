@@ -618,19 +618,55 @@ inputUstensiles.addEventListener('blur', () => {
 //!         Recherches recettes par tag
 
 function getSelectedTags() {
-  const selectedTags = [];
+  let selectedTags = [];
 
-  const selectedTagElements = selectedTagList.querySelectorAll('.selected-tag-elt');
+  let selectedTagElements = selectedTagList.querySelectorAll('.selected-tag-elt');
 
   selectedTagElements.forEach(tagElement => {
 
-    const tagText = tagElement.textContent.split('×')[0];
+    let tagText = tagElement.textContent.split('×')[0];
     // divise le texte en 2 par le symbole x du close button, et seule la 1ere partie est ajoutée au tableau
     selectedTags.push(tagText);
   });
-
-  console.log(selectedTags);
+  selectedTags = selectedTags.map(tag => tag.toLowerCase()); // Passe le tableau en lower case
+  //console.log(selectedTags);
   return selectedTags;
 }
 
 
+function filterRecipesByTags(selectedTags) {
+  console.log('Selected Tags:', selectedTags);
+
+  // Vérifie si aucun tag n'est sélectionné
+  if (selectedTags.length === 0) {
+    recipeSection.innerHTML = ''; // efface les recette existantes
+    recipesToLowerCase.forEach (recipe => { // si pas de tag selectionné -> affiche l'ensemble des recettes
+      createSearchRecipesStructure(recipe);
+    });
+    return;
+  }
+
+  let filteredRecipes = recipesToLowerCase.filter(recipe => {
+    console.log('Recipe:', recipesToLowerCase);
+
+    let hasMatchingIngredient = recipe.ingredients.some(ingredient => {
+      return selectedTags.includes(ingredient.ingredient);
+    });
+    console.log('Has Matching Ingredient:', hasMatchingIngredient);
+    return hasMatchingIngredient;
+  });
+
+  console.log('Filtered Recipes:', filteredRecipes);
+
+  recipeSection.innerHTML = ''; // Efface les recettes existantes
+
+  filteredRecipes.forEach(recipe => {
+    createSearchRecipesStructure(recipe);
+    //recipeSection.appendChild(recipeCard);
+  });
+}
+
+mainSearchElt.addEventListener('click', function() {
+  const selectedTags = getSelectedTags();
+  filterRecipesByTags(selectedTags);
+});
