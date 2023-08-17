@@ -652,8 +652,20 @@ function filterRecipesByTags(selectedTags) {
     let hasMatchingIngredient = recipe.ingredients.some(ingredient => {
       return selectedTags.includes(ingredient.ingredient);
     });
+
+    let hasMatchingAppliance = selectedTags.includes(recipe.appliance);
+
+    let hasMatchingUstensil = recipe.ustensils.some(ustensil => {
+      return selectedTags.includes(ustensil);
+    })
+
     console.log('Has Matching Ingredient:', hasMatchingIngredient);
-    return hasMatchingIngredient;
+    console.log('Has Matching Appliance:', hasMatchingAppliance);
+    console.log('Has Matching Ustensil:', hasMatchingUstensil);
+    
+    let hasMatchingTag = hasMatchingIngredient || hasMatchingAppliance || hasMatchingUstensil;
+    console.log('Has Matching Tag:', hasMatchingTag);
+    return hasMatchingTag;
   });
 
   console.log('Filtered Recipes:', filteredRecipes);
