@@ -614,3 +614,23 @@ inputUstensiles.addEventListener('blur', () => {
     legendUstensiles.style.display = "block";
   }
 });
+
+//!         Recherches recettes par tag
+
+function getSelectedTags() {
+  const selectedTags = [];
+
+  const selectedTagElements = selectedTagList.querySelectorAll('.selected-tag-elt');
+
+  selectedTagElements.forEach(tagElement => {
+
+    const tagText = tagElement.textContent.split('×')[0];
+    // divise le texte en 2 par le symbole x du close button, et seule la 1ere partie est ajoutée au tableau
+    selectedTags.push(tagText);
+  });
+
+  console.log(selectedTags);
+  return selectedTags;
+}
+
+
