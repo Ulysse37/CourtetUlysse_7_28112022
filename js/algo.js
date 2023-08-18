@@ -249,10 +249,12 @@ function createIngredientList(uniqueIngredientArray) {
     ingredientList.appendChild(ingredientElt);
 
     ingredientElt.addEventListener("click", event => {
-      const clickedTag = event.target.textContent;
 
-      /* console.log(clickedTag); */
-      createSelectedTagElt(clickedTag, event);
+      const clickedTag = event.target.textContent;
+      createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élement de liste
+
+      /* const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags); */ // !filtrage des recettes en fonctions des tag sélectionnés 
     });
   }
 }
@@ -308,9 +310,10 @@ function createApplianceList(uniqueApplianceArray) {
     
     applianceElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
-    
-      //console.log(clickedTag);
-      createSelectedTagElt(clickedTag, event);
+      createSelectedTagElt(clickedTag, event);  // création du tag sélectionné au clique sur l'élement de liste
+
+      /* const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags); */  // !filtrage des recettes en fonctions des tag sélectionnés 
     });
   }
 }
@@ -361,8 +364,10 @@ function createUstensileList(uniqueUstensilArray) {
     
     ustensileElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
-      //console.log(clickedTag);
-      createSelectedTagElt(clickedTag, event);
+      createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élement de liste
+
+      /* const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags); */  // !filtrage des recettes en fonctions des tag sélectionnés 
     });
   }
 }
