@@ -645,7 +645,7 @@ function filterRecipesByTags(selectedTags) {
 
   // Vérifie si aucun tag n'est sélectionné
   if (selectedTags.length === 0) {
-    recipeSection.innerHTML = ''; // efface les recette existantes
+    removeDomData(); // efface les recette existantes
     recipesToLowerCase.forEach (recipe => { // si pas de tag selectionné -> affiche l'ensemble des recettes
       createSearchRecipesStructure(recipe);
     });
@@ -676,7 +676,7 @@ function filterRecipesByTags(selectedTags) {
   });
 
   console.log('Filtered Recipes:', filteredRecipes);
-
+  console.log(recipeSection);
   recipeSection.innerHTML = ''; // Efface les recettes existantes
 
   filteredRecipes.forEach(recipe => { // affiche les recettes liées aux tag sélectionnés 
