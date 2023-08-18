@@ -2,6 +2,7 @@
 
 const mainSearchElt         = document.getElementById("search-bar");
 const recipeSection         = document.querySelector(".recipes-list");
+const searchRecipeSection   = document.querySelector(".recipes-search-list");
 
 const ustensileList         = document.querySelector(".ustensiles-list");
 const ingredientList        = document.querySelector(".ingredients-list");
@@ -55,12 +56,11 @@ console.log(recipesToLowerCase, "Le recipe lower case");
 // Récupération de l'ul qui va contenir seulement les recettes recherchées 
 function createSearchRecipeSection() {
 
-  let recipeSection                  = document.querySelector(".recipes-search-list");
-  recipeSection.style.display        = "flex";
-  recipeSection.style.flexWrap       = "wrap";
-  recipeSection.style.justifyContent = "center";
+  searchRecipeSection.style.display        = "flex";
+  searchRecipeSection.style.flexWrap       = "wrap";
+  searchRecipeSection.style.justifyContent = "center";
 
-  return recipeSection;
+  return searchRecipeSection;
 }
 
 /**
@@ -69,19 +69,19 @@ function createSearchRecipeSection() {
  */
 function createSearchRecipesStructure(data) {
 
-  let recipeSection     = createSearchRecipeSection();
-  let recipeElt         = createRecipeElt(recipeSection);
-  let recipeLink        = createRecipeLink(recipeElt);
-  let figureElt         = createFigureElt(recipeLink);
+  createSearchRecipeSection();
+  let recipeElt          = createRecipeElt(searchRecipeSection);
+  let recipeLink         = createRecipeLink(recipeElt);
+  let figureElt          = createFigureElt(recipeLink);
   createFigureBackground(figureElt);
-  let figcaptionElt     = createFigcaptionElt(figureElt);
-  let figcaptionHeader  = createFigcaptionheader(figcaptionElt);
+  let figcaptionElt      = createFigcaptionElt(figureElt);
+  let figcaptionHeader   = createFigcaptionheader(figcaptionElt);
   createNameElt(figcaptionHeader, data);
-  let timeContainer     = createTimeContainer(figcaptionHeader);
+  let timeContainer      = createTimeContainer(figcaptionHeader);
   createTimeIcon(timeContainer);
   createTimeElt(timeContainer, data);
-  let mainContainer     = createFigcaptionMainContainer(figcaptionElt);
-  let ingredientsList   = createIngredientsList(mainContainer);
+  let mainContainer      = createFigcaptionMainContainer(figcaptionElt);
+  let ingredientsList    = createIngredientsList(mainContainer);
   getIngredients(ingredientsList, data);
   createDescriptionElt(mainContainer, data);
 }
@@ -118,20 +118,18 @@ function fillRecipesArrayForIngredients (value, items, recipe) {
 // Fonction qui reset la recherche à chaque nouvel input de l'utilisateur en supprimant l'affichage des recherches précédentes
 function removeDomData() {
 
-  let recipeSection         = document.querySelector(".recipes-search-list");
-  recipeSection.innerText   = "";
+  searchRecipeSection.innerText   = "";
 }
 
 // Fonction qui dans le cas d'une recherche non aboutie va afficher un message d'erreur
 function displayErrorMessage()  {
   
-  let recipeSearchSection = document.querySelector(".recipes-search-list");
   let errorMessage        = document.createElement("p");
 
   recipeSection.style.display = "none";
   errorMessage.innerText      = "Aucune recette ne correspond à votre critère... Vous pouvez chercher <<tarte aux pommes>>, <<poisson>>, etc.";
 
-  recipeSearchSection.appendChild(errorMessage);
+  searchRecipeSection.appendChild(errorMessage);
 }
 
 /**
@@ -167,7 +165,7 @@ function mainSearch(value, recipeSection) {
   if ( value.length >= 3 ) {
 
     let items = [];
-    recipeSection.style.display = "none";
+    recipeSection.style.display = "none"; // cache les recettes affichées de base
   
     for (let recipe of recipesToLowerCase) {
         
@@ -181,8 +179,8 @@ function mainSearch(value, recipeSection) {
     loopSearchRecipes(uniqueItems);
   } else  {
 
-    removeDomData();
-    recipeSection.style.display = "flex";
+    removeDomData(); // supprime l'affichage des recettes recherchées
+    recipeSection.style.display = "flex"; // réaffiche les recettes affichées de base
   }
 }
 
@@ -642,14 +640,11 @@ function getSelectedTags() {
  */
 function filterRecipesByTags(selectedTags) {
   console.log('Selected Tags:', selectedTags);
-
-  // Vérifie si aucun tag n'est sélectionné
-  if (selectedTags.length === 0) {
-    removeDomData(); // efface les recette existantes
-    recipesToLowerCase.forEach (recipe => { // si pas de tag selectionné -> affiche l'ensemble des recettes
-      createSearchRecipesStructure(recipe);
-    });
-    //selectedTagList.innerHTML = '';
+  removeDomData(); // efface les recette recherchées précédemment
+  
+  if (selectedTags.length === 0) {  // Si aucun tag sélectionné 
+    
+    recipeSection.style.display = "flex"; // affiche les recettes de base
     return;
   }
 
@@ -677,7 +672,7 @@ function filterRecipesByTags(selectedTags) {
 
   console.log('Filtered Recipes:', filteredRecipes);
   console.log(recipeSection);
-  recipeSection.innerHTML = ''; // Efface les recettes existantes
+  recipeSection.style.display = "none";
 
   filteredRecipes.forEach(recipe => { // affiche les recettes liées aux tag sélectionnés 
     createSearchRecipesStructure(recipe);
@@ -695,15 +690,16 @@ mainSearchElt.addEventListener('click', function() {
 //const closeTagButton = document.querySelector(".close-button");
 function resetRecipesDisplay(selectedTags) {
   // Vérifie si aucun tag n'est sélectionné
-  if (selectedTags.length === 0) {
-    recipeSection.innerHTML = ''; // Efface les recettes existantes
-    recipesToLowerCase.forEach(recipe => {
-
-      createSearchRecipesStructure(recipe);
-    });
+  if (selectedTags.length === 0) {  // Si aucun tag sélectionné 
+    
+    recipeSection.style.display = "flex"; // affiche les recettes de base
+    return;
   }
 }
 
-/* closeButton.addEventListener("click", (event) => {
+/* closeButton.addEventListener("click", function() {
+  const selectedTags = getSelectedTags();
   resetRecipesDisplay(selectedTags);
 }); */
+
+//console.log(closeButton);
