@@ -225,6 +225,9 @@ function createSelectedTagElt(clickedTag, event) {
 // addeventlistener pour supprimer l'élément de la liste de tag sélectionné lorsqu'il est cliqué
   closeButton.addEventListener("click", (event) => {
     selectedTagElt.remove();
+
+    const selectedTags = getSelectedTags(); 
+    resetRecipesDisplay(selectedTags); // réinitialisation affichage des recettes si pas de tag sélectionnés
   });
 };
 
@@ -253,8 +256,8 @@ function createIngredientList(uniqueIngredientArray) {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élement de liste
 
-      /* const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags); */ // !filtrage des recettes en fonctions des tag sélectionnés 
+      const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags); // filtrage des recettes en fonctions des tag sélectionnés 
     });
   }
 }
@@ -312,8 +315,8 @@ function createApplianceList(uniqueApplianceArray) {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event);  // création du tag sélectionné au clique sur l'élement de liste
 
-      /* const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags); */  // !filtrage des recettes en fonctions des tag sélectionnés 
+      const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
     });
   }
 }
@@ -366,8 +369,8 @@ function createUstensileList(uniqueUstensilArray) {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élement de liste
 
-      /* const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags); */  // !filtrage des recettes en fonctions des tag sélectionnés 
+      const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
     });
   }
 }
@@ -686,10 +689,10 @@ function filterRecipesByTags(selectedTags) {
 }
 
 // eventlistener qui va chercher les tag selectionnés et appel la fonction affichant les recettes concernées 
-mainSearchElt.addEventListener('click', function() {
+/* mainSearchElt.addEventListener('click', function() {
   const selectedTags = getSelectedTags();
   filterRecipesByTags(selectedTags);
-});
+}); */
 
 
 //const closeTagButton = document.querySelector(".close-button");
