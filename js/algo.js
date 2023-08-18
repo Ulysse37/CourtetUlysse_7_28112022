@@ -615,17 +615,19 @@ inputUstensiles.addEventListener('blur', () => {
   }
 });
 
-//!         Recherches recettes par tag
+//!                Recherches recettes par tag
 
+// va chercher et mets dans un tableau les tag sélectionnés 
 function getSelectedTags() {
   let selectedTags = [];
 
-  let selectedTagElements = selectedTagList.querySelectorAll('.selected-tag-elt');
+  let selectedTagElt = selectedTagList.querySelectorAll('.selected-tag-elt');
 
-  selectedTagElements.forEach(tagElement => {
+  selectedTagElt.forEach(tagElement => {
 
     let tagText = tagElement.textContent.split('×')[0];
-    // divise le texte en 2 par le symbole x du close button, et seule la 1ere partie est ajoutée au tableau
+    // divise le texte en 2 au symbole x du close button, et seule la 1ere partie est ajoutée au tableau
+    // afin d'éviter d'avoir le bouton x dans le tableau.
     selectedTags.push(tagText);
   });
   selectedTags = selectedTags.map(tag => tag.toLowerCase()); // Passe le tableau en lower case
@@ -634,6 +636,10 @@ function getSelectedTags() {
 }
 
 
+/**
+ * Filtre les recettes en fonctions des tag sélectionnés 
+ * @param {Array} selectedTags
+ */
 function filterRecipesByTags(selectedTags) {
   console.log('Selected Tags:', selectedTags);
 
@@ -647,17 +653,17 @@ function filterRecipesByTags(selectedTags) {
     return;
   }
 
-  let filteredRecipes = recipesToLowerCase.filter(recipe => {
+  let filteredRecipes = recipesToLowerCase.filter(recipe => { // création nouveau tableau 
     console.log('Recipe:', recipesToLowerCase);
 
     let hasMatchingIngredient = recipe.ingredients.some(ingredient => {
-      return selectedTags.includes(ingredient.ingredient);
+      return selectedTags.includes(ingredient.ingredient); // vérifie si la recette a un ingrédient correspondant au tag
     });
 
-    let hasMatchingAppliance = selectedTags.includes(recipe.appliance);
+    let hasMatchingAppliance = selectedTags.includes(recipe.appliance); // de même pour les appareils
 
     let hasMatchingUstensil = recipe.ustensils.some(ustensil => {
-      return selectedTags.includes(ustensil);
+      return selectedTags.includes(ustensil); // de même pour les ustensiles 
     })
 
     console.log('Has Matching Ingredient:', hasMatchingIngredient);
@@ -666,19 +672,20 @@ function filterRecipesByTags(selectedTags) {
     
     let hasMatchingTag = hasMatchingIngredient || hasMatchingAppliance || hasMatchingUstensil;
     console.log('Has Matching Tag:', hasMatchingTag);
-    return hasMatchingTag;
+    return hasMatchingTag; // si la recette a un ingrédient/appareil ou ustensile correspondant au tag, l'ajoute au tableau
   });
 
   console.log('Filtered Recipes:', filteredRecipes);
 
   recipeSection.innerHTML = ''; // Efface les recettes existantes
 
-  filteredRecipes.forEach(recipe => {
+  filteredRecipes.forEach(recipe => { // affiche les recettes liées aux tag sélectionnés 
     createSearchRecipesStructure(recipe);
     
   });
 }
 
+// eventlistener qui va chercher les tag selectionnés et appel la fonction affichant les recettes concernées 
 mainSearchElt.addEventListener('click', function() {
   const selectedTags = getSelectedTags();
   filterRecipesByTags(selectedTags);
