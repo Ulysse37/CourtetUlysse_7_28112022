@@ -688,14 +688,7 @@ function filterRecipesByTags(selectedTags) {
   });
 }
 
-// eventlistener qui va chercher les tag selectionnés et appel la fonction affichant les recettes concernées 
-/* mainSearchElt.addEventListener('click', function() {
-  const selectedTags = getSelectedTags();
-  filterRecipesByTags(selectedTags);
-}); */
-
-
-//const closeTagButton = document.querySelector(".close-button");
+// si aucun tag n'est sélectionné affiche toutes les recettes 
 function resetRecipesDisplay(selectedTags) {
   // Vérifie si aucun tag n'est sélectionné
   if (selectedTags.length === 0) {  // Si aucun tag sélectionné 
@@ -704,10 +697,3 @@ function resetRecipesDisplay(selectedTags) {
     return;
   }
 }
-
-/* closeButton.addEventListener("click", function() {
-  const selectedTags = getSelectedTags();
-  resetRecipesDisplay(selectedTags);
-}); */
-
-//console.log(closeButton);
