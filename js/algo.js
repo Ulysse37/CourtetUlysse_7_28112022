@@ -240,7 +240,8 @@ function createIngredientList(uniqueIngredientArray) {
   ingredientList.style.display  = "flex";
   const existingTags = ingredientList.querySelectorAll(".tag");
 
-  if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
+  existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste
+  //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
   
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
     
@@ -650,14 +651,14 @@ function filterRecipesByTags(selectedTags) {
   console.log('Selected Tags:', selectedTags);
   removeDomData(); // efface les recette recherchées précédemment
   
-  if (selectedTags.length === 0) {  // Si aucun tag sélectionné 
+  /* if (selectedTags.length === 0) {  // Si aucun tag sélectionné 
     
     recipeSection.style.display = "flex"; // affiche les recettes de base
     return;
-  }
+  } */
 
   let filteredRecipes = recipesToLowerCase.filter(recipe => { // création nouveau tableau 
-    console.log('Recipe:', recipesToLowerCase);
+    //console.log('Recipe:', recipesToLowerCase);
 
     let hasMatchingIngredient = recipe.ingredients.some(ingredient => {
       return selectedTags.includes(ingredient.ingredient); // vérifie si la recette a un ingrédient correspondant au tag
@@ -669,23 +670,24 @@ function filterRecipesByTags(selectedTags) {
       return selectedTags.includes(ustensil); // de même pour les ustensiles 
     })
 
-    console.log('Has Matching Ingredient:', hasMatchingIngredient);
+    /* console.log('Has Matching Ingredient:', hasMatchingIngredient);
     console.log('Has Matching Appliance:', hasMatchingAppliance);
-    console.log('Has Matching Ustensil:', hasMatchingUstensil);
+    console.log('Has Matching Ustensil:', hasMatchingUstensil); */
     
     let hasMatchingTag = hasMatchingIngredient || hasMatchingAppliance || hasMatchingUstensil;
-    console.log('Has Matching Tag:', hasMatchingTag);
+    //console.log('Has Matching Tag:', hasMatchingTag);
     return hasMatchingTag; // si la recette a un ingrédient/appareil ou ustensile correspondant au tag, l'ajoute au tableau
   });
 
   console.log('Filtered Recipes:', filteredRecipes);
-  console.log(recipeSection);
+  //console.log(recipeSection);
   recipeSection.style.display = "none";
 
   filteredRecipes.forEach(recipe => { // affiche les recettes liées aux tag sélectionnés 
+
     createSearchRecipesStructure(recipe);
-    
   });
+  return filteredRecipes;
 }
 
 // si aucun tag n'est sélectionné affiche toutes les recettes 
