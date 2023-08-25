@@ -230,6 +230,18 @@ function createSelectedTagElt(clickedTag, event) {
     resetRecipesDisplay(selectedTags); // réinitialisation affichage des recettes si pas de tag sélectionnés
   });
 };
+function createList(className, content, list) {
+
+  let element               = document.createElement("li");
+  element.classList.add("tag");
+  element.dataset.tagClass  = className;
+  element.textContent       = content;
+  element.style.color       = "white";
+  list.appendChild(element);
+  console.log(element);
+  
+  return element;
+}
 
 /**
  * Affiche le tableau des ingrédients dans une liste
@@ -244,7 +256,7 @@ function createIngredientList(uniqueIngredientArray) {
   //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
   
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
-    let ingredientElt = createUpdatedList("ingredients-tag", uniqueIngredientArray[i], ingredientList);
+    let ingredientElt = createList("ingredients-tag", uniqueIngredientArray[i], ingredientList);
     /* let ingredientElt               = document.createElement("li");
     ingredientElt.classList.add("tag");
     ingredientElt.dataset.tagClass  = "ingredients-tag";
@@ -304,7 +316,7 @@ function createApplianceList(uniqueApplianceArray) {
   if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
   
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
-    let applianceElt = createUpdatedList("appareils-tag", uniqueApplianceArray[i], applianceList);
+    let applianceElt = createList("appareils-tag", uniqueApplianceArray[i], applianceList);
     /* let applianceElt              = document.createElement("li");
     applianceElt.classList.add("tag");
     applianceElt.dataset.tagClass = "appareils-tag";
@@ -358,7 +370,7 @@ function createUstensileList(uniqueUstensileArray) {
   if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
   
   for (let i = 0; i < uniqueUstensileArray.length; i++) {
-    let ustensileElt = createUpdatedList("ustensiles-tag", uniqueUstensileArray[i], ustensileList);
+    let ustensileElt = createList("ustensiles-tag", uniqueUstensileArray[i], ustensileList);
     /* let ustensileElt              = document.createElement("li");
     ustensileElt.classList.add("tag");
     ustensileElt.dataset.tagClass = "ustensiles-tag";
@@ -693,7 +705,7 @@ function testFilteredRecipes() {
       
       for (let i = 0; i < filteredRecipes.length; i++) {
         for (let y = 0; y < filteredRecipes[i].ingredients.length; y++) {
-          createUpdatedList("ingredients-tag", filteredRecipes[i].ingredients[y].ingredient, ingredientList);
+          createList("ingredients-tag", filteredRecipes[i].ingredients[y].ingredient, ingredientList);
           /* let ingredientElt               = document.createElement("li");
           ingredientElt.classList.add("tag");
           ingredientElt.dataset.tagClass  = "ingredients-tag";
@@ -709,17 +721,6 @@ function testFilteredRecipes() {
     })
 }
 
-function createUpdatedList(className, content, list) {
-  let element               = document.createElement("li");
-  element.classList.add("tag");
-  element.dataset.tagClass  = className;
-  element.textContent       = content;
-  element.style.color       = "white";
-  list.appendChild(element);
-  
-  console.log(element);
-  return element;
-}
 
 // si aucun tag n'est sélectionné affiche toutes les recettes 
 function resetRecipesDisplay(selectedTags) {
