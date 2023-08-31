@@ -338,10 +338,10 @@ function createUstensileArray(recipes) {
     }
   }
   // Création d'un nouveau tableau qui ne contient aucun doublons d'ustensile
-  let uniqueUstensilArray = [...new Set(ustensileArray)];
+  let uniqueUstensileArray = [...new Set(ustensileArray)];
   //console.log(uniqueUstensilArray);
 
-  return uniqueUstensilArray;
+  return uniqueUstensileArray;
 }
 
 /**
