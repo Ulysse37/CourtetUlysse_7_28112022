@@ -53,6 +53,50 @@ console.log(recipesToLowerCase, "Le recipe lower case");
 
 //                                                  Barre de recherche
 
+// ajoute dans un tableau les recettes dont le nom correspond à l'input
+function fillRecipesArrayForNames(value, items, recipe) {
+  if (recipe.name.includes(value))  {
+
+    items.push(recipe);
+  }
+}
+
+// ajoute dans un tableau les recettes dont la description correspond à l'input
+function fillRecipesArrayForDescriptions (value, items, recipe) {
+  if (recipe.description.includes(value)) {
+
+    items.push(recipe);
+  }
+}
+
+// ajoute dans un tableau les recettes dont les ingrédients correspondent à l'input
+function fillRecipesArrayForIngredients (value, items, recipe) {
+  for (let ingredient of recipe.ingredients) {
+          
+    if (ingredient.ingredient.includes(value))  {
+
+      items.push(recipe);
+    }
+  }
+}
+
+// Fonction qui reset la recherche à chaque nouvel input de l'utilisateur en supprimant l'affichage des recherches précédentes
+function removeDomData() {
+
+  searchRecipeSection.innerText   = "";
+}
+
+// Fonction qui dans le cas d'une recherche non aboutie va afficher un message d'erreur
+function displayErrorMessage()  {
+  
+  let errorMessage        = document.createElement("p");
+
+  recipeSection.style.display = "none";
+  errorMessage.innerText      = "Aucune recette ne correspond à votre critère... Vous pouvez chercher <<tarte aux pommes>>, <<poisson>>, etc.";
+
+  searchRecipeSection.appendChild(errorMessage);
+}
+
 // Récupération de l'ul qui va contenir seulement les recettes recherchées 
 function createSearchRecipeSection() {
 
@@ -86,52 +130,6 @@ function createSearchRecipesStructure(data) {
   createDescriptionElt(mainContainer, data);
 }
 
-// ajoute dans un tableau les recettes dont le nom correspond à l'input
-function fillRecipesArrayForNames(value, items, recipe) {
-  if (recipe.name.includes(value))  {
-
-    items.push(recipe);
-  }
-}
-
-// ajoute dans un tableau les recettes dont la description correspond à l'input
-function fillRecipesArrayForDescriptions (value, items, recipe) {
-  if (recipe.description.includes(value)) {
-
-    items.push(recipe);
-  }
-}
-
-// ajoute dans un tableau les recettes dont les ingrédients correspondent à l'input
-function fillRecipesArrayForIngredients (value, items, recipe) {
-  for (let ingredient of recipe.ingredients) {
-          
-    if (ingredient.ingredient.includes(value))  {
-
-      items.push(recipe);
-    }
-  }
-}
-
-
-
-// Fonction qui reset la recherche à chaque nouvel input de l'utilisateur en supprimant l'affichage des recherches précédentes
-function removeDomData() {
-
-  searchRecipeSection.innerText   = "";
-}
-
-// Fonction qui dans le cas d'une recherche non aboutie va afficher un message d'erreur
-function displayErrorMessage()  {
-  
-  let errorMessage        = document.createElement("p");
-
-  recipeSection.style.display = "none";
-  errorMessage.innerText      = "Aucune recette ne correspond à votre critère... Vous pouvez chercher <<tarte aux pommes>>, <<poisson>>, etc.";
-
-  searchRecipeSection.appendChild(errorMessage);
-}
-
 /**
  * Fonction appelant celle qui crée la stucture d'une recette recherchée afin de la boucler sur le tableau de toutes celles recherchées. (uniqueItems)
  * Si ce tableau de contient aucune recette, appelle la fonction qui affiche le message d'erreur.
@@ -152,14 +150,13 @@ function loopSearchRecipes(searchArray) {
   }
 };
 
-
-
 /**
  * fonction qui, si la recherche contient 3 caractère va chercher les noms de recettes, les descriptions et les ingrédients correspondants
  * afin d'ajouter les recettes concernées dans un tableau. Puis appelle la fonction qui va les afficher.
  * @param {string} value
  * @param {HTMLElement} recipeSection
  */
+
 function mainSearch(value, recipeSection) {
   
   if ( value.length >= 3 ) {
@@ -197,5 +194,3 @@ function searchRecipes(event) {
 }
 
 mainSearchElt.addEventListener("input", searchRecipes);
-
-

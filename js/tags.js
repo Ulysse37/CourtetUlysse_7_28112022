@@ -1,8 +1,10 @@
 "use strict";
 
 /**
- * Crée un élément de liste contenant le tag cliqué et l'ajoute à la liste des tags sélectionnés.
- * @param {string} clickedTag - le tag qui a été cliqué
+ * Crée un élément de tag sélectionné et l'ajoute à la liste des tags sélectionnés.
+ *
+ * @param {string} clickedTag - Le tag cliqué.
+ * @param {Event} event - L'objet événement.
  */
 function createSelectedTagElt(clickedTag, event) {
 
@@ -13,7 +15,6 @@ function createSelectedTagElt(clickedTag, event) {
   // Récupère le dataset de l'élément de liste sélectionné et ajoute celui-ci en classe du tag sélectionné
   const tagClass = event.target.dataset.tagClass;
   selectedTagElt.classList.add(tagClass);
-  console.log(tagClass);
 
 // crée un bouton de fermeture
   const closeButton = document.createElement("button");
@@ -31,7 +32,14 @@ function createSelectedTagElt(clickedTag, event) {
   });
 };
 
-// fonction 
+/**
+ * Crée un élément de liste avec le nom de classe, le contenu donné, et l'ajoute à la liste fournie.
+ *
+ * @param {string} className - Le nom de classe pour l'élément de liste.
+ * @param {string} content - Le contenu à afficher dans l'élément de liste.
+ * @param {HTMLElement} list - La liste à laquelle l'élément de liste sera ajouté.
+ * @return {HTMLElement} - L'élément de liste créé.
+ */ 
 function createList(className, content, list) {
 
   let element               = document.createElement("li");
@@ -40,7 +48,6 @@ function createList(className, content, list) {
   element.textContent       = content;
   element.style.color       = "white";
   list.appendChild(element);
-  console.log(element);
   
   return element;
 }
@@ -58,13 +65,8 @@ function createIngredientList(uniqueIngredientArray) {
   //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
   
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
+
     let ingredientElt = createList("ingredients-tag", uniqueIngredientArray[i], ingredientList);
-    /* let ingredientElt               = document.createElement("li");
-    ingredientElt.classList.add("tag");
-    ingredientElt.dataset.tagClass  = "ingredients-tag";
-    ingredientElt.textContent       = uniqueIngredientArray[i];
-    ingredientElt.style.color       = "white";
-    ingredientList.appendChild(ingredientElt); */
 
     ingredientElt.addEventListener("click", event => {
 
@@ -73,7 +75,6 @@ function createIngredientList(uniqueIngredientArray) {
 
       const selectedTags = getSelectedTags();
       filterRecipesByTags(selectedTags); // filtrage des recettes en fonctions des tag sélectionnés 
-      testFilteredRecipes();
     });
   }
 }
@@ -81,7 +82,7 @@ function createIngredientList(uniqueIngredientArray) {
 /**
  * Affiche les ingrédients recherchés dans l'input et cache les autres
  *
- * @param {Event} event trigger de l'action
+ * @param {Event} event - L'objet événement.
  */
 function ingredientSearch(event) {
 
@@ -118,16 +119,11 @@ function createApplianceList(uniqueApplianceArray) {
   if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
   
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
+
     let applianceElt = createList("appareils-tag", uniqueApplianceArray[i], applianceList);
-    /* let applianceElt              = document.createElement("li");
-    applianceElt.classList.add("tag");
-    applianceElt.dataset.tagClass = "appareils-tag";
-    applianceElt.textContent      = uniqueApplianceArray[i];
-    applianceElt.style.width      = "50%";
-    applianceElt.style.color      = "white"; 
-    applianceList.appendChild(applianceElt); */
     
     applianceElt.addEventListener("click", event => {
+
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event);  // création du tag sélectionné au clique sur l'élement de liste
 
@@ -137,7 +133,11 @@ function createApplianceList(uniqueApplianceArray) {
   }
 }
 
-// Affiche les appareils recherchés dans l'input et cache les autres
+/**
+ * Affiche les appareils recherchés dans l'input et cache les autres
+ *
+ * @param {Event} event - L'objet événement.
+ */
 function applianceSearch(event) {
 
   let value = event.target.value;
@@ -162,7 +162,7 @@ inputAppareils.addEventListener("input", applianceSearch);
 
 /**
  * Affiche le tableau des ustensiles dans une liste
- * @param {object} uniqueUstensilArray
+ * @param {object} uniqueUstensileArray
  */
 function createUstensileList(uniqueUstensileArray) {
 
@@ -172,14 +172,8 @@ function createUstensileList(uniqueUstensileArray) {
   if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
   
   for (let i = 0; i < uniqueUstensileArray.length; i++) {
+
     let ustensileElt = createList("ustensiles-tag", uniqueUstensileArray[i], ustensileList);
-    /* let ustensileElt              = document.createElement("li");
-    ustensileElt.classList.add("tag");
-    ustensileElt.dataset.tagClass = "ustensiles-tag";
-    ustensileElt.textContent      = uniqueUstensilArray[i];
-    ustensileElt.style.width      = "50%";
-    ustensileElt.style.color      = "white"; 
-    ustensileList.appendChild(ustensileElt); */
     
     ustensileElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
@@ -191,7 +185,11 @@ function createUstensileList(uniqueUstensileArray) {
   }
 }
 
-// Affiche les ustensiles recherchés dans l'input et cache les autres
+/**
+ * Affiche les ustensiles recherchés dans l'input et cache les autres
+ *
+ * @param {Event} event - L'objet événement.
+ */
 function ustensileSearch(event) {
 
   let value = event.target.value;
@@ -232,6 +230,7 @@ function displayIngredientList() {
 }
 // appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
 ingredientsBtn.addEventListener("click", displayIngredientList);
+
 // appelle la fonction displayIngredientList quand on appuie sur le </i> du bouton ingredient
 ingredientFa.addEventListener("click", (event) => {
   event.stopPropagation(); // Arrête la propagation de l'événement de clic
@@ -283,8 +282,8 @@ function displayUstensileList() {
   appareilContainer.style.height    = "80px";
   ustensileContainer.style.height   = "80px";
   ingredientContainer.style.height  = "80px";
-  legendUstensiles.textContent       = "Rechercher un ustensile";
-  legendUstensiles.style.opacity     = "0.7";
+  legendUstensiles.textContent      = "Rechercher un ustensile";
+  legendUstensiles.style.opacity    = "0.7";
   legendUstensiles.classList.add('smaller-legend-font-size');
   ustensileFa.classList.add("rotate180"); //ajoute classe pour rotate l'icône de 180°
 }
@@ -316,7 +315,7 @@ document.addEventListener('click', (event) => {
 
 // réinitialise la largeur des fieldset si on ne clique pas sur son btn ainsi que le contenu et style de la légende
 function resetDisplay(container, legend, content, className) {
-  container.style.width     = "auto";
+  container.style.width    = "auto";
   legend.textContent       = content;
   legend.style.opacity     = "1";
   legend.classList.remove('smaller-legend-font-size');
@@ -341,7 +340,7 @@ document.addEventListener('click', (event) => {
   }
 });
 
-// réinitialise les valeurs des éléments des fieldset appareil et ustensile
+// réinitialise les valeurs des éléments des fieldset appareils et ustensiles
 function resetAppareilUstensileFieldset() {
 
   appareilContainer.style.width     = "auto";
@@ -359,14 +358,15 @@ function resetAppareilUstensileFieldset() {
 ingredientFa.addEventListener('click', resetAppareilUstensileFieldset);
 inputIngredients.addEventListener('click', resetAppareilUstensileFieldset);
 
+// réinitialise les valeurs des éléments des fieldset ingredients et ustensiles
 function resetIngredientUstensileFieldset() {
 
-  ingredientContainer.style.width   = "auto";
-  legendIngredients.textContent     = "Ingrédients";
-  legendIngredients.style.opacity   = "1";
+  ingredientContainer.style.width    = "auto";
+  legendIngredients.textContent      = "Ingrédients";
+  legendIngredients.style.opacity    = "1";
   legendIngredients.classList.remove('smaller-legend-font-size');
   ingredientFa.classList.remove("rotate180");
-  ustensileContainer.style.width    = "auto";
+  ustensileContainer.style.width     = "auto";
   legendUstensiles.textContent       = "Ustensiles";
   legendUstensiles.style.opacity     = "1";
   legendUstensiles.classList.remove('smaller-legend-font-size');
@@ -376,6 +376,7 @@ function resetIngredientUstensileFieldset() {
 appareilFa.addEventListener('click', resetIngredientUstensileFieldset);
 inputAppareils.addEventListener('click', resetIngredientUstensileFieldset);
 
+// réinitialise les valeurs des éléments des fieldset ingredients et appareils
 function resetIngredientAppareilFieldset() {
   
   ingredientContainer.style.width   = "auto";
@@ -443,7 +444,7 @@ function getSelectedTags() {
     selectedTags.push(tagText);
   });
   selectedTags = selectedTags.map(tag => tag.toLowerCase()); // Passe le tableau en lower case
-  //console.log(selectedTags);
+  
   return selectedTags;
 }
 
@@ -456,7 +457,6 @@ function filterRecipesByTags(selectedTags) {
     console.log('Selected Tags:', selectedTags);
     removeDomData(); // efface les recette recherchées précédemment
     let filteredRecipes = recipesToLowerCase.filter(recipe => { // création nouveau tableau 
-      //console.log('Recipe:', recipesToLowerCase);
   
       let hasMatchingIngredient = recipe.ingredients.some(ingredient => {
         return selectedTags.includes(ingredient.ingredient); // vérifie si la recette a un ingrédient correspondant au tag
@@ -467,22 +467,12 @@ function filterRecipesByTags(selectedTags) {
       let hasMatchingUstensil = recipe.ustensils.some(ustensil => {
         return selectedTags.includes(ustensil); // de même pour les ustensiles 
       })
-  
-      /* console.log('Has Matching Ingredient:', hasMatchingIngredient);
-      console.log('Has Matching Appliance:', hasMatchingAppliance);
-      console.log('Has Matching Ustensil:', hasMatchingUstensil); */
       
       let hasMatchingTag = hasMatchingIngredient || hasMatchingAppliance || hasMatchingUstensil;
-      //console.log('Has Matching Tag:', hasMatchingTag);
       return hasMatchingTag; // si la recette a un ingrédient/appareil ou ustensile correspondant au tag, l'ajoute au tableau
     });
   
     console.log('Filtered Recipes:', filteredRecipes);
-  /*   console.log('Filtered Recipes Length :', filteredRecipes.length);
-    console.log('Filtered Recipes Ingredients :', filteredRecipes[0].ingredients[0]);
-    console.log('Filtered Recipes Ingredients Ingredient :', filteredRecipes[0].ingredients[0].ingredient);
-    console.log('Filtered Recipes Ingredients Ingredient 0:', filteredRecipes[0].ingredients[0].ingredient[0]);
-    console.log('Filtered Recipes Ingredients Ingredient 1:', filteredRecipes[0].ingredients[0].ingredient[1]); */
     recipeSection.style.display = "none";
   
     filteredRecipes.forEach(recipe => { // affiche les recettes liées aux tag sélectionnés 
@@ -498,23 +488,22 @@ function testFilteredRecipes() {
   let selectedTags = getSelectedTags();
   filterRecipesByTags(selectedTags) // filtrage des recettes en fonctions des tag sélectionnés 
     .then (filteredRecipes => {
-      console.log("FILTERED RECIPES :", filteredRecipes);
-      ingredientList.style.display  = "flex";
+      //ingredientList.style.display  = "flex";
       const existingTags = ingredientList.querySelectorAll(".tag");
     
-      existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste
+      existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste 
       //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
       
       for (let i = 0; i < filteredRecipes.length; i++) {
         for (let y = 0; y < filteredRecipes[i].ingredients.length; y++) {
-          createList("ingredients-tag", filteredRecipes[i].ingredients[y].ingredient, ingredientList);
-          /* let ingredientElt               = document.createElement("li");
-          ingredientElt.classList.add("tag");
-          ingredientElt.dataset.tagClass  = "ingredients-tag";
-          ingredientElt.textContent       = filteredRecipes[i].ingredients[y].ingredient;
-          ingredientElt.style.color       = "white";
-          ingredientList.appendChild(ingredientElt);
-          console.log(ingredientElt); */
+          let ingredientElt = createList("ingredients-tag", filteredRecipes[i].ingredients[y].ingredient, ingredientList);
+          console.log(ingredientElt);
+
+          ingredientElt.addEventListener("click", event => {
+
+            const clickedTag = event.target.textContent;
+            createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
+          });
           }
     }
   }) 
@@ -523,6 +512,7 @@ function testFilteredRecipes() {
     })
 }
 
+//ingredientsBtn.addEventListener("click", testFilteredRecipes); // ! A test avec un appareil en tag et ça marche
 
 // si aucun tag n'est sélectionné affiche toutes les recettes 
 function resetRecipesDisplay(selectedTags) {
