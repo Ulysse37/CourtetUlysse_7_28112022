@@ -7,28 +7,7 @@ const searchRecipeSection   = document.querySelector(".recipes-search-list");
 const ustensileList         = document.querySelector(".ustensiles-list");
 const ingredientList        = document.querySelector(".ingredients-list");
 const applianceList         = document.querySelector(".appareils-list");
-// Const tags
-const selectedTagList       = document.querySelector(".selected-tag-list");
 
-const ingredientContainer   = document.querySelector(".ingredients-fieldset");
-const appareilContainer     = document.querySelector(".appareils-fieldset");
-const ustensileContainer    = document.querySelector(".ustensiles-fieldset");
-
-const ingredientsBtn        = document.querySelector(".btn-ingredient");
-const appareilsBtn          = document.querySelector(".btn-appareil");
-const ustensilesBtn         = document.querySelector(".btn-ustensile");
-
-const ingredientFa          = document.querySelector(".ingredient-fa");
-const appareilFa            = document.querySelector(".appareil-fa");
-const ustensileFa           = document.querySelector(".ustensile-fa");
-
-const inputIngredients      = document.getElementById("ingredients");
-const inputAppareils        = document.getElementById("appareils");
-const inputUstensiles       = document.getElementById("ustensiles");
-
-const legendIngredients     = document.querySelector(".ingredients-legend");
-const legendAppareils       = document.querySelector(".appareils-legend");
-const legendUstensiles      = document.querySelector(".ustensiles-legend");
 console.log(recipes, "Recipes de base");
 
 //  Création d'un tableau contenant recipes mais en miniscule 

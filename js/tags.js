@@ -1,4 +1,26 @@
 "use strict";
+// Const tags
+const selectedTagList       = document.querySelector(".selected-tag-list");
+
+const ingredientContainer   = document.querySelector(".ingredients-fieldset");
+const appareilContainer     = document.querySelector(".appareils-fieldset");
+const ustensileContainer    = document.querySelector(".ustensiles-fieldset");
+
+const ingredientsBtn        = document.querySelector(".btn-ingredient");
+const appareilsBtn          = document.querySelector(".btn-appareil");
+const ustensilesBtn         = document.querySelector(".btn-ustensile");
+
+const ingredientFa          = document.querySelector(".ingredient-fa");
+const appareilFa            = document.querySelector(".appareil-fa");
+const ustensileFa           = document.querySelector(".ustensile-fa");
+
+const inputIngredients      = document.getElementById("ingredients");
+const inputAppareils        = document.getElementById("appareils");
+const inputUstensiles       = document.getElementById("ustensiles");
+
+const legendIngredients     = document.querySelector(".ingredients-legend");
+const legendAppareils       = document.querySelector(".appareils-legend");
+const legendUstensiles      = document.querySelector(".ustensiles-legend");
 
 /**
  * Crée un élément de tag sélectionné et l'ajoute à la liste des tags sélectionnés.
@@ -491,7 +513,7 @@ function testFilteredRecipes() {
       //ingredientList.style.display  = "flex";
       const existingTags = ingredientList.querySelectorAll(".tag");
     
-      existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste 
+      existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste - SERT A RIEN?
       //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
       
       for (let i = 0; i < filteredRecipes.length; i++) {
