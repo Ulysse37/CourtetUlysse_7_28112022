@@ -95,8 +95,10 @@ function createIngredientList(uniqueIngredientArray) {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
-      const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags); // filtrage des recettes en fonctions des tag sélectionnés 
+      /* const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags); */ // filtrage des recettes en fonctions des tag sélectionnés 
+
+      testFilteredRecipes(); // affichage de la liste en fonction des recettes affichées
     });
   }
 }
@@ -149,8 +151,10 @@ function createApplianceList(uniqueApplianceArray) {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event);  // création du tag sélectionné au clique sur l'élement de liste
 
-      const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
+      /* const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags); */  // filtrage des recettes en fonctions des tag sélectionnés 
+
+      testFilteredRecipes(); // affichage de la liste en fonction des recettes affichées
     });
   }
 }
@@ -201,8 +205,10 @@ function createUstensileList(uniqueUstensileArray) {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élement de liste
 
-      const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
+      /* const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags); */  // filtrage des recettes en fonctions des tag sélectionnés 
+
+      testFilteredRecipes(); // affichage de la liste en fonction des recettes affichées
     });
   }
 }
@@ -506,12 +512,24 @@ function filterRecipesByTags(selectedTags) {
   })
 }
 
+
+
+// si aucun tag n'est sélectionné affiche toutes les recettes 
+function resetRecipesDisplay(selectedTags) {
+  // Vérifie si aucun tag n'est sélectionné
+  if (selectedTags.length === 0) {  // Si aucun tag sélectionné 
+    
+    recipeSection.style.display = "flex"; // affiche les recettes de base
+    return;
+  }
+}
+
 function testFilteredRecipes() {
   let selectedTags = getSelectedTags();
   filterRecipesByTags(selectedTags) // filtrage des recettes en fonctions des tag sélectionnés 
     .then (filteredRecipes => {
       //ingredientList.style.display  = "flex";
-      const existingTags = ingredientList.querySelectorAll(".tag");
+      const existingTags = document.querySelectorAll(".tag");
     
       existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste - SERT A RIEN?
       //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
@@ -527,6 +545,26 @@ function testFilteredRecipes() {
             createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
           });
           }
+
+        let applianceElt = createList("appareils-tag", filteredRecipes[i].appliance, applianceList);
+        console.log(applianceElt);
+
+        applianceElt.addEventListener("click", event => {
+          
+          const clickedTag = event.target.textContent;
+          createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
+        })
+
+          for (let y = 0; y < filteredRecipes[i].ustensils.length; y++) {
+            let ustensileElt = createList("ustensiles-tag", filteredRecipes[i].ustensils[y], ustensileList);
+            console.log(ustensileElt);
+
+            ustensileElt.addEventListener("click", event => {
+              
+              const clickedTag = event.target.textContent;
+              createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
+            })
+          }
     }
   }) 
     .catch(error => {
@@ -534,14 +572,6 @@ function testFilteredRecipes() {
     })
 }
 
-//ingredientsBtn.addEventListener("click", testFilteredRecipes); // ! A test avec un appareil en tag et ça marche
-
-// si aucun tag n'est sélectionné affiche toutes les recettes 
-function resetRecipesDisplay(selectedTags) {
-  // Vérifie si aucun tag n'est sélectionné
-  if (selectedTags.length === 0) {  // Si aucun tag sélectionné 
-    
-    recipeSection.style.display = "flex"; // affiche les recettes de base
-    return;
-  }
-}
+/* ingredientsBtn.addEventListener("click", testFilteredRecipes); // ! A test avec un appareil en tag et ça marche
+appareilsBtn.addEventListener("click", testFilteredRecipes);
+ustensilesBtn.addEventListener("click", testFilteredRecipes);  */

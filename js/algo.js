@@ -4,9 +4,9 @@ const mainSearchElt         = document.getElementById("search-bar");
 const recipeSection         = document.querySelector(".recipes-list");
 const searchRecipeSection   = document.querySelector(".recipes-search-list");
 
-const ustensileList         = document.querySelector(".ustensiles-list");
 const ingredientList        = document.querySelector(".ingredients-list");
 const applianceList         = document.querySelector(".appareils-list");
+const ustensileList         = document.querySelector(".ustensiles-list");
 
 console.log(recipes, "Recipes de base");
 
