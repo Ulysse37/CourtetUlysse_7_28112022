@@ -248,7 +248,7 @@ function ustensileSearch(event) {
 
 inputUstensiles.addEventListener("input", ustensileSearch);
 
-
+// Si pas de tag selectionné : lance liste normale, sinon lance les listes filtrées
 function isIngredientTagSelected() {
   let selectedTags = getSelectedTags();
 
@@ -297,7 +297,7 @@ inputIngredients.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
-
+// Si pas de tag selectionné : lance liste normale, sinon lance les listes filtrées
 function isApplianceTagSelected() {
   let selectedTags = getSelectedTags();
 
@@ -345,7 +345,7 @@ inputAppareils.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
-
+// Si pas de tag selectionné : lance liste normale, sinon lance les listes filtrées
 function isUstensileTagSelected() {
   let selectedTags = getSelectedTags();
 
@@ -354,7 +354,6 @@ function isUstensileTagSelected() {
     createUstensileList(uniqueUstensileArray);
     console.log("Lance les recettes non filtrées");
 
-  
   } else {
 
     testFilteredRecipes();
@@ -368,7 +367,7 @@ function isUstensileTagSelected() {
 function displayUstensileList() {
 
   isUstensileTagSelected();
-  createUstensileList(uniqueUstensileArray);
+  //createUstensileList(uniqueUstensileArray);
   applianceList.style.display       = "none";
   ingredientList.style.display      = "none";
   ustensileList.classList.add("overlay-ustensiles");
@@ -578,8 +577,6 @@ function filterRecipesByTags(selectedTags) {
   })
 }
 
-
-
 // si aucun tag n'est sélectionné affiche toutes les recettes 
 function resetRecipesDisplay(selectedTags) {
   // Vérifie si aucun tag n'est sélectionné
@@ -636,7 +633,7 @@ function testFilteredRecipes() {
 
           let ustensile = filteredRecipes[i].ustensils[y];
           
-          if (!selectedTags.includes(ustensile)) {
+          if (!selectedTags.includes(ustensile)) {  // Vérifie si l'ustensile fait partie des tags sélectionnés
 
             let ustensileElt = createList("ustensiles-tag", ustensile, ustensileList);
             //console.log(ustensileElt);
@@ -653,10 +650,3 @@ function testFilteredRecipes() {
       console.log(error);
     })
 }
-
-
-
-
-/* ingredientsBtn.addEventListener("click", testFilteredRecipes); // ! A test avec un appareil en tag et ça marche
-appareilsBtn.addEventListener("click", testFilteredRecipes);
-ustensilesBtn.addEventListener("click", testFilteredRecipes);  */
