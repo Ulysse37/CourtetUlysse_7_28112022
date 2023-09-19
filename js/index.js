@@ -4,7 +4,7 @@ let recipesNamesArray;
 let recipesDescriptionsArray;
 let uniqueIngredientArray;
 let uniqueApplianceArray;
-let uniqueUstensilArray;
+let uniqueUstensileArray;
 
 // Récupération de l'ul qui va contenir les recettes
 function createRecipeSection() {
@@ -354,7 +354,7 @@ function init() {
   recipesDescriptionsArray  = createDescriptionsArray(recipes);
   uniqueApplianceArray      = createApplianceArray(recipes);
   uniqueIngredientArray     = createIngredientArray(recipes);
-  uniqueUstensilArray       = createUstensileArray(recipes);
+  uniqueUstensileArray       = createUstensileArray(recipes);
 }
 
 init();

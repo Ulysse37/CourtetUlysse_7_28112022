@@ -101,10 +101,10 @@ function createIngredientList(uniqueIngredientArray) {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
-      /* const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags); */ // filtrage des recettes en fonctions des tag sélectionnés 
+       const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
 
-      testFilteredRecipes(); // affichage de la liste en fonction des recettes affichées
+      /* testFilteredRecipes();   //affichage de la liste en fonction des recettes affichées */
     });
   }
 }
@@ -146,7 +146,8 @@ function createApplianceList(uniqueApplianceArray) {
   applianceList.style.display = "flex";
   const existingTags = applianceList.querySelectorAll(".tag");
 
-  if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
+  existingTags.forEach(tag => tag.remove());
+  //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
   
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
 
@@ -157,10 +158,10 @@ function createApplianceList(uniqueApplianceArray) {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event);  // création du tag sélectionné au clique sur l'élement de liste
 
-      /* const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags); */  // filtrage des recettes en fonctions des tag sélectionnés 
+      const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
 
-      testFilteredRecipes(); // affichage de la liste en fonction des recettes affichées
+      /* testFilteredRecipes(); // affichage de la liste en fonction des recettes affichées */
     });
   }
 }
@@ -201,7 +202,8 @@ function createUstensileList(uniqueUstensileArray) {
   ustensileList.style.display  = "flex";
   const existingTags = ustensileList.querySelectorAll(".tag");
 
-  if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
+  existingTags.forEach(tag => tag.remove());
+  //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
   
   for (let i = 0; i < uniqueUstensileArray.length; i++) {
 
@@ -211,10 +213,10 @@ function createUstensileList(uniqueUstensileArray) {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élement de liste
 
-      /* const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags); */  // filtrage des recettes en fonctions des tag sélectionnés 
+      const selectedTags = getSelectedTags();
+      filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
 
-      testFilteredRecipes(); // affichage de la liste en fonction des recettes affichées
+      /* testFilteredRecipes(); // affichage de la liste en fonction des recettes affichées */
     });
   }
 }
@@ -246,10 +248,28 @@ function ustensileSearch(event) {
 
 inputUstensiles.addEventListener("input", ustensileSearch);
 
-// Affiche la liste des ingrédients, et limite la taille des autres fieldset
-function displayIngredientList(ingredients) {
 
-  createIngredientList(ingredients);
+function isIngredientTagSelected() {
+  let selectedTags = getSelectedTags();
+
+  if (selectedTags.length === 0) {
+
+    createIngredientList(uniqueIngredientArray);
+    console.log("Lance les recettes non filtrées");
+  } else {
+
+    testFilteredRecipes();
+    ingredientList.style.display = "flex";
+    ingredientList.style.width   = "100%";
+    console.log("Lance les recettes avec le filtrage");
+  }
+}
+
+// Affiche la liste des ingrédients, et limite la taille des autres fieldset
+function displayIngredientList() {
+
+  //createIngredientList(ingredients);
+  isIngredientTagSelected();
   applianceList.style.display         = "none";
   ustensileList.style.display         = "none";
   ingredientList.classList.add("overlay-ingredients"); // ajoute classe pour stylisée la liste d'ingredient
@@ -263,10 +283,43 @@ function displayIngredientList(ingredients) {
   ingredientFa.classList.add("rotate180"); //ajoute classe pour rotate l'icône de 180°
 }
 
+// appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
+ingredientsBtn.addEventListener("click", displayIngredientList);
+
+// appelle la fonction displayIngredientList quand on appuie sur le </i> du bouton ingredient
+ingredientFa.addEventListener("click", (event) => {
+  event.stopPropagation(); // Arrête la propagation de l'événement de clic
+  displayIngredientList();
+});
+// appelle la fonction displayIngredientList quand on appuie sur son input
+inputIngredients.addEventListener("click", (event) => {
+  displayIngredientList();
+  event.stopPropagation();
+});
+
+
+function isApplianceTagSelected() {
+  let selectedTags = getSelectedTags();
+
+  if (selectedTags.length === 0) {
+
+    createApplianceList(uniqueApplianceArray);
+    console.log("Lance les recettes non filtrées");
+  
+  } else {
+
+    testFilteredRecipes();
+    applianceList.style.display = "flex";
+    applianceList.style.width   = "100%";
+    console.log("Lance les recettes avec le filtrage");
+  }
+}
+
 // Affiche la liste des appareils, et limite la taille des autres fieldset
 function displayApplianceList() {
 
-  createApplianceList(uniqueApplianceArray);
+  isApplianceTagSelected();
+  //createApplianceList(uniqueApplianceArray);
   ingredientList.style.display      = "none";
   ustensileList.style.display       = "none";
   applianceList.classList.add("overlay-appareils");
@@ -292,10 +345,30 @@ inputAppareils.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
+
+function isUstensileTagSelected() {
+  let selectedTags = getSelectedTags();
+
+  if (selectedTags.length === 0) {
+
+    createUstensileList(uniqueUstensileArray);
+    console.log("Lance les recettes non filtrées");
+
+  
+  } else {
+
+    testFilteredRecipes();
+    ustensileList.style.display = "flex";
+    ustensileList.style.width   = "100%";
+    console.log("Lance les recettes avec le filtrage");
+  }
+}
+
 // Affiche la liste des ustensiles, et limite la taille des autres fieldset
 function displayUstensileList() {
 
-  createUstensileList(uniqueUstensilArray);
+  isUstensileTagSelected();
+  createUstensileList(uniqueUstensileArray);
   applianceList.style.display       = "none";
   ingredientList.style.display      = "none";
   ustensileList.classList.add("overlay-ustensiles");
@@ -521,98 +594,67 @@ function testFilteredRecipes() {
   let selectedTags = getSelectedTags();
   filterRecipesByTags(selectedTags) // filtrage des recettes en fonctions des tag sélectionnés 
     .then(filteredRecipes => {
-      //ingredientList.style.display  = "flex";
       const existingTags = document.querySelectorAll(".tag");
     
       existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste - SERT A RIEN?
       //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
 
-      let filteredIngredientList = [];
-      let filteredAppareilList = [];
-      let filteredUstensilList = [];
-
       for (let i = 0; i < filteredRecipes.length; i++) {
         for (let y = 0; y < filteredRecipes[i].ingredients.length; y++) {
-
-          let ingredientElt = createList("ingredients-tag", filteredRecipes[i].ingredients[y].ingredient, ingredientList);
-          //console.log(ingredientElt);
-          filteredIngredientList.push(ingredientElt);
           
-          ingredientElt.addEventListener("click", event => {
+          let ingredient = filteredRecipes[i].ingredients[y].ingredient;
 
+          // Vérifie si l'ingrédient fait partie des tags sélectionnés
+          if (!selectedTags.includes(ingredient)) {
+
+            let ingredientElt = createList("ingredients-tag", ingredient, ingredientList);
+            //console.log(ingredientElt);
+
+            ingredientElt.addEventListener("click", event => {
+
+              const clickedTag = event.target.textContent;
+              createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
+            });
+          }
+        }
+
+        let appliance = filteredRecipes[i].appliance;
+        if (!selectedTags.includes(appliance)) { // Vérifie si l'appareil fait partie des tags sélectionnés
+
+          let applianceElt = createList("appareils-tag", appliance, applianceList);
+          //console.log(applianceElt);
+          applianceElt.addEventListener("click", event => {
+          
             const clickedTag = event.target.textContent;
             createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
-          });
-          }
-        //console.log(filteredIngredientList);
-
-        let applianceElt = createList("appareils-tag", filteredRecipes[i].appliance, applianceList);
+          })
+        }
+        
         //console.log(applianceElt);
-        filteredAppareilList.push(applianceElt);
+        
+        for (let y = 0; y < filteredRecipes[i].ustensils.length; y++) {
 
-        applianceElt.addEventListener("click", event => {
+          let ustensile = filteredRecipes[i].ustensils[y];
           
-          const clickedTag = event.target.textContent;
-          createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
-        })
+          if (!selectedTags.includes(ustensile)) {
 
-          for (let y = 0; y < filteredRecipes[i].ustensils.length; y++) {
-
-            let ustensileElt = createList("ustensiles-tag", filteredRecipes[i].ustensils[y], ustensileList);
+            let ustensileElt = createList("ustensiles-tag", ustensile, ustensileList);
             //console.log(ustensileElt);
-            filteredUstensilList.push(ustensileElt);
-
             ustensileElt.addEventListener("click", event => {
-              
+            
               const clickedTag = event.target.textContent;
               createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
             })
           }
-    }
-    isFiltred = true;
-    console.log(ingredientList);
-    console.log(filteredIngredientList);
-    console.log(isFiltred);
-  }) 
+        }
+      }
+    }) 
     .catch(error => {
       console.log(error);
     })
 }
 
-if (isFiltred) {
 
-  ingredientsBtn.addEventListener("click", () => {
-    displayIngredientList(filteredIngredientList);
-    console.log("Rentre dans isFiltred = true");
-  });
-
-  ingredientFa.addEventListener("click", (event) => {
-    event.stopPropagation(); // Arrête la propagation de l'événement de clic
-    displayIngredientList(filteredIngredientList);
-});
-
-  inputIngredients.addEventListener("click", (event) => {
-    displayIngredientList(filteredIngredientList);
-    event.stopPropagation();
-});
-
-  } else {
-  
-  ingredientsBtn.addEventListener("click", () => {
-    displayIngredientList(uniqueIngredientArray);
-    console.log("Reste dans isFiltred = false");
-  });
-
-  ingredientFa.addEventListener("click", (event) => {
-    event.stopPropagation(); // Arrête la propagation de l'événement de clic
-    displayIngredientList(uniqueIngredientArray);
-});
-
-  inputIngredients.addEventListener("click", (event) => {
-    displayIngredientList(uniqueIngredientArray);
-    event.stopPropagation();
-});
-}
 
 
 /* ingredientsBtn.addEventListener("click", testFilteredRecipes); // ! A test avec un appareil en tag et ça marche
