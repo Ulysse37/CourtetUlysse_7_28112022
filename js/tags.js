@@ -101,7 +101,7 @@ function createIngredientList(uniqueIngredientArray) {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
-       const selectedTags = getSelectedTags();
+      const selectedTags = getSelectedTags();
       filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
 
       /* testFilteredRecipes();   //affichage de la liste en fonction des recettes affichées */
@@ -587,25 +587,29 @@ function resetRecipesDisplay(selectedTags) {
   }
 }
 
+// Fonction affichant les 3 listes en fonctions des recettes filtrées par les tags
 function testFilteredRecipes() {
   let selectedTags = getSelectedTags();
   filterRecipesByTags(selectedTags) // filtrage des recettes en fonctions des tag sélectionnés 
     .then(filteredRecipes => {
       const existingTags = document.querySelectorAll(".tag");
-    
       existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste - SERT A RIEN?
       //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
+
+      let filteredIngredientList = [];
+      let filteredAppareilList = [];
+      let filteredUstensilList = [];
 
       for (let i = 0; i < filteredRecipes.length; i++) {
         for (let y = 0; y < filteredRecipes[i].ingredients.length; y++) {
           
           let ingredient = filteredRecipes[i].ingredients[y].ingredient;
 
-          // Vérifie si l'ingrédient fait partie des tags sélectionnés
-          if (!selectedTags.includes(ingredient)) {
+          if (!selectedTags.includes(ingredient)) { // n'affiche pas le tag sélectionné dans la liste
 
             let ingredientElt = createList("ingredients-tag", ingredient, ingredientList);
-            //console.log(ingredientElt);
+            filteredIngredientList.push(ingredient);
+            //console.log(filteredIngredientList);
 
             ingredientElt.addEventListener("click", event => {
 
@@ -616,14 +620,17 @@ function testFilteredRecipes() {
         }
 
         let appliance = filteredRecipes[i].appliance;
-        if (!selectedTags.includes(appliance)) { // Vérifie si l'appareil fait partie des tags sélectionnés
+        if (!selectedTags.includes(appliance)) { // n'affiche pas le tag sélectionné dans la liste
 
           let applianceElt = createList("appareils-tag", appliance, applianceList);
-          //console.log(applianceElt);
+          filteredAppareilList.push(appliance);
+          console.log(filteredAppareilList);
+
           applianceElt.addEventListener("click", event => {
           
             const clickedTag = event.target.textContent;
             createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
+            
           })
         }
         
@@ -633,7 +640,7 @@ function testFilteredRecipes() {
 
           let ustensile = filteredRecipes[i].ustensils[y];
           
-          if (!selectedTags.includes(ustensile)) {  // Vérifie si l'ustensile fait partie des tags sélectionnés
+          if (!selectedTags.includes(ustensile)) {  // n'affiche pas le tag sélectionné dans la liste
 
             let ustensileElt = createList("ustensiles-tag", ustensile, ustensileList);
             //console.log(ustensileElt);
