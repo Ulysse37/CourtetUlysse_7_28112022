@@ -596,41 +596,47 @@ function testFilteredRecipes() {
       existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste - SERT A RIEN?
       //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
 
-      let filteredIngredientList = [];
-      let filteredAppareilList = [];
-      let filteredUstensilList = [];
+      let filteredIngredientList = new Set();
+      let filteredAppareilList = new Set();
+      let filteredUstensileList = new Set();
 
       for (let i = 0; i < filteredRecipes.length; i++) {
         for (let y = 0; y < filteredRecipes[i].ingredients.length; y++) {
           
           let ingredient = filteredRecipes[i].ingredients[y].ingredient;
-
-          if (!selectedTags.includes(ingredient)) { // n'affiche pas le tag sélectionné dans la liste
+          // n'affiche pas le tag sélectionné dans la liste ni les doublons
+          if (!selectedTags.includes(ingredient) && !filteredIngredientList.has(ingredient)) { 
 
             let ingredientElt = createList("ingredients-tag", ingredient, ingredientList);
-            filteredIngredientList.push(ingredient);
+            filteredIngredientList.add(ingredient);
             //console.log(filteredIngredientList);
 
             ingredientElt.addEventListener("click", event => {
 
               const clickedTag = event.target.textContent;
               createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
+
+              const selectedTags = getSelectedTags();
+              filterRecipesByTags(selectedTags);  // ! une fois fonction modifiée la relancer ici ?
             });
           }
         }
 
         let appliance = filteredRecipes[i].appliance;
-        if (!selectedTags.includes(appliance)) { // n'affiche pas le tag sélectionné dans la liste
+        // n'affiche pas le tag sélectionné dans la liste ni les doublons
+        if (!selectedTags.includes(appliance) && !filteredAppareilList.has(appliance)) { 
 
           let applianceElt = createList("appareils-tag", appliance, applianceList);
-          filteredAppareilList.push(appliance);
-          console.log(filteredAppareilList);
+          filteredAppareilList.add(appliance);
+          //console.log(filteredAppareilList);
 
           applianceElt.addEventListener("click", event => {
           
             const clickedTag = event.target.textContent;
             createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
-            
+
+            const selectedTags = getSelectedTags();
+            filterRecipesByTags(selectedTags); // ! une fois fonction modifiée la relancer ici ?
           })
         }
         
@@ -639,15 +645,19 @@ function testFilteredRecipes() {
         for (let y = 0; y < filteredRecipes[i].ustensils.length; y++) {
 
           let ustensile = filteredRecipes[i].ustensils[y];
-          
-          if (!selectedTags.includes(ustensile)) {  // n'affiche pas le tag sélectionné dans la liste
+          // n'affiche pas le tag sélectionné dans la liste ni les doublons
+          if (!selectedTags.includes(ustensile) && !filteredUstensileList.has(ustensile)) {  
 
             let ustensileElt = createList("ustensiles-tag", ustensile, ustensileList);
-            //console.log(ustensileElt);
+            filteredUstensileList.add(ustensile);
+            //console.log(filteredUstensileList);
             ustensileElt.addEventListener("click", event => {
             
               const clickedTag = event.target.textContent;
               createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
+
+              const selectedTags = getSelectedTags();
+              filterRecipesByTags(selectedTags);  // ! une fois fonction modifiée la relancer ici ?
             })
           }
         }
