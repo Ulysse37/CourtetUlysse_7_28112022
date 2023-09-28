@@ -255,13 +255,13 @@ function isIngredientTagSelected() {
   if (selectedTags.length === 0) {
 
     createIngredientList(uniqueIngredientArray);
-    console.log("Lance les recettes non filtrées");
+    console.log("Lance liste recettes non filtrées");
   } else {
 
     testFilteredRecipes();
     ingredientList.style.display = "flex";
     ingredientList.style.width   = "100%";
-    console.log("Lance les recettes avec le filtrage");
+    console.log("Lance liste recettes avec le filtrage");
   }
 }
 
@@ -549,14 +549,16 @@ function filterRecipesByTags(selectedTags) {
   return new Promise((resolve, reject) => {
     console.log('Selected Tags:', selectedTags);
     removeDomData(); // efface les recette recherchées précédemment
-    let filteredRecipes = recipesToLowerCase.filter(recipe => { // création nouveau tableau 
-  
+    let filteredRecipes;
+    
+    filteredRecipes = recipesToLowerCase.filter(recipe => { // création nouveau tableau 
+
       let hasMatchingIngredient = recipe.ingredients.some(ingredient => {
         return selectedTags.includes(ingredient.ingredient); // vérifie si la recette a un ingrédient correspondant au tag
       });
-  
+
       let hasMatchingAppliance = selectedTags.includes(recipe.appliance); // de même pour les appareils
-  
+
       let hasMatchingUstensil = recipe.ustensils.some(ustensil => {
         return selectedTags.includes(ustensil); // de même pour les ustensiles 
       })
@@ -564,7 +566,7 @@ function filterRecipesByTags(selectedTags) {
       let hasMatchingTag = hasMatchingIngredient || hasMatchingAppliance || hasMatchingUstensil;
       return hasMatchingTag; // si la recette a un ingrédient/appareil ou ustensile correspondant au tag, l'ajoute au tableau
     });
-  
+    
     console.log('Filtered Recipes:', filteredRecipes);
     recipeSection.style.display = "none";
   
