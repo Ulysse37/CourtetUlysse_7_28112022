@@ -90,8 +90,7 @@ function createIngredientList(uniqueIngredientArray) {
   ingredientList.style.display  = "flex";
   const existingTags = ingredientList.querySelectorAll(".tag");
 
-  existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste
-  //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
+  existingTags.forEach(tag => tag.remove()); // Permet de n'afficher la liste qu'une fois
   
   for (let i = 0; i < uniqueIngredientArray.length; i++) {
 
@@ -110,7 +109,6 @@ function createIngredientList(uniqueIngredientArray) {
 
 /**
  * Affiche les ingrédients recherchés dans l'input et cache les autres
- *
  * @param {Event} event - L'objet événement.
  */
 function ingredientSearch(event) {
@@ -145,8 +143,7 @@ function createApplianceList(uniqueApplianceArray) {
   applianceList.style.display = "flex";
   const existingTags = applianceList.querySelectorAll(".tag");
 
-  existingTags.forEach(tag => tag.remove());
-  //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
+  existingTags.forEach(tag => tag.remove()); // Permet de n'afficher la liste qu'une fois
   
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
 
@@ -165,7 +162,6 @@ function createApplianceList(uniqueApplianceArray) {
 
 /**
  * Affiche les appareils recherchés dans l'input et cache les autres
- *
  * @param {Event} event - L'objet événement.
  */
 function applianceSearch(event) {
@@ -199,8 +195,7 @@ function createUstensileList(uniqueUstensileArray) {
   ustensileList.style.display  = "flex";
   const existingTags = ustensileList.querySelectorAll(".tag");
 
-  existingTags.forEach(tag => tag.remove());
-  //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête.
+  existingTags.forEach(tag => tag.remove()); // Permet de n'afficher la liste qu'une fois
   
   for (let i = 0; i < uniqueUstensileArray.length; i++) {
 
@@ -263,7 +258,6 @@ function isIngredientTagSelected() {
 // Affiche la liste des ingrédients, et limite la taille des autres fieldset
 function displayIngredientList() {
 
-  //createIngredientList(ingredients);
   isIngredientTagSelected();
   applianceList.style.display         = "none";
   ustensileList.style.display         = "none";
@@ -314,7 +308,6 @@ function isApplianceTagSelected() {
 function displayApplianceList() {
 
   isApplianceTagSelected();
-  //createApplianceList(uniqueApplianceArray);
   ingredientList.style.display      = "none";
   ustensileList.style.display       = "none";
   applianceList.classList.add("overlay-appareils");
@@ -362,7 +355,6 @@ function isUstensileTagSelected() {
 function displayUstensileList() {
 
   isUstensileTagSelected();
-  //createUstensileList(uniqueUstensileArray);
   applianceList.style.display       = "none";
   ingredientList.style.display      = "none";
   ustensileList.classList.add("overlay-ustensiles");
@@ -581,7 +573,6 @@ function filterRecipesByTags(selectedTags) {
       createSearchRecipesStructure(recipe);
     });
     resolve(filteredRecipes);
-    //return filteredRecipes;
   })
 }
 
@@ -601,8 +592,7 @@ function filteredLists() {
   filterRecipesByTags(selectedTags) // filtrage des recettes en fonctions des tag sélectionnés 
     .then(filteredRecipes => {
       const existingTags = document.querySelectorAll(".tag");
-      existingTags.forEach(tag => tag.remove()); //! Meilleure solution je pense pr pas afficher +eur x la liste - SERT A RIEN?
-      //if (existingTags.length > 0) return; // Si les éléments existent déjà la fonction s'arrête. 
+      existingTags.forEach(tag => tag.remove()); // Permet de n'afficher la liste qu'une fois
 
       let filteredIngredientList = new Set();
       let filteredAppareilList = new Set();
@@ -617,7 +607,6 @@ function filteredLists() {
 
             let ingredientElt = createList("ingredients-tag", ingredient, ingredientList);
             filteredIngredientList.add(ingredient);
-            //console.log(filteredIngredientList);
 
             ingredientElt.addEventListener("click", event => {
 
@@ -625,7 +614,7 @@ function filteredLists() {
               createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
               const selectedTags = getSelectedTags();
-              filterRecipesByTags(selectedTags);  // ! une fois fonction modifiée la relancer ici ?
+              filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
             });
           }
         }
@@ -636,7 +625,6 @@ function filteredLists() {
 
           let applianceElt = createList("appareils-tag", appliance, applianceList);
           filteredAppareilList.add(appliance);
-          //console.log(filteredAppareilList);
 
           applianceElt.addEventListener("click", event => {
           
@@ -644,11 +632,9 @@ function filteredLists() {
             createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
             const selectedTags = getSelectedTags();
-            filterRecipesByTags(selectedTags); // ! une fois fonction modifiée la relancer ici ?
+            filterRecipesByTags(selectedTags); // filtrage des recettes en fonctions des tag sélectionnés 
           })
         }
-        
-        //console.log(applianceElt);
         
         for (let y = 0; y < filteredRecipes[i].ustensils.length; y++) {
 
@@ -658,14 +644,14 @@ function filteredLists() {
 
             let ustensileElt = createList("ustensiles-tag", ustensile, ustensileList);
             filteredUstensileList.add(ustensile);
-            //console.log(filteredUstensileList);
+          
             ustensileElt.addEventListener("click", event => {
             
               const clickedTag = event.target.textContent;
               createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
               const selectedTags = getSelectedTags();
-              filterRecipesByTags(selectedTags);  // ! une fois fonction modifiée la relancer ici ?
+              filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
             })
           }
         }
