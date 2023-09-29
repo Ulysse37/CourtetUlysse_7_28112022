@@ -553,8 +553,10 @@ function filterRecipesByTags(selectedTags) {
     
     filteredRecipes = recipesToLowerCase.filter(recipe => { // création nouveau tableau 
 
-      let hasMatchingIngredient = recipe.ingredients.some(ingredient => {
-        return selectedTags.includes(ingredient.ingredient); // vérifie si la recette a un ingrédient correspondant au tag
+      let hasMatchingIngredient = selectedTags.every(tag => {
+        return recipe.ingredients.some(ingredient => {
+          return ingredient.ingredient === tag;
+        }); // vérifie si la recette a des ingrédients correspondant aux tags
       });
 
       let hasMatchingAppliance = selectedTags.includes(recipe.appliance); // de même pour les appareils
