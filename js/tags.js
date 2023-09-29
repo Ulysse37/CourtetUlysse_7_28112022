@@ -57,6 +57,7 @@ function createSelectedTagElt(clickedTag, event) {
 
     const selectedTags = getSelectedTags(); 
     resetRecipesDisplay(selectedTags); // réinitialisation affichage des recettes si pas de tag sélectionnés
+    filterRecipesByTags(selectedTags); // filtrage des recettes en fonctions des tag sélectionnés 
   });
 };
 
@@ -549,9 +550,8 @@ function filterRecipesByTags(selectedTags) {
   return new Promise((resolve, reject) => {
     console.log('Selected Tags:', selectedTags);
     removeDomData(); // efface les recette recherchées précédemment
-    let filteredRecipes;
-    
-    filteredRecipes = recipesToLowerCase.filter(recipe => { // création nouveau tableau 
+
+    let filteredRecipes = recipesToLowerCase.filter(recipe => { // création nouveau tableau 
 
       let hasMatchingIngredient = selectedTags.every(tag => {
         return recipe.ingredients.some(ingredient => {
@@ -564,9 +564,19 @@ function filterRecipesByTags(selectedTags) {
       let hasMatchingUstensil = recipe.ustensils.some(ustensil => {
         return selectedTags.includes(ustensil); // de même pour les ustensiles 
       })
-      
-      let hasMatchingTag = hasMatchingIngredient || hasMatchingAppliance || hasMatchingUstensil;
-      return hasMatchingTag; // si la recette a un ingrédient/appareil ou ustensile correspondant au tag, l'ajoute au tableau
+
+      // Filtrer les recettes pour s'assurer qu'elles correspondent à tous les tags sélectionnés
+      let allTagsMatched = selectedTags.every(tag => {
+        return (
+          recipe.ingredients.some(ingredient => ingredient.ingredient === tag) ||
+          recipe.appliance === tag ||
+          recipe.ustensils.includes(tag)
+        );
+      });
+      // recette incluse si une correspondance avec une des 3 catégories ET tous les tag selectionnés doivent être satisfait 
+      return (
+        (hasMatchingIngredient || hasMatchingAppliance || hasMatchingUstensil) && allTagsMatched
+      );
     });
     
     console.log('Filtered Recipes:', filteredRecipes);
