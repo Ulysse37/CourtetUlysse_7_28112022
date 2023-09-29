@@ -104,8 +104,6 @@ function createIngredientList(uniqueIngredientArray) {
 
       const selectedTags = getSelectedTags();
       filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
-
-      /* testFilteredRecipes();   //affichage de la liste en fonction des recettes affichées */
     });
   }
 }
@@ -161,8 +159,6 @@ function createApplianceList(uniqueApplianceArray) {
 
       const selectedTags = getSelectedTags();
       filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
-
-      /* testFilteredRecipes(); // affichage de la liste en fonction des recettes affichées */
     });
   }
 }
@@ -216,8 +212,6 @@ function createUstensileList(uniqueUstensileArray) {
 
       const selectedTags = getSelectedTags();
       filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
-
-      /* testFilteredRecipes(); // affichage de la liste en fonction des recettes affichées */
     });
   }
 }
@@ -259,7 +253,7 @@ function isIngredientTagSelected() {
     console.log("Lance liste recettes non filtrées");
   } else {
 
-    testFilteredRecipes();
+    filteredLists();
     ingredientList.style.display = "flex";
     ingredientList.style.width   = "100%";
     console.log("Lance liste recettes avec le filtrage");
@@ -309,7 +303,7 @@ function isApplianceTagSelected() {
   
   } else {
 
-    testFilteredRecipes();
+    filteredLists();
     applianceList.style.display = "flex";
     applianceList.style.width   = "100%";
     console.log("Lance les recettes avec le filtrage");
@@ -357,7 +351,7 @@ function isUstensileTagSelected() {
 
   } else {
 
-    testFilteredRecipes();
+    filteredLists();
     ustensileList.style.display = "flex";
     ustensileList.style.width   = "100%";
     console.log("Lance les recettes avec le filtrage");
@@ -602,7 +596,7 @@ function resetRecipesDisplay(selectedTags) {
 }
 
 // Fonction affichant les 3 listes en fonctions des recettes filtrées par les tags
-function testFilteredRecipes() {
+function filteredLists() {
   let selectedTags = getSelectedTags();
   filterRecipesByTags(selectedTags) // filtrage des recettes en fonctions des tag sélectionnés 
     .then(filteredRecipes => {
