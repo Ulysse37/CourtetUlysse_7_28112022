@@ -1,4 +1,5 @@
 "use strict";
+
 // Const tags
 const selectedTagList       = document.querySelector(".selected-tag-list");
 
@@ -26,7 +27,7 @@ const legendIngredients     = document.querySelector(".ingredients-legend");
 const legendAppareils       = document.querySelector(".appareils-legend");
 const legendUstensiles      = document.querySelector(".ustensiles-legend");
 
-let isFiltred = false;
+
 
 /**
  * Crée un élément de tag sélectionné et l'ajoute à la liste des tags sélectionnés.
