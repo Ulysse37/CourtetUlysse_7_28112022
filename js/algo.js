@@ -124,14 +124,13 @@ function loopSearchRecipes(searchArray) {
     displayErrorMessage();
   }
 };
-
+let uniqueItems = [];
 /**
  * fonction qui, si la recherche contient 3 caractère va chercher les noms de recettes, les descriptions et les ingrédients correspondants
  * afin d'ajouter les recettes concernées dans un tableau. Puis appelle la fonction qui va les afficher.
  * @param {string} value
  * @param {HTMLElement} recipeSection
  */
-
 function mainSearch(value, recipeSection) {
   
   if ( value.length >= 3 ) {
@@ -145,10 +144,11 @@ function mainSearch(value, recipeSection) {
       fillRecipesArrayForDescriptions (value, items, recipe);
       fillRecipesArrayForIngredients (value, items, recipe);
     }
-    let uniqueItems = [...new Set(items)]; // supression des doublons dans le tableau des recettes recherchées
+    uniqueItems = [...new Set(items)]; // supression des doublons dans le tableau des recettes recherchées
     console.log(value);
     removeDomData();
     loopSearchRecipes(uniqueItems);
+    
   } else  {
 
     removeDomData(); // supprime l'affichage des recettes recherchées
@@ -170,8 +170,86 @@ function searchRecipes(event) {
 
 mainSearchElt.addEventListener("input", searchRecipes);
 
+//!                 Filtrage des listes en fonction de la recherche principale
 
-//!                Recherches recettes par tag
+// filtre la liste d'ingrédients en fonction de la recherche principale
+function updateIngredientList(uniqueItems, updatedIngredientList) {
+  for (let i = 0; i < uniqueItems.ingredients.length; i++) {
+          
+    let ingredient = uniqueItems.ingredients[i].ingredient;
+    // n'affiche pas le tag sélectionné dans la liste ni les doublons
+    if (!updatedIngredientList.has(ingredient)) { 
+
+      let ingredientElt = createList("ingredients-tag", ingredient, ingredientList);
+      updatedIngredientList.add(ingredient);
+
+      ingredientElt.addEventListener("click", event => {
+
+        const clickedTag = event.target.textContent;
+        createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
+
+        const selectedTags = getSelectedTags();
+        filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
+      });
+    }
+  }
+}
+// filtre la liste d'appareils en fonction de la recherche principale
+function updateApplianceList(uniqueItems, updatedAppareilList) {
+  let appliance = uniqueItems.appliance;
+        // n'affiche pas le tag sélectionné dans la liste ni les doublons
+        if (!updatedAppareilList.has(appliance)) { 
+
+          let applianceElt = createList("appareils-tag", appliance, applianceList);
+          updatedAppareilList.add(appliance);
+
+          applianceElt.addEventListener("click", event => {
+          
+            const clickedTag = event.target.textContent;
+            createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
+
+            const selectedTags = getSelectedTags();
+            filterRecipesByTags(selectedTags); // filtrage des recettes en fonctions des tag sélectionnés 
+          })
+        }
+}
+// filtre la liste d'ustensile en fonction de la recherche principale
+function updateUstensileList(uniqueItems, updatedUstensileList) {
+  for (let i = 0; i < uniqueItems.ustensils.length; i++) {
+
+    let ustensile = uniqueItems.ustensils[i];
+    // n'affiche pas le tag sélectionné dans la liste ni les doublons
+    if (!updatedUstensileList.has(ustensile)) {  
+
+      let ustensileElt = createList("ustensiles-tag", ustensile, ustensileList);
+      updatedUstensileList.add(ustensile);
+    
+      ustensileElt.addEventListener("click", event => {
+      
+        const clickedTag = event.target.textContent;
+        createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
+
+        const selectedTags = getSelectedTags();
+        filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
+      })
+    }
+  }
+}
+// filtre les 3 listes en fonction de la recherche principale.
+function updateLists(uniqueItems) {
+  let updatedIngredientList = new Set();
+  let updatedAppareilList = new Set();
+  let updatedUstensileList = new Set();
+
+  for (let i = 0; i < uniqueItems.length; i++) {
+
+    updateIngredientList(uniqueItems[i], updatedIngredientList);
+    updateApplianceList(uniqueItems[i], updatedAppareilList)
+    updateUstensileList(uniqueItems[i], updatedUstensileList)
+  }
+}
+
+//!                 Recherches recettes par tag
 
 // va chercher et mets dans un tableau les tag sélectionnés 
 function getSelectedTags() {
@@ -335,6 +413,3 @@ function filteredListsByTags() {
       console.log(error);
     })
 }
-
-// ! filtrage des listes en fonction de la recherche principale
-

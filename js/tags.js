@@ -130,7 +130,6 @@ function ingredientSearch(event) {
       ingredientElt.style.display = "none";
     }
   } 
-  
 }
 
 inputIngredients.addEventListener("input", ingredientSearch);
@@ -247,14 +246,23 @@ function isIngredientTagSelected() {
 
     createIngredientList(uniqueIngredientArray);
     console.log("Lance liste recettes non filtrées");
+    console.log(mainSearchElt.value.length);
+  } else if (mainSearchElt.value.length >= 3) {
+
+    updateLists(uniqueItems);
+    ingredientList.style.display = "flex";
+    ingredientList.style.width   = "100%";
+    console.log("Lance liste recettes avec le filtrage recherche principale");
   } else {
 
     filteredListsByTags();
     ingredientList.style.display = "flex";
     ingredientList.style.width   = "100%";
-    console.log("Lance liste recettes avec le filtrage");
+    console.log("Lance liste recettes avec le filtrage par tag");
   }
 }
+
+console.log(mainSearchElt.textLength);
 
 // Affiche la liste des ingrédients, et limite la taille des autres fieldset
 function displayIngredientList() {
@@ -296,12 +304,18 @@ function isApplianceTagSelected() {
     createApplianceList(uniqueApplianceArray);
     console.log("Lance les recettes non filtrées");
   
+  } else if (mainSearchElt.textLength >= 3) {
+
+    updateLists(uniqueItems);
+    applianceList.style.display = "flex";
+    applianceList.style.width   = "100%";
+    console.log("Lance liste recettes avec le filtrage recherche principale");
   } else {
 
     filteredListsByTags();
     applianceList.style.display = "flex";
     applianceList.style.width   = "100%";
-    console.log("Lance les recettes avec le filtrage");
+    console.log("Lance les recettes avec le filtrage par tag");
   }
 }
 
@@ -343,12 +357,18 @@ function isUstensileTagSelected() {
     createUstensileList(uniqueUstensileArray);
     console.log("Lance les recettes non filtrées");
 
+  } else if (mainSearchElt.textLength >= 3) {
+
+    updateLists(uniqueItems);
+    ustensileList.style.display = "flex";
+    ustensileList.style.width   = "100%";
+    console.log("Lance liste recettes avec le filtrage recherche principale");
   } else {
 
     filteredListsByTags();
     ustensileList.style.display = "flex";
     ustensileList.style.width   = "100%";
-    console.log("Lance les recettes avec le filtrage");
+    console.log("Lance les recettes avec le filtrage par tag");
   }
 }
 
