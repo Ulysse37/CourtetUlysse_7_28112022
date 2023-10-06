@@ -249,7 +249,7 @@ function isIngredientTagSelected() {
     console.log("Lance liste recettes non filtrées");
   } else {
 
-    filteredLists();
+    filteredListsByTags();
     ingredientList.style.display = "flex";
     ingredientList.style.width   = "100%";
     console.log("Lance liste recettes avec le filtrage");
@@ -298,7 +298,7 @@ function isApplianceTagSelected() {
   
   } else {
 
-    filteredLists();
+    filteredListsByTags();
     applianceList.style.display = "flex";
     applianceList.style.width   = "100%";
     console.log("Lance les recettes avec le filtrage");
@@ -345,7 +345,7 @@ function isUstensileTagSelected() {
 
   } else {
 
-    filteredLists();
+    filteredListsByTags();
     ustensileList.style.display = "flex";
     ustensileList.style.width   = "100%";
     console.log("Lance les recettes avec le filtrage");

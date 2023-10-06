@@ -312,7 +312,7 @@ function filterUstensileList(filteredRecipe, selectedTags, filteredUstensileList
   }
 }
 // Fonction affichant les 3 listes en fonctions des recettes filtrées par les tags
-function filteredLists() {
+function filteredListsByTags() {
   let selectedTags = getSelectedTags();
   filterRecipesByTags(selectedTags) // filtrage des recettes en fonctions des tag sélectionnés 
     .then(filteredRecipes => {
@@ -335,3 +335,6 @@ function filteredLists() {
       console.log(error);
     })
 }
+
+// ! filtrage des listes en fonction de la recherche principale
+
