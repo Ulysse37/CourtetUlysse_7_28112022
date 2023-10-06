@@ -237,6 +237,9 @@ function updateUstensileList(uniqueItems, updatedUstensileList) {
 }
 // filtre les 3 listes en fonction de la recherche principale.
 function updateLists(uniqueItems) {
+  ingredientList.innerHTML ="";
+  applianceList.innerHTML ="";
+  ustensileList.innerHTML ="";
   let updatedIngredientList = new Set();
   let updatedAppareilList = new Set();
   let updatedUstensileList = new Set();
