@@ -58,7 +58,7 @@ function createSelectedTagElt(clickedTag, event) {
 
     const selectedTags = getSelectedTags(); 
     resetRecipesDisplay(selectedTags); // réinitialisation affichage des recettes si pas de tag sélectionnés
-    filterRecipesByTags(selectedTags); // filtrage des recettes en fonctions des tag sélectionnés 
+    mainSearch(selectedTags, recipeSection); // filtrage des recettes en fonctions des tag sélectionnés 
   });
 };
 
@@ -103,7 +103,7 @@ function createIngredientList(uniqueIngredientArray) {
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
       const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
+      mainSearch(selectedTags, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
     });
   }
 }
@@ -155,7 +155,7 @@ function createApplianceList(uniqueApplianceArray) {
       createSelectedTagElt(clickedTag, event);  // création du tag sélectionné au clique sur l'élement de liste
 
       const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
+      mainSearch(selectedTags, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
     });
   }
 }
@@ -206,7 +206,7 @@ function createUstensileList(uniqueUstensileArray) {
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élement de liste
 
       const selectedTags = getSelectedTags();
-      filterRecipesByTags(selectedTags);  // filtrage des recettes en fonctions des tag sélectionnés 
+      mainSearch(selectedTags, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
     });
   }
 }
