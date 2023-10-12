@@ -132,28 +132,39 @@ let uniqueItems = [];
  * @param {HTMLElement} recipeSection
  */
 function mainSearch(value, recipeSection) {
-  
-  if ( value.length >= 3 ) {
-
+  let selectedTags = getSelectedTags();
+  if (value.length >= 3) {
     let items = [];
-    recipeSection.style.display = "none"; // cache les recettes affichées de base
-  
-    for (let recipe of recipesToLowerCase) {
-        
-      fillRecipesArrayForNames(value, items, recipe);
-      fillRecipesArrayForDescriptions (value, items, recipe);
-      fillRecipesArrayForIngredients (value, items, recipe);
-    }
-    uniqueItems = [...new Set(items)]; // supression des doublons dans le tableau des recettes recherchées
-    console.log(value);
-    removeDomData();
-    loopSearchRecipes(uniqueItems);
+    recipeSection.style.display = "none";
     
-  } else  {
-
-    removeDomData(); // supprime l'affichage des recettes recherchées
-    recipeSection.style.display = "flex"; // réaffiche les recettes affichées de base
+    filterRecipesByTags(selectedTags)
+      .then(filteredRecipes => {
+        for (let recipe of recipesToLowerCase) {
+          fillRecipesArrayForNames(value, items, recipe);
+          fillRecipesArrayForDescriptions(value, items, recipe);
+          fillRecipesArrayForIngredients(value, items, recipe);
+        }
+        
+        uniqueItems = [...new Set(items)];
+        let commonRecipes = uniqueItems.filter(item => filteredRecipes.includes(item));
+        console.log("uniqueItems :",uniqueItems);
+        console.log("filteredRecipes :",filteredRecipes);
+        console.log("commonRecipes :",commonRecipes);
+        removeDomData();
+        loopSearchRecipes(commonRecipes);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  } else {
+    removeDomData();
+    recipeSection.style.display = "flex";
   }
+}
+
+function getCommonRecipes(recipes1, recipes2) {
+
+  return recipes1.filter(recipe => recipes2.includes(recipe));
 }
 
 /**

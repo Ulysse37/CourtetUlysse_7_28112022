@@ -241,7 +241,6 @@ inputUstensiles.addEventListener("input", ustensileSearch);
 // si recherche principale -> listes filtrées en fonction / si pas de tag : liste normale / sinon liste filtré par tag
 function isIngredientTagSelected() {
   let selectedTags = getSelectedTags();
-  console.log(mainSearchElt.value);
   
   if (mainSearchElt.value.length >= 3) {
     updateLists(uniqueItems);
@@ -252,7 +251,6 @@ function isIngredientTagSelected() {
   } else if (selectedTags.length === 0) {
     createIngredientList(uniqueIngredientArray);
     console.log("Lance liste recettes non filtrées");
-    console.log(mainSearchElt.value.length);
 
   } else {
 
@@ -262,8 +260,6 @@ function isIngredientTagSelected() {
     console.log("Lance liste recettes avec le filtrage par tag");
   }
 }
-
-console.log(mainSearchElt.textLength);
 
 // Affiche la liste des ingrédients, et limite la taille des autres fieldset
 function displayIngredientList() {
