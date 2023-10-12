@@ -238,7 +238,7 @@ function ustensileSearch(event) {
 
 inputUstensiles.addEventListener("input", ustensileSearch);
 
-// Si pas de tag selectionné : lance liste normale, sinon lance les listes filtrées
+// si recherche principale -> listes filtrées en fonction / si pas de tag : liste normale / sinon liste filtré par tag
 function isIngredientTagSelected() {
   let selectedTags = getSelectedTags();
   console.log(mainSearchElt.value);
@@ -296,7 +296,7 @@ inputIngredients.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
-// Si pas de tag selectionné : lance liste normale, sinon lance les listes filtrées
+// si recherche principale -> listes filtrées en fonction / si pas de tag : liste normale / sinon liste filtré par tag
 function isApplianceTagSelected() {
   let selectedTags = getSelectedTags();
 
@@ -347,7 +347,7 @@ inputAppareils.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
-// Si pas de tag selectionné : lance liste normale, sinon lance les listes filtrées
+// si recherche principale -> listes filtrées en fonction / si pas de tag : liste normale / sinon liste filtré par tag
 function isUstensileTagSelected() {
   let selectedTags = getSelectedTags();
 
