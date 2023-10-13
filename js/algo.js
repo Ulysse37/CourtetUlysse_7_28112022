@@ -169,8 +169,10 @@ function mainSearch(value, recipeSection) {
 
   } else if ( value.length < 3 && selectedTags.length > 0 ) { // filtre par tags
     recipeSection.style.display = "none";
-
-    filterRecipesByTags(selectedTags)
+    removeDomData();
+    filterRecipesByTags(selectedTags);
+    console.log("recherche TAGS");
+    /* filterRecipesByTags(selectedTags)
       .then(filteredRecipes => {
 
         removeDomData();
@@ -180,7 +182,7 @@ function mainSearch(value, recipeSection) {
       })
       .catch(error => {
         console.error(error);
-      });
+      }); */
   } else {
     removeDomData();
     recipeSection.style.display = "flex";
