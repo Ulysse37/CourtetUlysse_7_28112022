@@ -134,34 +134,45 @@ let uniqueItems = [];
 function mainSearch(value, recipeSection) {
   let selectedTags = getSelectedTags();
   let items = [];
+
   for (let recipe of recipesToLowerCase) {
     fillRecipesArrayForNames(value, items, recipe);
     fillRecipesArrayForDescriptions(value, items, recipe);
     fillRecipesArrayForIngredients(value, items, recipe);
   }
+  
   uniqueItems = [...new Set(items)]; // tableau des recettes liées à la recherche principale 
 
-  if ((value.length >= 3 && selectedTags.length > 0) || (value.length >= 3 && selectedTags.length === 0)) {
+  if (value.length >= 3 && selectedTags.length === 0) { // filtre par recherche principale
+    recipeSection.style.display = "none";
+
+    removeDomData();
+    loopSearchRecipes(uniqueItems);
+    console.log("recherche PRINCIPALE");
+    console.log(value);
+
+  } else if ( selectedTags.length > 0 && value.length >= 3 ) { // filtre par recherche principale ET tags
     recipeSection.style.display = "none";
     
     filterRecipesByTags(selectedTags)
       .then(filteredRecipes => {
         
         let commonRecipes = filteredRecipes.filter(item => uniqueItems.includes(item));
-        /* console.log("uniqueItems :",uniqueItems);
-        console.log("filteredRecipes :",filteredRecipes);
-        console.log("commonRecipes :",commonRecipes); */
         removeDomData();
         loopSearchRecipes(commonRecipes);
         console.log("double recherche");
+        console.log(value);
       })
       .catch(error => {
         console.error(error);
       });
-  } else if ( value.length < 3 && selectedTags.length > 0 ) {
+
+  } else if ( value.length < 3 && selectedTags.length > 0 ) { // filtre par tags
     recipeSection.style.display = "none";
+
     filterRecipesByTags(selectedTags)
       .then(filteredRecipes => {
+
         removeDomData();
         filterRecipesByTags(selectedTags);
         console.log("recherche TAGS");
@@ -208,8 +219,7 @@ function updateIngredientList(uniqueItems, updatedIngredientList) {
         const clickedTag = event.target.textContent;
         createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
-        const selectedTags = getSelectedTags();
-        mainSearch(selectedTags, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
+        mainSearch(mainSearchElt.value, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
       });
     }
   }
@@ -228,8 +238,7 @@ function updateApplianceList(uniqueItems, updatedAppareilList) {
             const clickedTag = event.target.textContent;
             createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
-            const selectedTags = getSelectedTags();
-            mainSearch(selectedTags, recipeSection); // filtrage des recettes en fonctions des tag sélectionnés 
+            mainSearch(mainSearchElt.value, recipeSection); // filtrage des recettes en fonctions des tag sélectionnés 
           })
         }
 }
@@ -249,8 +258,7 @@ function updateUstensileList(uniqueItems, updatedUstensileList) {
         const clickedTag = event.target.textContent;
         createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
-        const selectedTags = getSelectedTags();
-        mainSearch(selectedTags, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
+        mainSearch(mainSearchElt.value, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
       })
     }
   }
@@ -365,8 +373,7 @@ function filterIngredientList(filteredRecipe, selectedTags, filteredIngredientLi
         const clickedTag = event.target.textContent;
         createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
-        const selectedTags = getSelectedTags();
-        mainSearch(selectedTags, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
+        mainSearch(mainSearchElt.value, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
       });
     }
   }
@@ -385,8 +392,7 @@ function filterApplianceList(filteredRecipe, selectedTags, filteredAppareilList)
             const clickedTag = event.target.textContent;
             createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
-            const selectedTags = getSelectedTags();
-            mainSearch(selectedTags, recipeSection); // filtrage des recettes en fonctions des tag sélectionnés 
+            mainSearch(mainSearchElt.value, recipeSection); // filtrage des recettes en fonctions des tag sélectionnés 
           })
         }
 }
@@ -406,8 +412,7 @@ function filterUstensileList(filteredRecipe, selectedTags, filteredUstensileList
         const clickedTag = event.target.textContent;
         createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
 
-        const selectedTags = getSelectedTags();
-        mainSearch(selectedTags, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
+        mainSearch(mainSearchElt.value, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
       })
     }
   }
