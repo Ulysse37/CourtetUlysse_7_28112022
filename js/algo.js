@@ -172,17 +172,7 @@ function mainSearch(value, recipeSection) {
     removeDomData();
     filterRecipesByTags(selectedTags);
     console.log("recherche TAGS");
-    /* filterRecipesByTags(selectedTags)
-      .then(filteredRecipes => {
-
-        removeDomData();
-        filterRecipesByTags(selectedTags);
-        console.log("recherche TAGS");
-        console.log(value);
-      })
-      .catch(error => {
-        console.error(error);
-      }); */
+    
   } else {
     removeDomData();
     recipeSection.style.display = "flex";
@@ -350,15 +340,7 @@ function filterRecipesByTags(selectedTags) {
   })
 }
 
-// si aucun tag n'est sélectionné affiche toutes les recettes 
-function resetRecipesDisplay(selectedTags) {
-  // Vérifie si aucun tag n'est sélectionné
-  if (selectedTags.length === 0) {  // Si aucun tag sélectionné 
-    
-    recipeSection.style.display = "flex"; // affiche les recettes de base
-    return;
-  }
-}
+//!                 Filtrage des listes en fonction des tag
 // filtre la liste d'ingrédient en fonction des tag
 function filterIngredientList(filteredRecipe, selectedTags, filteredIngredientList) {
   for (let i = 0; i < filteredRecipe.ingredients.length; i++) {
