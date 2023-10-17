@@ -166,7 +166,6 @@ function mainSearch(value, recipeSection) {
     recipeSection.style.display = "none"; // supprime les recettes non filtrées
     removeDomData();
     filterRecipesByTags(selectedTags);
-    console.log("recherche TAGS");
     
   } else {
     removeDomData();
