@@ -1,5 +1,5 @@
 "use strict";
-//console.log(recipes);
+
 let recipesNamesArray;
 let recipesDescriptionsArray;
 let uniqueIngredientArray;
@@ -232,7 +232,6 @@ function createRecipesStructure(data) {
   let ingredientsList   = createIngredientsList(mainContainer);
   getIngredients(ingredientsList, data);
   createDescriptionElt(mainContainer, data);
-  //console.log(data);
 }
 
 /**
@@ -245,7 +244,6 @@ function displayRecipes(recipes) {
     
     createRecipesStructure(recipes[i]);
   }
-  //console.log(recipes);
 }
 
 /**
@@ -293,7 +291,6 @@ function createApplianceArray(recipes) {
   }
   // Création d'un nouveau tableau qui ne contient aucun doublons d'appareil
   let uniqueApplianceArray = [...new Set(applianceArray)];
-  //console.log(uniqueApplianceArray);
 
   return uniqueApplianceArray;
 }
@@ -316,7 +313,6 @@ function createIngredientArray(recipes) {
   }
   // Création d'un nouveau tableau qui ne contient aucun doublons d'ingrédient
   let uniqueIngredientArray = [...new Set(ingredientArray)];
-  //console.log(uniqueIngredientArray);
 
   return uniqueIngredientArray;
 }
@@ -339,7 +335,6 @@ function createUstensileArray(recipes) {
   }
   // Création d'un nouveau tableau qui ne contient aucun doublons d'ustensile
   let uniqueUstensileArray = [...new Set(ustensileArray)];
-  //console.log(uniqueUstensilArray);
 
   return uniqueUstensileArray;
 }
@@ -358,4 +353,3 @@ function init() {
 }
 
 init();
-
