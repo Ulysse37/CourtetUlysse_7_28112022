@@ -122,11 +122,11 @@ function mainSearch(value, recipeSection) {
   let selectedTags = getSelectedTags();
   let items = [];
 
-  for (let recipe of recipesToLowerCase) { // ajoute dans le tableau items les recettes liés à la recherche principale
+  recipesToLowerCase.forEach((recipe) => { // ajoute dans le tableau items les recettes liés à la recherche principale
     fillRecipesArrayForNames(value, items, recipe);
     fillRecipesArrayForDescriptions(value, items, recipe);
     fillRecipesArrayForIngredients(value, items, recipe);
-  }
+  });
   
   uniqueItems = [...new Set(items)]; // tableau des recettes liées à la recherche principale sans doublons
 
