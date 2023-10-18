@@ -22,12 +22,26 @@ a:focus {
   color: hsl(0, 0%, 25%);
 }
 
-.ingredients {
-  margin-right: 100px;
+.row {
+  margin-right: 0;
+  margin-left: 0;
 }
 
-.appareils {
-  margin-right: 100px;
+/* header */
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* style pour la barre de recherche */
+.search-bar-form {
+  position: relative;
+}
+
+.fa-magnifying-glass {
+  position: absolute;
+  top: 14px;
+  right: 10px;
 }
 
 /* style pour afficher l'ellipsis sur la description de la recette */
@@ -40,6 +54,192 @@ a:focus {
   white-space: normal;
 }
 
+/* Style des fieldSet  */
+fieldset {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  width: auto;
+  height: 80px; 
+  padding: 20px;
+} 
+
+legend {
+  position: absolute;
+  width: auto;
+  color: white;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+fieldset button {
+  position: absolute;
+  right: 5px;
+}
+
+.input-tag {
+  border: none;
+  width: 150px;
+  height: 25px;
+  color: white;
+}
+
+.ingredients-fieldset {
+  margin-right: 100px;
+  background-color: #2e81fe;
+}
+
+.input-ingredients {
+  background-color: #2e81fe;
+}
+
+.appareils-fieldset {
+  margin-right: 100px;
+  background-color: #53fdbc;
+}
+
+.input-appareils {
+  background-color: #53fdbc;
+}
+
+.ustensiles-fieldset {
+  background-color: #ff5e2e;
+}
+
+.input-ustenstiles {
+  background-color: #ff5e2e;
+}
+
+.ingredients-list, .appareils-list, .ustensiles-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+.smaller-legend-font-size {
+  font-size: 17px !important;
+}
+
+.rotate180 {
+  transform: rotate(180deg);
+}
+
+.fa-angle-down {
+  color: white;
+} 
+/* Classe stylisant listes fieldset pour qu'elles s'affichent au dessus des recettes */
+.overlay-ingredients { 
+  border-radius : 5px;
+  margin-top : 40px;
+  margin-left : -20px;
+  padding-left : 20px;
+  padding-bottom: 20px;
+  background-color : #2e81fe;
+  position: absolute;
+  z-index: 2;
+}
+
+.overlay-appareils { 
+  border-radius : 5px;
+  margin-top : 40px;
+  margin-left : -20px;
+  padding-left : 20px;
+  padding-bottom: 20px;
+  background-color : #53fdbc;
+  position: absolute;
+  z-index: 2;
+}
+
+.overlay-ustensiles { 
+  border-radius : 5px;
+  margin-top : 40px;
+  margin-left : -20px;
+  padding-left : 20px;
+  padding-bottom: 20px;
+  background-color : #ff5e2e;
+  position: absolute;
+  z-index: 2;
+}
+
+/* Style pour les tag selectionnés */
+.selected-tag-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.selected-tag-elt {
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.close-button {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  border-radius: 35px;
+  box-sizing: content-box;
+  border: 2px solid white;
+  padding: 0 2px 2px;
+  background: none;
+  color : white;
+  font-weight: bolder;
+}
+
+.ingredients-tag {
+  background-color: #2e81fe;
+}
+
+.appareils-tag {
+  background-color: #53fdbc;
+}
+
+.ustensiles-tag {
+  background-color: #ff5e2e;
+}
+
+
+@media (max-width: 576px) {
+  .tags {
+    justify-content: center;
+  }
+
+  .tag {
+    width: 50%;
+  }
+
+  .ingredients-fieldset, .appareils-fieldset, .ustensiles-fieldset {
+    margin-right: 0;
+    padding-right: 100px;
+  }
+
+  .selected-tag-section {
+    display: flex;
+    justify-content: center;
+  }
+
+  .selected-tag-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .selected-tag-elt {
+    display: flex;
+    justify-content: space-between;
+    max-width: 190px;
+  }
+}
+
 @media (min-width: 576px) {
   .figure-height {
     height: 17rem !important;
@@ -48,17 +248,21 @@ a:focus {
   .figcaption-height {
     height: 17rem !important;
   }
+
+  .tag {
+    width: 33.33%;
+  }
 }
 
 @media (min-width: 768px) {
-  .recipes-list {
+  .recipes-list, .recipes-search-list {
     flex-flow: row wrap;
     gap : 40px;
     width: 100%;
   }
 
   .recipe-element {
-    width : 45% !important;
+    width: calc((100% - 40px) / 2) !important;
   }
 
   .figcaption-height {
@@ -73,18 +277,17 @@ a:focus {
 }
 
 @media (min-width: 1200px) {
-  .recipes-list {
+  .recipes-list, .recipes-search-list {
     gap: 70px;
   }
 
   .recipe-element {
-    width: 45% !important;
+    width: calc((100% - 70px) / 2) !important;
   }
 }
 
 @media (min-width: 1500px) {
   .recipe-element {
-    width: 29% !important;
+    width: calc((100% - 140px) / 3) !important;
   }
 }
-
