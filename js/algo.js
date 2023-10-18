@@ -132,7 +132,6 @@ function mainSearch(value, recipeSection) {
 
   if (value.length >= 3 && selectedTags.length === 0) { // filtre par la recherche principale si input > 3 caractères
     recipeSection.style.display = "none"; // supprime les recettes non filtrées
-
     removeDomData();
     loopSearchRecipes(uniqueItems);
 
@@ -152,7 +151,6 @@ function mainSearch(value, recipeSection) {
 
   } else if (value.length < 3 && selectedTags.length > 0) { // filtre par tags
     recipeSection.style.display = "none"; // supprime les recettes non filtrées
-
     removeDomData();
     filterRecipesByTags(selectedTags);
     
