@@ -8,8 +8,8 @@ let uniqueUstensileArray;
 
 // Récupération de l'ul qui va contenir les recettes
 function createRecipeSection() {
-
   let recipeSection                  = document.querySelector(".recipes-list");
+
   recipeSection.style.display        = "flex";
   recipeSection.style.flexWrap       = "wrap";
   recipeSection.style.justifyContent = "center";
@@ -19,8 +19,8 @@ function createRecipeSection() {
 
 // Création de la li qui contient une recette
 function createRecipeElt(recipeSection) {
-
   let recipeElt                      = document.createElement("li");
+
   recipeElt.classList.add("recipe-element");
   recipeElt.style.width              = "100%";
   recipeElt.style.display            = "flex";
@@ -32,8 +32,8 @@ function createRecipeElt(recipeSection) {
 
 // Lien contenant la figure
 function createRecipeLink(recipeElt) {
-
   let recipeLink                     = document.createElement("a");
+
   recipeLink.href                    = "#";
   recipeElt.appendChild(recipeLink);
 
@@ -41,8 +41,8 @@ function createRecipeLink(recipeElt) {
 }
 
 function createFigureElt(recipeLink) {
-
   let figureElt                       = document.createElement("figure");
+
   figureElt.style.borderRadius        = "8px";
   figureElt.style.backgroundColor     = "#BFBDBB";
   figureElt.style.marginTop           = "50px";
@@ -53,8 +53,8 @@ function createFigureElt(recipeLink) {
 
 // Div pour stylisé le background de la figure
 function createFigureBackground(figureElt) {
-
   let figureBackground                = document.createElement("div");
+
   figureBackground.classList.add("figure-height");
   figureBackground.style.height       = "20rem";
   figureElt.appendChild(figureBackground);
@@ -63,8 +63,8 @@ function createFigureBackground(figureElt) {
 }
 
 function createFigcaptionElt(figureElt) {
-
   let figcaptionElt                   = document.createElement("figcaption");
+
   figcaptionElt.classList.add("figcaption-height");
   figcaptionElt.style.display         = "flex";
   figcaptionElt.style.flexWrap        = "wrap";
@@ -74,14 +74,14 @@ function createFigcaptionElt(figureElt) {
   figcaptionElt.style.height          = "25rem";
   figcaptionElt.style.backgroundColor = "#E6E6E6";
   figureElt.appendChild(figcaptionElt);
-  
+
   return figcaptionElt;
 }
 
 // HEADER contenant le nom et le container du temps de la recette
 function createFigcaptionheader(figcaptionElt) {
-
   let figcaptionHeader                = document.createElement("header");
+
   figcaptionHeader.style.display      = "flex";
   figcaptionHeader.style.width        = "100%";
   figcaptionHeader.style.margin       = "1rem";  
@@ -92,8 +92,8 @@ function createFigcaptionheader(figcaptionElt) {
 
 // Création d'un h2 contenant le nom de la recette
 function createNameElt(figcaptionHeader, data) {
-
   let nameElt                         = document.createElement("h2");
+
   nameElt.innerText                   = data.name;
   nameElt.style.width                 = "72%";  
   nameElt.style.marginRight           = "0.4rem";           
@@ -104,8 +104,8 @@ function createNameElt(figcaptionHeader, data) {
 }
 // Container avec l'icône et le temps de la recette
 function createTimeContainer(figcaptionHeader) {
-
   let timeContainer                   = document.createElement("p");
+
   timeContainer.style.width           = "28%";
   timeContainer.style.fontSize        = "25px";
   figcaptionHeader.appendChild(timeContainer);
@@ -115,8 +115,8 @@ function createTimeContainer(figcaptionHeader) {
 
 // Time icône 
 function createTimeIcon(timeContainer) {
-
   let timeIcon                         = document.createElement("i");
+
   timeIcon.style.marginRight           = "0.5rem"; 
   timeIcon.classList.add("fa-regular");
   timeIcon.classList.add("fa-clock");
@@ -127,8 +127,8 @@ function createTimeIcon(timeContainer) {
 
 // Temps en  minutes
 function createTimeElt(timeContainer, data) {
-
   let timeElt                         = document.createElement("span");
+
   timeElt.innerText                   = data.time + " min";
   timeElt.style.fontFamily            = "Latto";
   timeContainer.appendChild(timeElt);
@@ -138,8 +138,8 @@ function createTimeElt(timeContainer, data) {
 
 //Div contenant la liste et la description de la recette
 function createFigcaptionMainContainer(figcaptionElt) {
-
   let mainContainer                   = document.createElement("div");
+
   mainContainer.style.display         = "flex";
   mainContainer.style.height          = "200px";
   mainContainer.style.margin          = "0 1rem 0 1rem";
@@ -151,8 +151,8 @@ function createFigcaptionMainContainer(figcaptionElt) {
 
 // Liste (ul) contenant tous les ingrédients de la recette
 function createIngredientsList(mainContainer) {
-
   let ingredientsList                 = document.createElement("ul");
+  
   ingredientsList.style.marginRight   = "0.5rem";
   ingredientsList.style.width         = "50%";
   mainContainer.appendChild(ingredientsList);
@@ -187,8 +187,8 @@ function checkIngredientType(data, i, ingredients) {
 
 //affiche l'ingrédient, la quantité et l'unité de celui-ci
 function getIngredients(ingredientsList, data) {
-
   let ingredients     = [];
+  
   for (let i = 0; i < data.ingredients.length; i++) {
       ingredients[i]  = document.createElement("li");
       ingredients = checkIngredientType(data, i, ingredients);
@@ -198,9 +198,9 @@ function getIngredients(ingredientsList, data) {
 }
 
 // Description de la recette
-function createDescriptionElt(mainContainer, data) {
-  
+function createDescriptionElt(mainContainer, data) { 
   let descriptionElt                  = document.createElement("p");
+
   descriptionElt.classList.add("text-overflow");
   descriptionElt.innerText            = data.description;
   descriptionElt.style.width          = "50%";
@@ -238,10 +238,8 @@ function createRecipesStructure(data) {
  * Fonction appelant celle qui crée la stucture d'une recette afin de la boucler sur les 50
  * @param {object} recipes 
  */
-function displayRecipes(recipes) {
-  
-  for (let i = 0; i < recipes.length; i++) {
-    
+function displayRecipes(recipes) { 
+  for (let i = 0; i < recipes.length; i++) { 
     createRecipesStructure(recipes[i]);
   }
 }
@@ -250,8 +248,7 @@ function displayRecipes(recipes) {
  * Création d'un tableau regroupant tous les noms des recettes
  * @param {object} recipes 
  */
-function createRecipesNamesArray(recipes) {
-  
+function createRecipesNamesArray(recipes) { 
   let recipesNamesArray = [];
 
   for (let i = 0; i < recipes.length; i++) {
@@ -265,8 +262,7 @@ function createRecipesNamesArray(recipes) {
  * Création d'un tableau regroupant toutes les descriptions des recettes
  * @param {object} recipes 
  */
-function createDescriptionsArray(recipes) {
-  
+function createDescriptionsArray(recipes) { 
   let recipesDescriptionsArray = [];
 
   for (let i = 0; i < recipes.length; i++) {
@@ -281,11 +277,9 @@ function createDescriptionsArray(recipes) {
  * @param {object} recipes 
  */
 function createApplianceArray(recipes) {
-
   let applianceArray = [];
 
   for (let i = 0; i < recipes.length; i++) {
-
     let getAppliance = recipes[i].appliance;
     applianceArray.push(getAppliance);
   }
@@ -300,13 +294,10 @@ function createApplianceArray(recipes) {
  * @param {object} recipes 
  */
 function createIngredientArray(recipes) {
-
   let ingredientArray = [];
 
   for (let i = 0; i < recipes.length; i++) {
-
     for (let y = 0; y < recipes[i].ingredients.length; y++) {
-
       let getIngredient = recipes[i].ingredients[y].ingredient;
       ingredientArray.push(getIngredient);
     }
@@ -322,13 +313,10 @@ function createIngredientArray(recipes) {
  * @param {object} recipes 
  */
 function createUstensileArray(recipes) {
-
   let ustensileArray = [];
 
   for (let i = 0; i < recipes.length; i++) {
-
     for (let y = 0; y < recipes[i].ustensils.length; y++) {
-
       let getUstensile = recipes[i].ustensils[y];
       ustensileArray.push(getUstensile);
     }
@@ -343,13 +331,12 @@ function createUstensileArray(recipes) {
  * Fonction d'initialisation du code
  */
 function init() {
-
   displayRecipes(recipes);
+
   recipesNamesArray         = createRecipesNamesArray(recipes);
   recipesDescriptionsArray  = createDescriptionsArray(recipes);
   uniqueApplianceArray      = createApplianceArray(recipes);
   uniqueIngredientArray     = createIngredientArray(recipes);
   uniqueUstensileArray       = createUstensileArray(recipes);
 }
-
 init();

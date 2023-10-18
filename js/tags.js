@@ -1,5 +1,4 @@
 "use strict";
-
 // Const tags
 const selectedTagList       = document.querySelector(".selected-tag-list");
 
@@ -27,12 +26,9 @@ const legendIngredients     = document.querySelector(".ingredients-legend");
 const legendAppareils       = document.querySelector(".appareils-legend");
 const legendUstensiles      = document.querySelector(".ustensiles-legend");
 
-
-
 // si aucun tag n'est sélectionné affiche toutes les recettes 
 function resetRecipesDisplay(selectedTags) {
-  if (selectedTags.length === 0) {  // Si aucun tag sélectionné 
-    
+  if (selectedTags.length === 0) {  // Si aucun tag sélectionné    
     recipeSection.style.display = "flex"; // affiche les recettes de base
     return;
   }
@@ -45,7 +41,6 @@ function resetRecipesDisplay(selectedTags) {
  * @param {Event} event - L'objet événement.
  */
 function createSelectedTagElt(clickedTag, event) {
-
   let selectedTagElt = document.createElement("li");
   selectedTagElt.classList.add("selected-tag-elt");
   selectedTagElt.textContent = clickedTag;
@@ -61,10 +56,10 @@ function createSelectedTagElt(clickedTag, event) {
 
   selectedTagList.appendChild(selectedTagElt);
   selectedTagElt.appendChild(closeButton);
+
 // addeventlistener pour supprimer l'élément de la liste de tag sélectionné lorsqu'il est cliqué et relancer filtrage
   closeButton.addEventListener("click", (event) => {
     selectedTagElt.remove();
-
     const selectedTags = getSelectedTags(); 
     resetRecipesDisplay(selectedTags); // réinitialisation affichage des recettes si pas de tag sélectionnés
     mainSearch(mainSearchElt.value, recipeSection); // filtrage des recettes en fonctions des tag sélectionnés restants
@@ -80,8 +75,8 @@ function createSelectedTagElt(clickedTag, event) {
  * @return {HTMLElement} - L'élément de liste créé.
  */ 
 function createList(className, content, list) {
-
   let element               = document.createElement("li");
+
   element.classList.add("tag");
   element.dataset.tagClass  = className;
   element.textContent       = content;
@@ -96,7 +91,6 @@ function createList(className, content, list) {
  * @param {object} uniqueIngredientArray 
  */
 function createIngredientList(uniqueIngredientArray) {
-
   ingredientList.style.display  = "flex";
   const existingTags = ingredientList.querySelectorAll(".tag");
   existingTags.forEach(tag => tag.remove()); // Permet de n'afficher la liste qu'une fois
@@ -105,10 +99,8 @@ function createIngredientList(uniqueIngredientArray) {
     let ingredientElt = createList("ingredients-tag", uniqueIngredientArray[i], ingredientList);
 
     ingredientElt.addEventListener("click", event => {
-
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
-
       mainSearch(mainSearchElt.value, recipeSection);  // filtrage des recettes au clique sur l'élément 
     });
   }
@@ -119,20 +111,16 @@ function createIngredientList(uniqueIngredientArray) {
  * @param {Event} event - L'objet événement.
  */
 function ingredientSearch(event) {
-
   let value = event.target.value;
   value = value.toLowerCase();
   let ingredientArray = Array.from(ingredientList.querySelectorAll("li")); // créer dans un tableau la liste des ingrédients
   
-  for (let ingredientElt of ingredientArray) {
-    
+  for (let ingredientElt of ingredientArray) {    
     if (ingredientElt.textContent.toLowerCase().includes(value)) {
-
       ingredientElt.style.display = "block";
       ingredientList.style.width  = "100%";
 
     } else {
-
       ingredientElt.style.display = "none";
     }
   } 
@@ -145,21 +133,16 @@ inputIngredients.addEventListener("input", ingredientSearch);
  * @param {object} uniqueApplianceArray 
  */
 function createApplianceList(uniqueApplianceArray) {
-
   applianceList.style.display = "flex";
   const existingTags = applianceList.querySelectorAll(".tag");
-
   existingTags.forEach(tag => tag.remove()); // Permet de n'afficher la liste qu'une fois
   
   for (let i = 0; i < uniqueApplianceArray.length; i++) {
-
     let applianceElt = createList("appareils-tag", uniqueApplianceArray[i], applianceList);
     
     applianceElt.addEventListener("click", event => {
-
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event);  // création du tag sélectionné au clique sur l'élément de liste
-
       mainSearch(mainSearchElt.value, recipeSection);  // filtrage des recettes au clique de l'élément 
     });
   }
@@ -170,20 +153,16 @@ function createApplianceList(uniqueApplianceArray) {
  * @param {Event} event - L'objet événement.
  */
 function applianceSearch(event) {
-
   let value = event.target.value;
   value = value.toLowerCase();
   let applianceArray = Array.from(applianceList.querySelectorAll("li")); // créer dans un tableau la liste des appareils
   
   for (let applianceElt of applianceArray) {
-
     if (applianceElt.textContent.toLowerCase().includes(value)) {
-
       applianceElt.style.display = "block";
       applianceList.style.width  = "100%";
 
     } else {
-
       applianceElt.style.display = "none";
     }
   }
@@ -196,20 +175,16 @@ inputAppareils.addEventListener("input", applianceSearch);
  * @param {object} uniqueUstensileArray
  */
 function createUstensileList(uniqueUstensileArray) {
-
   ustensileList.style.display  = "flex";
   const existingTags = ustensileList.querySelectorAll(".tag");
-
   existingTags.forEach(tag => tag.remove()); // Permet de n'afficher la liste qu'une fois
   
   for (let i = 0; i < uniqueUstensileArray.length; i++) {
-
     let ustensileElt = createList("ustensiles-tag", uniqueUstensileArray[i], ustensileList);
     
     ustensileElt.addEventListener("click", event => {
       const clickedTag = event.target.textContent;
       createSelectedTagElt(clickedTag, event); // création du tag sélectionné au clique sur l'élément de liste
-
       mainSearch(mainSearchElt.value, recipeSection);  // filtrage des recettes en fonctions des tag sélectionnés 
     });
   }
@@ -221,20 +196,16 @@ function createUstensileList(uniqueUstensileArray) {
  * @param {Event} event - L'objet événement.
  */
 function ustensileSearch(event) {
-
   let value = event.target.value;
   value = value.toLowerCase();
   let ustensileArray = Array.from(ustensileList.querySelectorAll("li")); // créer dans un tableau la liste des appareils
   
-  for (let ustensileElt of ustensileArray) {
-    
+  for (let ustensileElt of ustensileArray) {   
     if (ustensileElt.textContent.toLowerCase().includes(value)) {
-
       ustensileElt.style.display = "block";
       ustensileList.style.width  = "100%";
 
     } else {
-
       ustensileElt.style.display = "none";
     }
   }
@@ -260,7 +231,6 @@ function isIngredientTagSelected() {
     ingredientList.style.width   = "100%";
 
   } else if (selectedTags.length > 0 && mainSearchElt.value.length === 0) { // filtrage par tag
-
     filteredListsByTags();
     ingredientList.style.display = "flex";
     ingredientList.style.width   = "100%";
@@ -269,8 +239,8 @@ function isIngredientTagSelected() {
 
 // Affiche la liste des ingrédients, et limite la taille des autres fieldset
 function displayIngredientList() {
-
   isIngredientTagSelected();
+
   applianceList.style.display         = "none";
   ustensileList.style.display         = "none";
   ingredientList.classList.add("overlay-ingredients"); // ajoute classe pour stylisée la liste d'ingredient
@@ -286,7 +256,6 @@ function displayIngredientList() {
 
 // appelle la fonction displayIngredientList quand on appuie sur le bouton ingredient
 ingredientsBtn.addEventListener("click", displayIngredientList);
-
 // appelle la fonction displayIngredientList quand on appuie sur le </i> du bouton ingredient
 ingredientFa.addEventListener("click", (event) => {
   event.stopPropagation(); // Arrête la propagation de l'événement de clic
@@ -324,8 +293,8 @@ function isApplianceTagSelected() {
 
 // Affiche la liste des appareils, et limite la taille des autres fieldset
 function displayApplianceList() {
-
   isApplianceTagSelected();
+
   ingredientList.style.display      = "none";
   ustensileList.style.display       = "none";
   applianceList.classList.add("overlay-appareils");
@@ -377,8 +346,8 @@ function isUstensileTagSelected() {
 
 // Affiche la liste des ustensiles, et limite la taille des autres fieldset
 function displayUstensileList() {
-
   isUstensileTagSelected();
+
   applianceList.style.display       = "none";
   ingredientList.style.display      = "none";
   ustensileList.classList.add("overlay-ustensiles");
@@ -406,7 +375,6 @@ inputUstensiles.addEventListener("click", (event) => {
 
 // Eventlistener qui efface les listes si on clique ailleurs que sur les boutons
 document.addEventListener('click', (event) => {
-
   if (!event.target.matches('.btn-ingredient') 
       && !event.target.matches('.btn-appareil') 
       && !event.target.matches('.btn-ustensile')) {
