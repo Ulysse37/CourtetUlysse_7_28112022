@@ -32,14 +32,14 @@ function fillRecipesArrayForNames(value, items, recipe) {
 }
 
 // ajoute dans un tableau les recettes dont la description correspond à l'input de la barre de recherche
-function fillRecipesArrayForDescriptions (value, items, recipe) {
+function fillRecipesArrayForDescriptions(value, items, recipe) {
   if (recipe.description.includes(value)) {
     items.push(recipe);
   }
 }
 
 // ajoute dans un tableau les recettes dont les ingrédients correspondent à l'input de la barre de recherche
-function fillRecipesArrayForIngredients (value, items, recipe) {
+function fillRecipesArrayForIngredients(value, items, recipe) {
   for (let ingredient of recipe.ingredients) {        
     if (ingredient.ingredient.includes(value))  {
       items.push(recipe);
@@ -234,7 +234,7 @@ function filterRecipesByTags(selectedTags) {
 
 //!                 Filtrage des listes en fonction de la recherche principale ET des tags
 // filtre la liste d'ingrédients en fonction de la recherche principale ET des tags via commonRecipes
-function mergeIngredientList(commonRecipes, mergedIngredientList, selectedTags ) {
+function mergeIngredientList(commonRecipes, mergedIngredientList, selectedTags) {
   for (let i = 0; i < commonRecipes.ingredients.length; i++) {       
     let ingredient = commonRecipes.ingredients[i].ingredient;
     
