@@ -499,4 +499,3 @@ inputUstensiles.addEventListener('blur', () => {
     legendUstensiles.style.display = "block";
   }
 });
-
