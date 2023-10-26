@@ -443,8 +443,8 @@ function filteredListsByTags() {
       for (let i = 0; i < filteredRecipes.length; i++) {
 
         filterIngredientList(filteredRecipes[i], selectedTags, filteredIngredientList);
-        filterApplianceList(filteredRecipes[i], selectedTags, filteredAppareilList)
-        filterUstensileList(filteredRecipes[i], selectedTags, filteredUstensileList)
+        filterApplianceList(filteredRecipes[i], selectedTags, filteredAppareilList);
+        filterUstensileList(filteredRecipes[i], selectedTags, filteredUstensileList);
 
       }
     }) 
