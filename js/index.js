@@ -6,7 +6,10 @@ let uniqueIngredientArray;
 let uniqueApplianceArray;
 let uniqueUstensileArray;
 
-// Récupération de l'ul qui va contenir les recettes
+/**
+ * Récupération de l'ul qui va contenir les recettes
+ * @returns {Element} L'élément de la section des recettes.
+ */
 function createRecipeSection() {
   let recipeSection                  = document.querySelector(".recipes-list");
 
@@ -17,7 +20,11 @@ function createRecipeSection() {
   return recipeSection;
 }
 
-// Création de la li qui contient une recette
+/**
+ * Création de la li qui contient une recette ainsi que certains styles de celle-ci
+ * @param {HTMLElement} recipeSection - La section où l'élément de recette sera ajoutée.
+ * @return {HTMLElement} L'élément de recette nouvellement créé.
+ */
 function createRecipeElt(recipeSection) {
   let recipeElt                      = document.createElement("li");
 
@@ -30,7 +37,12 @@ function createRecipeElt(recipeSection) {
   return recipeElt;
 }
 
-// Lien contenant la figure
+/**
+ * Crée un élément de lien pour une recette et l'ajoute à l'élément de la recette.
+ *
+ * @param {HTMLElement} recipeElt - L'élément de la recette auquel le lien est ajouté.
+ * @return {HTMLAnchorElement} - L'élément de lien créé.
+ */
 function createRecipeLink(recipeElt) {
   let recipeLink                     = document.createElement("a");
 
@@ -40,6 +52,12 @@ function createRecipeLink(recipeElt) {
   return recipeLink;
 }
 
+/**
+ * Crée un élément de figure et l'ajoute au lien de recette.
+ *
+ * @param {Object} recipeLink - L'élément de lien auquel l'élément de figure sera ajouté.
+ * @return {Object} - L'élément de figure créé.
+ */
 function createFigureElt(recipeLink) {
   let figureElt                       = document.createElement("figure");
 
@@ -51,7 +69,13 @@ function createFigureElt(recipeLink) {
   return figureElt;
 }
 
-// Div pour stylisé le background de la figure
+/**
+ * Crée un élément de fond de figure div et l'ajoute à l'élément de figure donné.
+ * Permet de stylisé le background de la figure
+ *
+ * @param {HTMLElement} figureElt - L'élément de figure auquel le fond sera ajouté.
+ * @return {HTMLElement} L'élément de fond de figure créé.
+ */
 function createFigureBackground(figureElt) {
   let figureBackground                = document.createElement("div");
 
@@ -62,6 +86,12 @@ function createFigureBackground(figureElt) {
   return figureBackground;
 }
 
+/**
+ * Crée un nouvel élément figcaption et l'ajoute à l'élément de figure donné.
+ *
+ * @param {HTMLElement} figureElt - L'élément de figure auquel l'élément figcaption sera ajouté.
+ * @return {HTMLElement} L'élément figcaption nouvellement créé.
+ */
 function createFigcaptionElt(figureElt) {
   let figcaptionElt                   = document.createElement("figcaption");
 
@@ -78,7 +108,13 @@ function createFigcaptionElt(figureElt) {
   return figcaptionElt;
 }
 
-// HEADER contenant le nom et le container du temps de la recette
+/**
+ * Crée un élément de balise header et l'ajoute à l'élément figcaption donné.
+ * Va contenir le nom et le container du temps de la recette
+ * 
+ * @param {Element} figcaptionElt - L'élément figcaption auquel ajouter l'élément header.
+ * @return {Element} L'élément header créé.
+ */
 function createFigcaptionheader(figcaptionElt) {
   let figcaptionHeader                = document.createElement("header");
 
@@ -90,7 +126,14 @@ function createFigcaptionheader(figcaptionElt) {
   return figcaptionHeader;
 }
 
-// Création d'un h2 contenant le nom de la recette
+/**
+ * Crée un nouvel élément HTML pour le nom donné et l'ajoute à l'élément
+ * Header fourni.
+ *
+ * @param {Element} figcaptionHeader - L'élément auquel ajouter l'élément de nom.
+ * @param {Object} data - L'objet de données contenant la propriété name.
+ * @return {Element} L'élément de nom nouvellement créé.
+ */
 function createNameElt(figcaptionHeader, data) {
   let nameElt                         = document.createElement("h2");
 
@@ -102,7 +145,13 @@ function createNameElt(figcaptionHeader, data) {
 
   return nameElt;
 }
-// Container avec l'icône et le temps de la recette
+
+/**
+ * Crée un container de temps ainsi que l'icône et l'ajoute à l'élément figcaptionHeader donné.
+ *
+ * @param {Element} figcaptionHeader - L'élément figcaption auquel le conteneur de temps sera ajouté.
+ * @return {Element} Le conteneur de temps créé.
+ */
 function createTimeContainer(figcaptionHeader) {
   let timeContainer                   = document.createElement("p");
 
@@ -113,7 +162,12 @@ function createTimeContainer(figcaptionHeader) {
   return timeContainer;
 }
 
-// Time icône 
+/**
+ * Crée une icône de temps et l'ajoute au conteneur donné.
+ *
+ * @param {HTMLElement} timeContainer - L'élément conteneur auquel ajouter l'icône de temps.
+ * @return {HTMLElement} L'élément de l'icône de temps créé.
+ */
 function createTimeIcon(timeContainer) {
   let timeIcon                         = document.createElement("i");
 
@@ -126,6 +180,13 @@ function createTimeIcon(timeContainer) {
 }
 
 // Temps en  minutes
+/**
+ * Crée un élément de temps et l'ajoute au conteneur donné.
+ *
+ * @param {HTMLElement} timeContainer - Le conteneur auquel l'élément de temps sera ajouté.
+ * @param {Object} data - L'objet de données contenant la valeur de temps.
+ * @return {HTMLElement} L'élément de temps créé.
+ */
 function createTimeElt(timeContainer, data) {
   let timeElt                         = document.createElement("span");
 
@@ -136,7 +197,13 @@ function createTimeElt(timeContainer, data) {
   return timeElt;
 }
 
-//Div contenant la liste et la description de la recette
+/**
+ * Crée un conteneur principal div de figcaption et l'ajoute à l'élément figcaption.
+ * Va contenir la liste d'ingrédient et la description de la recette
+ *
+ * @param {Element} figcaptionElt - L'élément figcaption auquel le conteneur principal sera ajouté.
+ * @return {Element} L'élément conteneur principal créé.
+ */
 function createFigcaptionMainContainer(figcaptionElt) {
   let mainContainer                   = document.createElement("div");
 
@@ -149,7 +216,12 @@ function createFigcaptionMainContainer(figcaptionElt) {
   return mainContainer;
 }
 
-// Liste (ul) contenant tous les ingrédients de la recette
+/**
+ * Crée une liste d'ingrédients et l'ajoute au conteneur principal.
+ *
+ * @param {Object} mainContainer - Le conteneur auquel ajouter la liste d'ingrédients.
+ * @return {Object} La liste d'ingrédients créée.
+ */
 function createIngredientsList(mainContainer) {
   let ingredientsList                 = document.createElement("ul");
   
@@ -185,7 +257,14 @@ function checkIngredientType(data, i, ingredients) {
   return ingredients;
 }
 
-//affiche l'ingrédient, la quantité et l'unité de celui-ci
+/**
+ * Génère une liste d'ingrédients et les ajoute à la liste ingredientsList donnée.
+ *  pour afficher l'ingrédient, la quantité et l'unité de celui-ci
+ * 
+ * @param {Array} ingredientsList - La liste où les ingrédients seront ajoutés.
+ * @param {Object} data - L'objet de données contenant les ingrédients.
+ * @return {Array} - La liste des ingrédients.
+ */
 function getIngredients(ingredientsList, data) {
   let ingredients     = [];
   
@@ -197,7 +276,14 @@ function getIngredients(ingredientsList, data) {
   return ingredients;
 }
 
-// Description de la recette
+/**
+ * Crée un nouvel élément de paragraphe avec la description fournie dans les données
+ * et l'ajoute au conteneur principal.
+ *
+ * @param {HTMLElement} mainContainer - Le conteneur principal auquel ajouter le nouveau paragraphe.
+ * @param {Object} data - L'objet de données contenant la description.
+ * @return {HTMLElement} L'élément de paragraphe nouvellement créé.
+ */
 function createDescriptionElt(mainContainer, data) { 
   let descriptionElt                  = document.createElement("p");
 
@@ -213,7 +299,8 @@ function createDescriptionElt(mainContainer, data) {
 
 /**
  * fonction appelant toutes celles créant la structure de la recette ainsi que leurs styles.
- * @param {object} data 
+ * 
+ * @param {object} data - Les données utilisées pour créer la structure de la recette.
  */
 function createRecipesStructure(data) {
 
@@ -235,9 +322,11 @@ function createRecipesStructure(data) {
 }
 
 /**
- * Fonction appelant celle qui crée la stucture d'une recette afin de la boucler sur les 50
- * @param {object} recipes 
+ * Affiche une liste de recettes en créant une structure pour chaque recette.
+ * 
+ * @param {object} recipes - La liste de recettes à afficher.
  */
+
 function displayRecipes(recipes) { 
   for (let i = 0; i < recipes.length; i++) { 
     createRecipesStructure(recipes[i]);
@@ -245,8 +334,10 @@ function displayRecipes(recipes) {
 }
 
 /**
- * Création d'un tableau regroupant tous les noms des recettes
- * @param {object} recipes 
+ * Crée un tableau de noms de recettes à partir du tableau de recettes donné.
+ *
+ * @param {Array} recipes - Un tableau d'objets de recette.
+ * @return {Array} Un tableau de noms de recettes.
  */
 function createRecipesNamesArray(recipes) { 
   let recipesNamesArray = [];
@@ -259,8 +350,10 @@ function createRecipesNamesArray(recipes) {
 }
 
 /**
- * Création d'un tableau regroupant toutes les descriptions des recettes
- * @param {object} recipes 
+ * Crée un tableau de descriptions de recettes à partir d'un tableau de recettes.
+ *
+ * @param {Array} recipes - Le tableau de recettes à partir duquel extraire les descriptions.
+ * @return {Array} Un tableau de descriptions de recettes.
  */
 function createDescriptionsArray(recipes) { 
   let recipesDescriptionsArray = [];
@@ -273,8 +366,10 @@ function createDescriptionsArray(recipes) {
 }
 
 /**
- * Création d'un tableau regroupant tous les appareils
- * @param {object} recipes 
+ * Crée un tableau d'appareils uniques à partir d'une liste de recettes.
+ *
+ * @param {Array} recipes - Une liste de recettes.
+ * @return {Array} Un tableau d'appareils uniques.
  */
 function createApplianceArray(recipes) {
   let applianceArray = [];
@@ -290,8 +385,10 @@ function createApplianceArray(recipes) {
 }
 
 /**
- * Création d'un tableau regroupant tous les ingrédients
- * @param {object} recipes 
+ * Crée un tableau d'ingrédients uniques à partir d'un tableau de recettes.
+ *
+ * @param {Array} recipes - Un tableau de recettes.
+ * @return {Array} - Un tableau d'ingrédients uniques.
  */
 function createIngredientArray(recipes) {
   let ingredientArray = [];
@@ -309,8 +406,10 @@ function createIngredientArray(recipes) {
 }
 
 /**
- * Création d'un tableau regroupant tous les ustensiles
- * @param {object} recipes 
+ * Crée un tableau contenant tous les ustensiles uniques d'une liste de recettes.
+ *
+ * @param {Array} recipes - Un tableau d'objets de recette.
+ * @return {Array} Un tableau contenant tous les ustensiles uniques.
  */
 function createUstensileArray(recipes) {
   let ustensileArray = [];
@@ -328,7 +427,10 @@ function createUstensileArray(recipes) {
 }
 
 /**
- * Fonction d'initialisation du code
+ * Initialise la fonction en appelant diverses fonctions d'aide pour générer des tableaux
+ * de noms de recettes, de descriptions, d'appareils, d'ingrédients et de ustensiles.
+ *
+ * @return {void} Cette fonction ne renvoie rien.
  */
 function init() {
   displayRecipes(recipes);
