@@ -23,22 +23,42 @@ for (let i = 0; i < recipesToLowerCase.length; i++) {
 }
 
 //!                                                Barre de recherche
-
-// ajoute dans un tableau les recettes dont le nom correspond à l'input de la barre de recherche
+/**
+ * Filtre les recettes en fonction d'une valeur donnée et leurs noms
+ * et remplit un tableau avec les recettes correspondantes.
+ *
+ * @param {string} value - La valeur à rechercher dans les noms des recettes.
+ * @param {Array} items - Le tableau à remplir avec les recettes correspondantes.
+ * @param {Object} recipe - L'objet de recette à vérifier pour un nom correspondant.
+ */
 function fillRecipesArrayForNames(value, items, recipe) {
   if (recipe.name.includes(value))  {
     items.push(recipe);
   }
 }
 
-// ajoute dans un tableau les recettes dont la description correspond à l'input de la barre de recherche
+/**
+ * Filtre les recettes en fonction d'une valeur donnée et leurs descriptions
+ * et remplit un tableau avec les recettes correspondantes.
+ * 
+ * @param {any} value - La valeur à rechercher dans les descriptions des recettes.
+ * @param {Array} items - Le tableau dans lequel ajouter les recettes correspondantes.
+ * @param {Object} recipe - L'objet de recette à vérifier pour une description correspondante.
+ */
 function fillRecipesArrayForDescriptions(value, items, recipe) {
   if (recipe.description.includes(value)) {
     items.push(recipe);
   }
 }
 
-// ajoute dans un tableau les recettes dont les ingrédients correspondent à l'input de la barre de recherche
+/**
+ * Filtre les recettes en fonction d'une valeur donnée et leurs ingrédients
+ * et remplit un tableau avec les recettes correspondantes.
+ *
+ * @param {any} value - La valeur à vérifier par rapport aux ingrédients.
+ * @param {Array} items - Le tableau pour stocker les recettes correspondantes.
+ * @param {Object} recipe - L'objet recette à vérifier.
+ */
 function fillRecipesArrayForIngredients(value, items, recipe) {
   for (let ingredient of recipe.ingredients) {        
     if (ingredient.ingredient.includes(value))  {
@@ -47,12 +67,13 @@ function fillRecipesArrayForIngredients(value, items, recipe) {
   }
 }
 
-// Fonction qui reset la recherche à chaque nouvel input de l'utilisateur en supprimant l'affichage des recherches précédentes
+/* Fonction qui reset la recherche à chaque nouvel input de l'utilisateur en supprimant 
+l'affichage des recherches précédentes */
 function removeDomData() {
   searchRecipeSection.innerText   = "";
 }
 
-// Fonction qui dans le cas d'une recherche non aboutie va afficher un message d'erreur
+// Dans le cas d'une recherche non aboutie va afficher un message d'erreur.
 function displayErrorMessage()  {  
   let errorMessage            = document.createElement("p");
 
@@ -62,7 +83,11 @@ function displayErrorMessage()  {
   searchRecipeSection.appendChild(errorMessage);
 }
 
-// Récupération de l'ul qui va contenir seulement les recettes recherchées 
+/**
+ * affiche la section de recherche de recettes.
+ *
+ * @return {Element} La section de recherche de recettes créée.
+ */
 function createSearchRecipeSection() {
   searchRecipeSection.style.display        = "flex";
   searchRecipeSection.style.flexWrap       = "wrap";
@@ -73,7 +98,8 @@ function createSearchRecipeSection() {
 
 /**
  * fonction appelant toutes celles créant la structure de la recette recherchée ainsi que leurs styles.
- * @param {object} data 
+ * 
+ * @param {object} data - Les données utilisées pour créer la structure de recettes de recherche.
  */
 function createSearchRecipesStructure(data) {
   createSearchRecipeSection();
@@ -95,9 +121,11 @@ function createSearchRecipesStructure(data) {
 }
 
 /**
- * Fonction appelant celle qui crée la stucture d'une recette recherchée afin de la boucler sur le tableau de toutes celles recherchées.
+ * Boucle à travers le tableau searchArray et crée une structure de recettes pour chaque élément recherché.
  * Si ce tableau de contient aucune recette, appelle la fonction qui affiche le message d'erreur.
- * @param {object} searchRecipes 
+ * 
+ * @param {Array} searchArray - Un tableau d'éléments de recherche.
+ * @return {undefined} Cette fonction ne renvoie pas de valeur.
  */
 function loopSearchRecipes(searchArray) {  
   if (searchArray.length > 0) {
@@ -115,6 +143,7 @@ let commonRecipes = [];
 /**
  * Fonction principale de filtrage qui va lancer l'affichage des recettes 
  * recherchées en fonction de la recherche principale, des tag ou des deux en même temps.
+ * 
  * @param {string} value
  * @param {HTMLElement} recipeSection
  */
@@ -162,7 +191,8 @@ function mainSearch(value, recipeSection) {
 
 /**
  * Fonction qui appelle mainSearch sur la barre de recherche
- * @param {object} event 
+ * 
+ * @param {object} event - L'objet événement déclenché par l'entrée de l'utilisateur.
  */
 function searchRecipes(event) {
   let value = event.target.value.toLowerCase();
@@ -173,8 +203,11 @@ function searchRecipes(event) {
 mainSearchElt.addEventListener("input", searchRecipes);
 
 //!                 Recherches recettes par tag
-
-// va chercher et mets dans un tableau les tag sélectionnés 
+/**
+ * Renvoie un tableau de tags sélectionnés.
+ *
+ * @return {Array} Un tableau de tags sélectionnés.
+ */
 function getSelectedTags() {
   let selectedTags = [];
   let selectedTagElt = selectedTagList.querySelectorAll('.selected-tag-elt');
@@ -191,7 +224,9 @@ function getSelectedTags() {
 
 /**
  * Filtre les recettes en fonctions des tag sélectionnés 
- * @param {Array} selectedTags
+ *
+ * @param {Array} selectedTags - Un tableau de tags sélectionnés.
+ * @return {Promise} Une promesse qui se résout avec un tableau de recettes filtrées.
  */
 function filterRecipesByTags(selectedTags) {
   return new Promise((resolve, reject) => {
@@ -233,7 +268,13 @@ function filterRecipesByTags(selectedTags) {
 }
 
 //!                 Filtrage des listes en fonction de la recherche principale ET des tags
-// filtre la liste d'ingrédients en fonction de la recherche principale ET des tags via commonRecipes
+/**
+ * filtre la liste d'ingrédients en fonction de la recherche principale ET des tags via commonRecipes
+ *
+ * @param {Array} commonRecipes - Le tableau des recettes communes.
+ * @param {Set} mergedIngredientList - La liste des ingrédients fusionnés.
+ * @param {Array} selectedTags - Le tableau des tags sélectionnés.
+ */
 function mergeIngredientList(commonRecipes, mergedIngredientList, selectedTags) {
   for (let i = 0; i < commonRecipes.ingredients.length; i++) {       
     let ingredient = commonRecipes.ingredients[i].ingredient;
@@ -251,7 +292,13 @@ function mergeIngredientList(commonRecipes, mergedIngredientList, selectedTags) 
   }
 }
 
-// filtre la liste d'appareils en fonction de la recherche principale ET des tags via commonRecipes
+/**
+ * filtre la liste d'appareils en fonction de la recherche principale ET des tags via commonRecipes
+ *
+ * @param {Array} commonRecipes - le tableau de recettes communes.
+ * @param {Set} mergedAppareilList - La liste des appareils fusionnés.
+ * @param {Array} selectedTags - Le tableau des tags sélectionnés.
+ */
 function mergeApplianceList(commonRecipes, mergedAppareilList, selectedTags) {
   let appliance = commonRecipes.appliance;
 
@@ -267,7 +314,13 @@ function mergeApplianceList(commonRecipes, mergedAppareilList, selectedTags) {
   }
 }
 
-// filtre la liste d'ustensiles en fonction de la recherche principale ET des tags via commonRecipes
+/**
+ * filtre la liste d'ustensiles en fonction de la recherche principale ET des tags via commonRecipes
+ *
+ * @param {Array} commonRecipes - le tableau de recettes communes.
+ * @param {Set} mergedUstensileList - La liste des ustensiles fusionnés.
+ * @param {Array} selectedTags - Le tableau des tags sélectionnés.
+ */
 function mergeUstensileList(commonRecipes, mergedUstensileList, selectedTags) {
   for (let i = 0; i < commonRecipes.ustensils.length; i++) {
     let ustensile = commonRecipes.ustensils[i];
@@ -285,7 +338,12 @@ function mergeUstensileList(commonRecipes, mergedUstensileList, selectedTags) {
   }
 }
 
-// filtre les 3 listes en fonction de la recherche principale ET des tag
+/**
+ * filtre les 3 listes en fonction de la recherche principale ET des tag
+ *
+ * @param {Array} commonRecipes - Le tableau des recettes communes.
+ * @return {undefined} Cette fonction ne renvoie pas de valeur.
+ */
 function mergeLists(commonRecipes) {
   let selectedTags = getSelectedTags();
   let mergedIngredientList = new Set();
@@ -305,7 +363,12 @@ function mergeLists(commonRecipes) {
 
 //!                 Filtrage des listes en fonction de la recherche principale
 
-// filtre la liste d'ingrédients en fonction de la recherche principale
+/**
+ * Filtre la liste d'ingrédients en fonction de la recherche principale
+ *
+ * @param {Object} uniqueItems - La liste des éléments uniques à utiliser pour mettre à jour la liste des ingrédients.
+ * @param {Set} updatedIngredientList - Liste des ingrédients mis à jour.
+ */
 function updateIngredientList(uniqueItems, updatedIngredientList) {
   for (let i = 0; i < uniqueItems.ingredients.length; i++) {      
     let ingredient = uniqueItems.ingredients[i].ingredient;
@@ -323,7 +386,12 @@ function updateIngredientList(uniqueItems, updatedIngredientList) {
   }
 }
 
-// filtre la liste d'appareils en fonction de la recherche principale
+/**
+ * Filtre la liste d'appareil en fonction de la recherche principale
+ *
+ * @param {Object} uniqueItems - La liste des éléments uniques à utiliser pour mettre à jour la liste des ingrédients.
+ * @param {Set} updatedAppareilList - Liste des appareils mis à jour.
+ */
 function updateApplianceList(uniqueItems, updatedAppareilList) {
   let appliance = uniqueItems.appliance;
 
@@ -339,7 +407,12 @@ function updateApplianceList(uniqueItems, updatedAppareilList) {
   }
 }
 
-// filtre la liste d'ustensile en fonction de la recherche principale
+/**
+ * Filtre la liste d'ustensile en fonction de la recherche principale
+ *
+ * @param {Object} uniqueItems - La liste des éléments uniques à utiliser pour mettre à jour la liste des ingrédients.
+ * @param {Set} updatedUstensileList - Liste des ustensiles mis à jour.
+ */
 function updateUstensileList(uniqueItems, updatedUstensileList) {
   for (let i = 0; i < uniqueItems.ustensils.length; i++) {
     let ustensile = uniqueItems.ustensils[i];
@@ -357,7 +430,13 @@ function updateUstensileList(uniqueItems, updatedUstensileList) {
   }
 }
 
-// filtre les 3 listes en fonction de la recherche principale.
+/**
+ * filtre les 3 listes en fonction de la recherche principale.
+ *
+ * @param {Array} uniqueItems - Un tableau d'éléments uniques.
+ * @return {undefined} Cette fonction ne renvoie pas de valeur.
+ */
+
 function updateLists(uniqueItems) {
   let updatedIngredientList = new Set();
   let updatedAppareilList = new Set();
@@ -376,7 +455,13 @@ function updateLists(uniqueItems) {
 }
 
 //!                 Filtrage des listes en fonction des tag
-// filtre la liste d'ingrédient en fonction des tag
+/**
+ * Filtre la liste des ingrédients en fonction des tags sélectionnés et les ajoute à la liste des ingrédients filtrés.
+ *
+ * @param {object} filteredRecipe - L'objet de recette filtré.
+ * @param {array} selectedTags - Le tableau des tags sélectionnés.
+ * @param {Set} filteredIngredientList - liste des ingrédients filtrés.
+ */
 function filterIngredientList(filteredRecipe, selectedTags, filteredIngredientList) {
   for (let i = 0; i < filteredRecipe.ingredients.length; i++) {   
     let ingredient = filteredRecipe.ingredients[i].ingredient;
@@ -394,7 +479,13 @@ function filterIngredientList(filteredRecipe, selectedTags, filteredIngredientLi
   }
 }
 
-// filtre la liste d'appareil en fonction des tag
+/**
+ * Filtre la liste des appareils en fonction des tags sélectionnés et les ajoute à la liste des appareils filtrés.
+ *
+ * @param {object} filteredRecipe - L'objet de recette filtré.
+ * @param {array} selectedTags - Le tableau des tags sélectionnés.
+ * @param {Set} filteredAppareilList - liste des appareils filtrés.
+ */
 function filterApplianceList(filteredRecipe, selectedTags, filteredAppareilList) {
   let appliance = filteredRecipe.appliance;
         
@@ -410,7 +501,13 @@ function filterApplianceList(filteredRecipe, selectedTags, filteredAppareilList)
   }
 }
 
-// filtre la liste d'ustensile en fonction des tag
+/**
+ * Filtre la liste des ustensiles en fonction des tags sélectionnés et les ajoute à la liste des ustensiles filtrés.
+ *
+ * @param {object} filteredRecipe - L'objet de recette filtré.
+ * @param {array} selectedTags - Le tableau des tags sélectionnés.
+ * @param {Set} filteredUstensileList - liste des ustensiles filtrés.
+ */
 function filterUstensileList(filteredRecipe, selectedTags, filteredUstensileList) {
   for (let i = 0; i < filteredRecipe.ustensils.length; i++) {
     let ustensile = filteredRecipe.ustensils[i];
@@ -428,7 +525,11 @@ function filterUstensileList(filteredRecipe, selectedTags, filteredUstensileList
   }
 }
 
-// Fonction affichant les 3 listes en fonctions des recettes filtrées par les tags
+/**
+ * Filtre les 3 listes en fonctions des recettes filtrées par les tags.
+ *
+ * @return {Promise} Une promesse qui se résout avec la liste filtrée des recettes.
+ */
 function filteredListsByTags() {
   let selectedTags = getSelectedTags();
   filterRecipesByTags(selectedTags) // filtrage des recettes en fonctions des tag sélectionnés 
