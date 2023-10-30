@@ -26,7 +26,12 @@ const legendIngredients     = document.querySelector(".ingredients-legend");
 const legendAppareils       = document.querySelector(".appareils-legend");
 const legendUstensiles      = document.querySelector(".ustensiles-legend");
 
-// si aucun tag n'est sélectionné affiche toutes les recettes 
+/**
+ * Réinitialise l'affichage de base des recettes si aucun tag n'est sélectionné.
+ *
+ * @param {Array} selectedTags - Un tableau de tags sélectionnés.
+ * @return {undefined} Cette fonction ne renvoie pas de valeur.
+ */
 function resetRecipesDisplay(selectedTags) {
   if (selectedTags.length === 0) {  // Si aucun tag sélectionné    
     recipeSection.style.display = "flex"; // affiche les recettes de base
@@ -88,7 +93,8 @@ function createList(className, content, list) {
 
 /**
  * Affiche le tableau des ingrédients non filtrés dans une liste
- * @param {object} uniqueIngredientArray 
+ * 
+ * @param {object} uniqueIngredientArray - Un tableau d'ingrédients uniques
  */
 function createIngredientList(uniqueIngredientArray) {
   ingredientList.style.display  = "flex";
@@ -108,6 +114,7 @@ function createIngredientList(uniqueIngredientArray) {
 
 /**
  * Affiche les ingrédients recherchés dans l'input et cache les autres
+ * 
  * @param {Event} event - L'objet événement.
  */
 function ingredientSearch(event) {
@@ -130,7 +137,8 @@ inputIngredients.addEventListener("input", ingredientSearch);
 
 /**
  * Affiche le tableau des appareils non filtrés dans une liste
- * @param {object} uniqueApplianceArray 
+ * 
+ * @param {object} uniqueApplianceArray - Un tableau d'appareils uniques
  */
 function createApplianceList(uniqueApplianceArray) {
   applianceList.style.display = "flex";
@@ -149,7 +157,8 @@ function createApplianceList(uniqueApplianceArray) {
 }
 
 /**
- * Affiche les appareils recherchés dans l'input et cache les autres
+ * Affiche les appareils recherchés dans l'input et cache les autres.
+ * 
  * @param {Event} event - L'objet événement.
  */
 function applianceSearch(event) {
@@ -171,8 +180,9 @@ function applianceSearch(event) {
 inputAppareils.addEventListener("input", applianceSearch);
 
 /**
- * Affiche le tableau des ustensiles non filtrés dans une liste
- * @param {object} uniqueUstensileArray
+ * Affiche le tableau des ustensiles non filtrés dans une liste.
+ * 
+ * @param {object} uniqueUstensileArray - Un tableau d'ustensiles uniques
  */
 function createUstensileList(uniqueUstensileArray) {
   ustensileList.style.display  = "flex";
@@ -191,7 +201,7 @@ function createUstensileList(uniqueUstensileArray) {
 }
 
 /**
- * Affiche les ustensiles recherchés dans l'input et cache les autres
+ * Affiche les ustensiles recherchés dans l'input et cache les autres.
  *
  * @param {Event} event - L'objet événement.
  */
@@ -213,7 +223,9 @@ function ustensileSearch(event) {
 
 inputUstensiles.addEventListener("input", ustensileSearch);
 
-// Choisit quelle liste des ingrédients afficher en fonction des différents filtrages
+/**
+ * Choisit quelle liste des ingrédients afficher en fonction des différents filtrages
+ */
 function isIngredientTagSelected() {
   let selectedTags = getSelectedTags();
   
@@ -267,7 +279,9 @@ inputIngredients.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
-// Choisit quelle liste des appareils afficher en fonction des différents filtrages
+/**
+ * Choisit quelle liste des appareils afficher en fonction des différents filtrages
+ */
 function isApplianceTagSelected() {
   let selectedTags = getSelectedTags();
 
@@ -320,7 +334,9 @@ inputAppareils.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
-// Choisit quelle liste des ustensiles afficher en fonction des différents filtrages
+/**
+ * Choisit quelle liste des ustensiles afficher en fonction des différents filtrages
+ */
 function isUstensileTagSelected() {
   let selectedTags = getSelectedTags();
 
@@ -385,7 +401,14 @@ document.addEventListener('click', (event) => {
   }
 });
 
-// réinitialise la largeur des fieldset si on ne clique pas sur son btn ainsi que le contenu et style de la légende
+/**
+ * Réinitialise la largeur des fieldset si on ne clique pas sur son btn ainsi que le contenu et style de la légende.
+ *
+ * @param {HTMLElement} container - Le conteneur à réinitialiser.
+ * @param {HTMLElement} legend - La légende à réinitialiser.
+ * @param {string} content - Le nouveau contenu pour la légende.
+ * @param {HTMLElement} className - La classe à réinitialiser.
+ */
 function resetDisplay(container, legend, content, className) {
   container.style.width    = "auto";
   legend.textContent       = content;
