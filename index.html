@@ -15,27 +15,23 @@
             <h1><img class="logo" src="images/logo_les-petits-plats.svg" alt="Les petits plats"></h1>
         </a>
     </header>
-
     <main class="m-5">
         <header class="container-fluid">
             <form class="search-bar-form">
                 <input class="container-fluid bg-light p-2" id="search-bar" type="search" placeholder="Rechercher une recette">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </form>
-            <!--TODO Peut-être remplacer la div par une liste ?-->
             <div class="selected-tag-section mt-3">
                 <ul class="selected-tag-list"></ul>
                 <!--là où les tag selectionnés s'afficheront-->
             </div>
-
             <form class="tags row mt-3">
                 <fieldset class="ingredients-fieldset">
                     <legend class="ingredients-legend">Ingrédients</legend>
                     <input type="search" id="ingredients" class="input-tag input-ingredients">
                     <button type="button" class="btn btn-ingredient"><i class="fa-solid fa-angle-down ingredient-fa"></i></button>
                     <ul class="ingredients-list"></ul>
-                </fieldset>
-                
+                </fieldset>            
                 <fieldset class="appareils-fieldset">
                     <legend class="appareils-legend">Appareils</legend>
                     <input type="search" id="appareils" class="input-tag input-appareils">
